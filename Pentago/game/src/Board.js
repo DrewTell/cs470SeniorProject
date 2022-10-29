@@ -170,7 +170,7 @@ function TopMessage(props) {
             </Typography>
             <Button width='100%'
                     sx={{
-                        opacity: haveAWinner ? 1 : 0
+                        visibility: haveAWinner ? 'visible' : 'hidden'
                     }}
                     onClick={() => props.dispatch(reset_action())}>Reset?
             </Button>
@@ -190,7 +190,7 @@ export default function Board(props) {
         <CssBaseline />
         <Fragment>
             <Divider sx = {{mt : 4}}>
-        <Chip sx = {{fontWeight: 'bold', fontSize : 16}} label="Pentago by Andrew Tellez"/>
+        <Chip sx = {{fontWeight: 'bold', fontSize : 16}} label="Pentago by The Lads"/>
         </Divider>
             <Grid container margin='auto'
                   columns={1}
