@@ -6,7 +6,7 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 
-function App() {
+function Menu(){
   return (
     <div className="App">
       <h1 className="title">Pick Your Game</h1>
@@ -24,6 +24,12 @@ function App() {
       <Button sx={{ mt: 10 }} color="success" variant="contained">Login</Button>
     </div>
   );
+}
+
+function App() {
+  return (
+    <Menu/>
+  )
 }
 
 export default App;
