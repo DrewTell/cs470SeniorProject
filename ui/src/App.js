@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
+import Board from "./Games/pentago/src/Board"
 
 function Menu(){
   return (
@@ -28,6 +29,7 @@ function Menu(){
 
 function App() {
   return (
+    //replace with <Board/> to render Pentago
     <Menu/>
   )
 }
