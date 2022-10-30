@@ -1,5 +1,5 @@
 import "./App.css";
-import Board from "./Pentago/Board";
+import Board from "./Games/pentago/src/Board";
 import { Route, Routes } from "react-router-dom";
 import Menu from "./Components/Menu";
 
