@@ -304,7 +304,7 @@ function reducers(state, action) {
     else if(action.type === 'ROTATION_CLICKED' && (state.quadrantToRotate !== -1) && state.timeToRotate){
         return integrateRotation(state, action.direction);
     }
-    else if(action.type === 'SKIP_ROTATION'){
+    else if(action.type === 'SKIP_ROTATION' && state.timeToRotate){
         state = {
             ...state,
             timeToRotate:false,
