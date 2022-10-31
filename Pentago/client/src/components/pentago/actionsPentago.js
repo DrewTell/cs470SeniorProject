@@ -1,7 +1,5 @@
 
 const click_on_cell_action = (clickColIdx, clickRowIdx, timeToRotate, turn, player, client, channel) => {
-    console.log("Cell clicked by: ", turn, player);
-    console.log("this is channel in click", channel)
     if (turn === player) {
 
         return {
@@ -45,12 +43,13 @@ const button_clicked = (buttonQuadrant, timeToRotate) => {
         timeToRotate: timeToRotate
     }
 }
-const rotation_clicked = (buttonQuadrant, timeToRotate, direction) => {
+const rotation_clicked = (buttonQuadrant, timeToRotate, direction, channel) => {
     return {
         type: 'ROTATION_CLICKED',
         quadrant: buttonQuadrant,
         timeToRotate: timeToRotate,
-        direction: direction
+        direction: direction,
+        channel: channel
     }
 }
 

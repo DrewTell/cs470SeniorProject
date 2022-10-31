@@ -104,7 +104,7 @@ function SkipButton(props){
 }
 
 function RotationButton(props){
-    const { dispatch, timeToRotate, quadrantToRotate} = props;
+    const { dispatch, timeToRotate, quadrantToRotate, channel} = props;
     const quadrants = ['Top Left', 'Top Right', 'Bottom Left', 'Bottom Right'];
     return (
         < Grid >
@@ -112,25 +112,25 @@ function RotationButton(props){
                          sx = {{justifyContent: 'center'}}>
                 <Button
                     sx = {{bgcolor : '#ffe6c1', color : 'black', width: '25%'}}
-                    onClick={() => props.dispatch(button_clicked(quadrants[0], timeToRotate))}>
+                    onClick={() => dispatch(button_clicked(quadrants[0], timeToRotate))}>
                     Top Left
                 </Button>
 
                 <Button
                     sx = {{bgcolor : '#b29c7c', color : 'black', width: '25%'}}
-                    onClick={() => props.dispatch(button_clicked(quadrants[1], timeToRotate))}>
+                    onClick={() => dispatch(button_clicked(quadrants[1], timeToRotate))}>
                     Top Right
                 </Button>
 
                 <Button
                     sx = {{bgcolor : '#b29c7c', color : 'black', width: '25%'}}
-                    onClick={() => props.dispatch(button_clicked(quadrants[2], timeToRotate))}>
+                    onClick={() => dispatch(button_clicked(quadrants[2], timeToRotate))}>
                     Bottom Left
                 </Button>
 
                 <Button
                     sx = {{bgcolor : '#ffe6c1', color : 'black', width: '25%'}}
-                    onClick={() => props.dispatch(button_clicked(quadrants[3], timeToRotate))}>
+                    onClick={() => dispatch(button_clicked(quadrants[3], timeToRotate))}>
                     Bottom Right
                 </Button>
 
@@ -142,13 +142,13 @@ function RotationButton(props){
                              sx = {{bgcolor:'#b29c7c', mx: "auto", width: 150, justifyContent: 'center', mt : 2}}>
 
                     <IconButton sx={{color:"black", bgcolor : '##ffe0b2', border : '1', width: '50%'}}
-                                onClick={() => props.dispatch(rotation_clicked(quadrantToRotate, timeToRotate, "Left"))} >
+                                onClick={() => dispatch(rotation_clicked(quadrantToRotate, timeToRotate, "Left", channel))} >
                         <input hidden accept="image/*" type="file" />
                         <TurnLeftIcon  />
                     </IconButton>
 
                     <IconButton size={'large'} sx={{color:"black", bgcolor : '##ffe0b2', size:'large', width: '50%'}}
-                                onClick={() => props.dispatch(rotation_clicked(quadrantToRotate, timeToRotate, "Right"))} >
+                                onClick={() => dispatch(rotation_clicked(quadrantToRotate, timeToRotate, "Right", channel))} >
                         <input hidden accept="image/*" type="file" />
                         <TurnRightIcon />
                     </IconButton>
@@ -203,8 +203,6 @@ export default function Board(props) {
 
 
     channel.on((event) => {
-        console.log("On channel called:");
-        console.log("event called", event.type)
         if (event.type === "game-move" && event.user.id !== client.userID) {
             console.log("newState in channel event", event.data.newState)
             const currentPlayer = event.data.player === "black" ? "white" : "black";
@@ -267,6 +265,7 @@ export default function Board(props) {
                             quadrantToRotate={quadrantToRotate}
                             timeToRotate={timeToRotate}
                             dispatch={dispatch}
+                            channel={channel}
                         />
                     </Grid>
                 </Grid>

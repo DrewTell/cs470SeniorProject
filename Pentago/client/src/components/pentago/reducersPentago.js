@@ -1,6 +1,3 @@
-import { AccessTimeOutlined, StarRateOutlined } from "@mui/icons-material";
-
-import { useChannelStateContext, useChatContext } from "stream-chat-react";
 import {NUM_ROWS} from "./constantsPentago";
 import doWeHaveAWinner from "./doWeHaveAWinner";
 
@@ -95,8 +92,6 @@ function anyQuadrantsSymmetrical(inboard){
 }
 
 function integrateClick(state, colIdx, rowGroup, channel) {
-    console.log("this is channel in integrate click", channel)
-    console.log("player: ", state.player );
     let nextTurn = (state.player === "black" ? "white" : "black");
 
     let board = state.board;
@@ -172,7 +167,7 @@ function rotateClockwise(arrayToRotate) {
     return arrayToRotate;
 }
 
-function integrateRotation(state, direction) {
+function integrateRotation(state, direction, channel) {
     var rowIndexColumnIndex = [];
     var rowManual = [];
     switch(state.quadrantToRotate){
@@ -197,7 +192,6 @@ function integrateRotation(state, direction) {
     }
 
     let board = state.board;
-    let quadrantToRotate = state.quadrantToRotate;
     var quadrantValues = [];
     var row1 = board[rowManual[0]].slice(rowIndexColumnIndex[2], rowIndexColumnIndex[3]);
     var row2 = board[rowManual[1]].slice(rowIndexColumnIndex[2], rowIndexColumnIndex[3]);
@@ -277,7 +271,15 @@ function integrateRotation(state, direction) {
             winnerColor: activeColor
         };
     }
-
+    let player = state.player
+    const sendClickState = async(newState) => {
+        console.log("Inside sendCLick promise with: ", newState);
+        await channel.sendEvent({
+            type: "game-move",
+            data: {newState, player},
+        })
+    };
+    sendClickState(newState);
     return newState;
 }
 
@@ -295,13 +297,11 @@ function reducers(state, action) {
     if( state === undefined )
         return state;
 
-    // console.log(`in reducers. action.type is: ${action.type}, board contains: ${JSON.stringify(state)}`);
 
     if( action.type === 'RESET' ) {
         document.getElementById('skipButton').style.visibility = 'visible';
         return createInitialState();
     } else if( action.type === 'CELL_CLICKED') {
-        console.log("this is channel in reducer routes", action.channel)
         if( state.haveAWinner )
             return state;
 
@@ -310,14 +310,13 @@ function reducers(state, action) {
         if(state.timeToRotate === true){
             return state;
         }
-        console.log("Time to integrate click");
         return integrateClick(state, action.colIdx, action.rowGroup, action.channel);
     }
     else if (action.type === 'BUTTON_CLICKED' && state.timeToRotate) {
         return integrateRotationChoice(state, action.quadrant);
     }
     else if(action.type === 'ROTATION_CLICKED' && (state.quadrantToRotate !== -1) && state.timeToRotate){
-        return integrateRotation(state, action.direction);
+        return integrateRotation(state, action.direction, action.channel);
     }
     else if(action.type === 'SKIP_ROTATION' && state.timeToRotate){
         state = {
@@ -328,10 +327,12 @@ function reducers(state, action) {
         return state;
     }
     else if(action.type === 'UPDATE'){
+        let newState = action.newState
         state = {
             ...state,
-            board:action.newState.board,
-            timeToRotate:true
+            nextColor: newState.nextColor,
+            board: newState.board,
+            timeToRotate: newState.timeToRotate
         }
     }
     else if(action.type === 'DO_NOTHING'){
