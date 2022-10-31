@@ -2,7 +2,7 @@ import React, {Fragment, useReducer, useState, useEffect} from 'react';
 import { useChannelStateContext, useChatContext } from "stream-chat-react";
 
 
-import { click_on_cell_action, reset_action, button_clicked, rotation_clicked, skip_rotation } from './actionsPentago';
+import { click_on_cell_action, reset_action, button_clicked, rotation_clicked, skip_rotation, update_Board } from './actionsPentago';
 import { reducers, createInitialState } from './reducersPentago';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -204,11 +204,13 @@ export default function Board(props) {
 
     channel.on((event) => {
         console.log("On channel called:");
+        console.log("event called", event.type)
         if (event.type === "game-move" && event.user.id !== client.userID) {
+            console.log("newState in channel event", event.data.newState)
             const currentPlayer = event.data.player === "black" ? "white" : "black";
             setPlayer(currentPlayer);
             setTurn(currentPlayer);
-            state.board = (event.data.newBoard);
+            dispatch(update_Board(event.data.newState))
         }
     });
 

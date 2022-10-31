@@ -327,6 +327,13 @@ function reducers(state, action) {
         }
         return state;
     }
+    else if(action.type === 'UPDATE'){
+        state = {
+            ...state,
+            board:action.newState.board,
+            timeToRotate:true
+        }
+    }
     else if(action.type === 'DO_NOTHING'){
         return state;
     }

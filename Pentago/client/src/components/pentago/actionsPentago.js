@@ -25,6 +25,13 @@ const reset_action = () => {
     }
 }
 
+const update_Board = (newState) => {
+    return {
+        type: 'UPDATE',
+        newState:newState,
+    }
+}
+
 const skip_rotation = () => {
     return {
         type: 'SKIP_ROTATION',
@@ -54,5 +61,6 @@ export {
     reset_action,
     button_clicked,
     rotation_clicked,
-    skip_rotation
+    skip_rotation,
+    update_Board
 };
