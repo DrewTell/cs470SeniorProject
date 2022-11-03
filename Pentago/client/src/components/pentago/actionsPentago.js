@@ -17,9 +17,10 @@ const click_on_cell_action = (clickColIdx, clickRowIdx, timeToRotate, turn, play
     }
 }
 
-const reset_action = () => {
+const reset_action = (channel) => {
     return {
         type: 'RESET',
+        channel:channel
     }
 }
 
@@ -30,9 +31,10 @@ const update_Board = (newState) => {
     }
 }
 
-const skip_rotation = () => {
+const skip_rotation = (channel) => {
     return {
         type: 'SKIP_ROTATION',
+        channel:channel
     }
 }
 

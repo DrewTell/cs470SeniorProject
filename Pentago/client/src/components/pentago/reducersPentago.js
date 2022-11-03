@@ -21,6 +21,7 @@ function createInitialState() {
         haveAWinner: false,
         nextColor: 'black',
         timeToRotate: false,
+        lastReceived: ""
 
     };
 }
@@ -126,12 +127,11 @@ function integrateClick(state, colIdx, rowGroup, channel) {
     else
         document.getElementById('skipButton').style.visibility = 'visible';
 
-    let player = state.player
     const sendClickState = async(newState) => {
-        console.log("Inside sendCLick promise with: ", newState);
+        console.log("Inside sendClick promise");
         await channel.sendEvent({
             type: "game-move",
-            data: {newState, player},
+            data: {newState},
         })
     };
     sendClickState(newState);
@@ -271,15 +271,14 @@ function integrateRotation(state, direction, channel) {
             winnerColor: activeColor
         };
     }
-    let player = state.player
-    const sendClickState = async(newState) => {
-        console.log("Inside sendCLick promise with: ", newState);
+    const sendRotateState = async(newState) => {
+        console.log("Inside sendRotate promise");
         await channel.sendEvent({
             type: "game-move",
-            data: {newState, player},
+            data: {newState},
         })
     };
-    sendClickState(newState);
+    sendRotateState(newState);
     return newState;
 }
 
@@ -292,6 +291,23 @@ function integrateRotationChoice(state, quadrantChoice) {
     return newState;
 }
 
+function integrateSkip(state, channel){
+    let newState = {
+        ...state,
+        timeToRotate:false,
+        nextColor:advanceColor(state.nextColor)
+    }
+    const sendSkipState = async(newState) => {
+        console.log("Inside sendSkip promise");
+        await channel.sendEvent({
+            type: "game-move",
+            data: {newState},
+        })
+    };
+    sendSkipState(newState);
+    return newState
+}
+
 function reducers(state, action) {
 
     if( state === undefined )
@@ -300,11 +316,23 @@ function reducers(state, action) {
 
     if( action.type === 'RESET' ) {
         document.getElementById('skipButton').style.visibility = 'visible';
-        return createInitialState();
+
+        let channel = action.channel
+        let newState = createInitialState();
+        //If this sentResetState was put inside createInitialState, the game board would reset on exit and rejoin to the lobby
+        //This might be a good idea because the games currently are desynced until a move is played on exit and rejoin
+        const sendResetState = async(newState) => {
+            console.log("Inside sendSkip promise");
+            await channel.sendEvent({
+                type: "game-move",
+                data: {newState},
+            })
+        };
+        sendResetState(newState);
+        return newState
     } else if( action.type === 'CELL_CLICKED') {
         if( state.haveAWinner )
             return state;
-
         if(state.board[action.rowGroup][action.colIdx].color !== 'gray')  // column is full
             return state;
         if(state.timeToRotate === true){
@@ -316,24 +344,17 @@ function reducers(state, action) {
         return integrateRotationChoice(state, action.quadrant);
     }
     else if(action.type === 'ROTATION_CLICKED' && (state.quadrantToRotate !== -1) && state.timeToRotate){
+        if(state.haveAWinner)
+            return state
         return integrateRotation(state, action.direction, action.channel);
     }
     else if(action.type === 'SKIP_ROTATION' && state.timeToRotate){
-        state = {
-            ...state,
-            timeToRotate:false,
-            nextColor:advanceColor(state.nextColor)
-        }
-        return state;
+        if(state.haveAWinner)
+            return state
+        return integrateSkip(state, action.channel)
     }
     else if(action.type === 'UPDATE'){
-        let newState = action.newState
-        state = {
-            ...state,
-            nextColor: newState.nextColor,
-            board: newState.board,
-            timeToRotate: newState.timeToRotate
-        }
+        return action.newState
     }
     else if(action.type === 'DO_NOTHING'){
         return state;

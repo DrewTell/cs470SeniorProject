@@ -97,7 +97,7 @@ function SkipButton(props){
         <Button
             id="skipButton"
             sx = {{bgcolor : '#ffe6c1', color : 'black', width: '100%', visibility: 'visible', mt: '-25px', mb: '8px'}}
-            onClick={() => props.dispatch(skip_rotation())}>
+            onClick={() => props.dispatch(skip_rotation(props.channel))}>
             Skip Rotation
         </Button>
     )
@@ -179,7 +179,7 @@ function TopMessage(props) {
                     sx={{
                         visibility: haveAWinner ? 'visible' : 'hidden'
                     }}
-                    onClick={() => props.dispatch(reset_action())}>Reset?
+                    onClick={() => props.dispatch(reset_action(props.channel))}>Reset?
             </Button>
         </Stack>
     )
@@ -202,16 +202,16 @@ export default function Board(props) {
         (config.num_columns - 1) * config.h_gap;
 
 
-    channel.on((event) => {
-        if (event.type === "game-move" && event.user.id !== client.userID) {
-            console.log("newState in channel event", event.data.newState)
-            const currentPlayer = event.data.player === "black" ? "white" : "black";
-            setPlayer(currentPlayer);
-            setTurn(currentPlayer);
-            dispatch(update_Board(event.data.newState))
-        }
-    });
+    useEffect(() => {
+        channel.on((event) => {
+            if (event.type === "game-move" && event.user.id !== client.userID) {
+                state.lastReceived = event.received_at
+                console.log("in channel event")
+                dispatch(update_Board(event.data.newState))
 
+            }
+        });
+    }, [])
 
 
     return (
@@ -237,9 +237,12 @@ export default function Board(props) {
                                     haveAWinner={haveAWinner}
                                     timeToRotate={timeToRotate}
                                     dispatch={dispatch}
+                                    channel={channel}
                         />
                     </Grid>
-                    <SkipButton dispatch={dispatch}/>
+                    <SkipButton dispatch={dispatch}
+                                channel={channel}
+                    />
                     {
                         board.map((row, rowIdx) => (
                             <Grid item
