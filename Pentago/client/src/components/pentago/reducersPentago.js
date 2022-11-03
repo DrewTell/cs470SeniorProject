@@ -26,6 +26,14 @@ function createInitialState() {
     };
 }
 
+async function sendState(newState, channel){
+    console.log("Inside sendState promise");
+    await channel.sendEvent({
+        type: "game-move",
+        data: {newState},
+    })
+};
+
 function quadrantOffsets(quadrant){
 
     let iOffset, jOffset;
@@ -127,14 +135,8 @@ function integrateClick(state, colIdx, rowGroup, channel) {
     else
         document.getElementById('skipButton').style.visibility = 'visible';
 
-    const sendClickState = async(newState) => {
-        console.log("Inside sendClick promise");
-        await channel.sendEvent({
-            type: "game-move",
-            data: {newState},
-        })
-    };
-    sendClickState(newState);
+    
+    sendState(newState, channel);
 
     return newState;
 }
@@ -271,14 +273,7 @@ function integrateRotation(state, direction, channel) {
             winnerColor: activeColor
         };
     }
-    const sendRotateState = async(newState) => {
-        console.log("Inside sendRotate promise");
-        await channel.sendEvent({
-            type: "game-move",
-            data: {newState},
-        })
-    };
-    sendRotateState(newState);
+    sendState(newState, channel);
     return newState;
 }
 
@@ -297,14 +292,8 @@ function integrateSkip(state, channel){
         timeToRotate:false,
         nextColor:advanceColor(state.nextColor)
     }
-    const sendSkipState = async(newState) => {
-        console.log("Inside sendSkip promise");
-        await channel.sendEvent({
-            type: "game-move",
-            data: {newState},
-        })
-    };
-    sendSkipState(newState);
+  
+    sendState(newState, channel);
     return newState
 }
 
@@ -321,14 +310,7 @@ function reducers(state, action) {
         let newState = createInitialState();
         //If this sentResetState was put inside createInitialState, the game board would reset on exit and rejoin to the lobby
         //This might be a good idea because the games currently are desynced until a move is played on exit and rejoin
-        const sendResetState = async(newState) => {
-            console.log("Inside sendSkip promise");
-            await channel.sendEvent({
-                type: "game-move",
-                data: {newState},
-            })
-        };
-        sendResetState(newState);
+        sendState(newState, channel);
         return newState
     } else if( action.type === 'CELL_CLICKED') {
         if( state.haveAWinner )
