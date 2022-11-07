@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useChatContext, Channel } from "stream-chat-react";
-import CustomInput from "./../CustomInput";
-import PentagoGame from "./PentagoGame";
+import CustomInput from "./CustomInput";
+
 import {TextField} from "@mui/material";
 import Typography from "@mui/material/Typography";
-function JoinPentago() {
+
+
+function PlaceHolderGame() {
     const [rivalUsername, setRivalUsername] = useState("");
     const { client } = useChatContext();
     const [channel, setChannel] = useState(null);
@@ -27,7 +29,7 @@ function JoinPentago() {
         <>
             {channel ? (
                 <Channel channel={channel} Input={CustomInput}>
-                    <PentagoGame channel={channel} setChannel={setChannel} />
+                    <div> Work in Progress </div>
                 </Channel>
             ) : (
                 <div className="joinGame">
@@ -45,7 +47,7 @@ function JoinPentago() {
                             textDecoration: 'none',
                         }}
                     >
-                        Pentago (2 Player):
+                        Placeholder (? Players):
                     </Typography>
 
                     <Typography
@@ -65,11 +67,12 @@ function JoinPentago() {
                             textDecoration: 'none',
                         }}
                     >
-                        Pentago is an abstract strategy game for two players with four 3×3
-                        grids arranged into a larger 6×6 grid. This game reimplements the well known Connect 4 with a twist: After placing a marble, the player has to twist one of the grids by 90°, thus changing the board after every turn.
+                        Placeholder is an abstract strategy game for ? players with a game board revolving around ?.
+                        This game reimplements the well known ? with a whole new spin: After ?, the player has to make a move, thus
+                        changing the game state.
                     </Typography>
                     <TextField
-                        placeholder="Username of pentago rival..."
+                        placeholder="Username of placeholder rival..."
                         onChange={(event) => {
                             setRivalUsername(event.target.value);
                         }}
@@ -81,4 +84,4 @@ function JoinPentago() {
     );
 }
 
-export default JoinPentago;
+export default PlaceHolderGame;

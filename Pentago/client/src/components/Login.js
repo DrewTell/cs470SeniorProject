@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, {Fragment, useState } from "react";
 import Axios from "axios";
 import Cookies from "universal-cookie";
-
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import {TextField} from "@mui/material";
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Typography from "@mui/material/Typography";
 function Login({ setIsAuth }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -26,24 +31,44 @@ function Login({ setIsAuth }) {
         });
     };
     return (
-        <div className="login">
-            <label> Login</label>
+        <Fragment>
+            <Stack direction="column" divider={<Divider orientation="vertical" flexItem />} sx = {{ alignItems: 'center', justifyContent: 'center' }}>
 
-            <input
+                <Typography
+                    variant="h6"
+                    noWrap
+                    component="a"
+                    href="/"
+                    sx={{
+                        mr: 2,
+                        display: { xs: 'none', md: 'flex' },
+                        fontFamily: 'monospace',
+                        fontWeight: 700,
+                        color: 'inherit',
+                        textDecoration: 'none',
+                    }}
+                >
+                    Login
+                </Typography>
+
+            <TextField
+                variant="outlined"
                 placeholder="Username"
                 onChange={(event) => {
                     setUsername(event.target.value);
                 }}
             />
-            <input
+            <TextField
                 placeholder="Password"
                 type="password"
                 onChange={(event) => {
                     setPassword(event.target.value);
                 }}
             />
-            <button onClick={login}> Login</button>
-        </div>
+
+            <Button color={'primary'} onClick={login}> Submit</Button>
+            </Stack>
+        </Fragment>
     );
 }
 

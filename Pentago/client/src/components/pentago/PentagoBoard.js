@@ -218,9 +218,6 @@ export default function Board(props) {
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
             <Fragment>
-                <Divider sx = {{mt : 4}}>
-                    <Chip sx = {{fontWeight: 'bold', fontSize : 16}} label="Pentago by The Lads"/>
-                </Divider>
                 <Grid container margin='auto'
                       columns={1}
                       sx={{
@@ -279,4 +276,3 @@ export default function Board(props) {
         </ThemeProvider>
     );
 }
-

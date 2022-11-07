@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import {Fragment} from "react";
 import Board from "./PentagoBoard";
-
+import Button from '@mui/material/Button';
+import Typography from "@mui/material/Typography";
 import "./Chat.css";
 
 
@@ -32,7 +34,7 @@ function Game({ channel, setChannel }) {
                 <MessageInput noFiles />
             </Window>
 
-            <button
+            <Button
                 onClick={async () => {
                     await channel.stopWatching();
                     setChannel(null);
@@ -40,10 +42,10 @@ function Game({ channel, setChannel }) {
             >
                 {" "}
                 Leave Game
-            </button>
+            </Button>
 
             {result.state === "won" && <div> {result.winner} Won The Game</div>}
-            {result.state === "tie" && <div> Game Tieds</div>}
+            {result.state === "tie" && <div> Game Tied</div>}
         </div>
     );
 }

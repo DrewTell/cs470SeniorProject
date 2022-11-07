@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import React, {Fragment, useState } from "react";
 import Axios from "axios";
 import Cookies from "universal-cookie";
+import Divider from '@mui/material/Divider';
+import {TextField} from "@mui/material";
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Typography from "@mui/material/Typography";
 
 function SignUp({ setIsAuth }) {
     const cookies = new Cookies();
@@ -20,35 +25,53 @@ function SignUp({ setIsAuth }) {
         });
     };
     return (
-        <div className="signUp">
-            <label> Sign Up</label>
-            <input
+            <Fragment>
+                <Stack direction="column" divider={<Divider orientation="vertical" flexItem />} sx = {{xs: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="a"
+                        href="/"
+                        sx={{
+                            mr: 2,
+                            display: { xs: 'none', md: 'flex' },
+                            fontFamily: 'monospace',
+                            fontWeight: 700,
+                            letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
+                        }}
+                    >
+                        Sign Up
+                    </Typography>
+            <TextField
                 placeholder="First Name"
                 onChange={(event) => {
                     setUser({ ...user, firstName: event.target.value });
                 }}
             />
-            <input
+            <TextField
                 placeholder="Last Name"
                 onChange={(event) => {
                     setUser({ ...user, lastName: event.target.value });
                 }}
             />
-            <input
+            <TextField
                 placeholder="Username"
                 onChange={(event) => {
                     setUser({ ...user, username: event.target.value });
                 }}
             />
-            <input
+            <TextField
                 placeholder="Password"
                 type="password"
                 onChange={(event) => {
                     setUser({ ...user, password: event.target.value });
                 }}
             />
-            <button onClick={signUp}> Sign Up</button>
-        </div>
+            <Button color={'primary'} onClick={signUp}> Sign Up</Button>
+                </Stack>
+            </Fragment>
     );
 }
 
