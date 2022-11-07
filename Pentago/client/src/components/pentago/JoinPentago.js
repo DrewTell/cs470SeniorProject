@@ -4,6 +4,7 @@ import CustomInput from "./../CustomInput";
 import PentagoGame from "./PentagoGame";
 import {TextField} from "@mui/material";
 import Typography from "@mui/material/Typography";
+import "./JoinPentago.css"
 function JoinPentago() {
     const [rivalUsername, setRivalUsername] = useState("");
     const { client } = useChatContext();
