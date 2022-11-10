@@ -27,7 +27,6 @@ function createInitialState() {
 }
 
 async function sendState(newState, channel){
-    console.log("Inside sendState promise");
     await channel.sendEvent({
         type: "game-move",
         data: {newState},
@@ -114,7 +113,6 @@ function integrateClick(state, colIdx, rowGroup, channel) {
     newBoard[rowGroup] = affectedRow;
     const activeColor = state.nextColor;
 
-    console.log("player color in state", state.playerColor)
 
     if (state.playerColor === ''){
         state.playerColor = state.nextColor
@@ -308,7 +306,6 @@ function integrateSkip(state, channel){
 
 
 function playerCheck(state, type){
-    console.log("player color in check", state.playerColor, "next color in check", state.nextColor)
     if(type === 'click'){
         if (state.playerColor === '' || state.playerColor === state.nextColor)
             return true
@@ -371,6 +368,7 @@ function reducers(state, action) {
     else if(action.type === 'UPDATE'){
         let temp = action.newState
 
+        //update game move
         let newState = {
             board:temp.board,
             hasRotated: temp.hasRotated,
@@ -379,6 +377,14 @@ function reducers(state, action) {
             nextColor: temp.nextColor,
             timeToRotate: temp.timeToRotate,
             playerColor:state.playerColor
+        }
+        //update win
+        if(temp.haveAWinner){
+            newState = {
+                ...newState,
+                winnerColor:temp.winnerColor,
+                playerColor:''
+            }
         }
         return newState
     }

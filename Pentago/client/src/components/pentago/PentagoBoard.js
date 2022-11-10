@@ -12,10 +12,9 @@ import Stack from '@mui/material/Stack'
 import ButtonGroup from '@mui/material/ButtonGroup';
 import TurnLeftIcon from '@mui/icons-material/TurnLeft';
 import TurnRightIcon from '@mui/icons-material/TurnRight';
-import Chip from '@mui/material/Chip';
 import IconButton from '@mui/material/IconButton';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import {CssBaseline, Divider} from "@mui/material";
+import {CssBaseline} from "@mui/material";
 const darkTheme = createTheme({
     palette: {
         mode: 'dark',
@@ -205,7 +204,6 @@ export default function Board(props) {
     useEffect(() => {
         channel.on((event) => {
             if (event.type === "game-move" && event.user.id !== client.userID) {
-                console.log("in channel event", channel)
                 dispatch(update_Board(event.data.newState))
 
             }
