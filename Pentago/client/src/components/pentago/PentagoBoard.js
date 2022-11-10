@@ -205,8 +205,7 @@ export default function Board(props) {
     useEffect(() => {
         channel.on((event) => {
             if (event.type === "game-move" && event.user.id !== client.userID) {
-                state.lastReceived = event.received_at
-                console.log("in channel event")
+                console.log("in channel event", channel)
                 dispatch(update_Board(event.data.newState))
 
             }

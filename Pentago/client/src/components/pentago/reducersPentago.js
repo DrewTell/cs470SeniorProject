@@ -21,7 +21,7 @@ function createInitialState() {
         haveAWinner: false,
         nextColor: 'black',
         timeToRotate: false,
-        lastReceived: ""
+        playerColor: ''
 
     };
 }
@@ -114,12 +114,20 @@ function integrateClick(state, colIdx, rowGroup, channel) {
     newBoard[rowGroup] = affectedRow;
     const activeColor = state.nextColor;
 
+    console.log("player color in state", state.playerColor)
+
+    if (state.playerColor === ''){
+        state.playerColor = state.nextColor
+    }
+
     let newState = {
         ...state,
         board: newBoard,
         timeToRotate: true,
         turn: nextTurn
     };
+
+
 
     if( doWeHaveAWinner(rowGroup, colIdx, activeColor, board) ) {
         newState = {
@@ -246,6 +254,7 @@ function integrateRotation(state, direction, channel) {
         quadrantToRotate: -1,
         nextColor: advanceColor(activeColor),
     };
+
     let winnerState = [false, false];
     for (let rowCheck = rowIndexColumnIndex[0]; rowCheck < rowIndexColumnIndex[1]; rowCheck++){
         for (let columnCheck = rowIndexColumnIndex[2]; columnCheck < rowIndexColumnIndex[3]; columnCheck++){
@@ -297,6 +306,22 @@ function integrateSkip(state, channel){
     return newState
 }
 
+
+function playerCheck(state, type){
+    console.log("player color in check", state.playerColor, "next color in check", state.nextColor)
+    if(type === 'click'){
+        if (state.playerColor === '' || state.playerColor === state.nextColor)
+            return true
+        return false
+    }
+    if(type === 'rotate'){
+        if (state.playerColor === state.nextColor)
+            return true
+        else return false
+    }
+    
+}
+
 function reducers(state, action) {
 
     if( state === undefined )
@@ -313,6 +338,8 @@ function reducers(state, action) {
         sendState(newState, channel);
         return newState
     } else if( action.type === 'CELL_CLICKED') {
+        if (!playerCheck(state, 'click'))
+            return state
         if( state.haveAWinner )
             return state;
         if(state.board[action.rowGroup][action.colIdx].color !== 'gray')  // column is full
@@ -326,17 +353,34 @@ function reducers(state, action) {
         return integrateRotationChoice(state, action.quadrant);
     }
     else if(action.type === 'ROTATION_CLICKED' && (state.quadrantToRotate !== -1) && state.timeToRotate){
+        if(!playerCheck(state, 'rotate'))
+            return state
+        if (state.playerColor !== '' && state.playerColor !== state.nextColor)
+            return state
         if(state.haveAWinner)
             return state
         return integrateRotation(state, action.direction, action.channel);
     }
     else if(action.type === 'SKIP_ROTATION' && state.timeToRotate){
+        if(!playerCheck(state, 'rotate'))
+            return state
         if(state.haveAWinner)
             return state
         return integrateSkip(state, action.channel)
     }
     else if(action.type === 'UPDATE'){
-        return action.newState
+        let temp = action.newState
+
+        let newState = {
+            board:temp.board,
+            hasRotated: temp.hasRotated,
+            quadrantToRotate: temp.quadrantToRotate,
+            haveAWinner: temp.haveAWinner,
+            nextColor: temp.nextColor,
+            timeToRotate: temp.timeToRotate,
+            playerColor:state.playerColor
+        }
+        return newState
     }
     else if(action.type === 'DO_NOTHING'){
         return state;
