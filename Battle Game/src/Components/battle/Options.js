@@ -3,12 +3,30 @@ import { attack, defend } from "../../actions"
 
 export const Options = (props) => {
     const{state, dispatch} = props
+    let log = state.fightText
+    let check = state.currFighter.name !=="unitName"
+    
     return(
         <div className="selector">
-            <Typography className="selector" variant="h4">Fight!</Typography>
-            <button onClick={()=>dispatch(attack())}> Attack </button>
-            <button onClick={()=>dispatch(defend())}> Defend </button>
-
+            {
+                check && <Typography className="selector" variant="h4">Fight!</Typography>
+            }
+            {      
+                check && <button onClick={()=>dispatch(attack())}> Attack </button>
+            }
+            {
+                check && <button onClick={()=>dispatch(defend())}> Defend </button>
+            }
+            <div className="log">
+                {
+                    log.map((message, idx) => 
+                        <Typography key={idx}>
+                            {message}
+                        </Typography>
+                )  
+                } 
+            </div>
         </div>
+        
     )
 }

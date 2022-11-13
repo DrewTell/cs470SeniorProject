@@ -1,12 +1,14 @@
 
 import { randomizer } from "./Components/randomizer";
+
+let blankUnit = {name: "unitName", lvl:0, strength:0, defense:0, currHP: 0, maxHP: 0}
+
 function createInitialState() {
     // The board is a 2D array of Objects. Each Object holds the state of the "cell" that it represents.
     // Each of the elements of firstAvailableIndex contains an index for each column of the 2D array.
     // The value at the index specifies which row in that column a disk can be deposited.
 
     let units = Array(3).fill({name: "unitName", lvl:0, strength:0, defense:0, currHP: 0, maxHP: 0});
-    let enemyUnit = randomizer(1,0)
     return {
         mode: 'start',
         units:units,
@@ -15,7 +17,8 @@ function createInitialState() {
         gold:0,
         currFighter:units[0],
         currFighterSlot:-1,
-        enemy:enemyUnit
+        enemy:randomizer(1, 0),
+        fightText:[]
 
     };
 }
@@ -34,62 +37,98 @@ function addMember(state, unit){
     };
 }
 
-function checkCurr(currFighter){
-    let newFighter = {name: "unitName", lvl:0, strength:0, defense:0, currHP: 0, maxHP: 0}
-    if(currFighter.currHP <= 0){
-        return {
-            newFighter
-        }
+function advanceStage(state){
+    let enemy = randomizer(state.stage+1, 0)
+    return {
+        ...state,
+        stage:state.stage+1,
+        enemy:enemy,
+        fightText:["Stage advanced, next battle commencing"],
+        currFighter:blankUnit
     }
-    return currFighter
 }
 
-function checkEnemy(enemy){
-    let newEnemy = {name: "unitName", lvl:0, strength:0, defense:0, currHP: 0, maxHP: 0}
-    if(enemy.currHP <= 0){
-        console.log("enemy has died")
-        return {
-            newEnemy
-        }
+function playerLoses(state){
+    let units = state.units
+    units[state.currFighterSlot] = blankUnit
+    return {
+        ...state,
+        units:units,
+        currFighter:blankUnit
     }
-    return enemy
 }
 
 function attack(state){
     let currFighter = state.currFighter
+    if(currFighter.name === "unitName")
+        return state
     let enemy = state.enemy
+    if(enemy.name === "unitName")
+        return state
     let d1 = currFighter.strength - enemy.defense
     let d2 = enemy.strength - currFighter.defense
 
+    state.fightText.push(`${currFighter.name} attacks!`)
     enemy.currHP -= d1
-    if(enemy.currHP !== 0)
-        currFighter.HP -= d2
+    state.fightText.push(`Enemy ${state.enemy.name} takes ${d1} damage!`)
+    if(enemy.currHP > 0){
+        state.fightText.push(`Enemy ${enemy.name} attacks!`)
+        currFighter.currHP -= d2
+        state.fightText.push(`${state.currFighter.name} takes ${d2} damage!`)
+    }
 
-    currFighter = checkCurr(currFighter)
-    enemy = checkEnemy(enemy)
-    return {
+    if (currFighter.currHP <= 0){
+        return state = playerLoses(state)
+    }
+    if(enemy.currHP <= 0){
+        return state = advanceStage(state)
+    }
+    else return {
         ...state,
         currFighter:currFighter,
-        enemy:enemy
+        enemy:enemy,
+        fightText:state.fightText
     }
 
 }
 
 function defend(state){
-    if(state.enemy.name === "unitName")
-        return state
     let currFighter = state.currFighter
+    if(currFighter.name === "unitName")
+        return state
     let enemy = state.enemy
+    if(enemy.name === "unitName")
+        return state
+    state.fightText.push(`${currFighter.name} defends!`)
     let d1 = enemy.strength - (Math.floor(currFighter.defense * 1.5) + 1)
 
+    state.fightText.push(`Enemy ${enemy.name} attacks!`)
     currFighter.currHP -= d1
+    state.fightText.push(`${state.currFighter.name} takes ${d1} damage!`)
 
-    currFighter = checkCurr(currFighter)
-    enemy = checkEnemy(enemy)
-    return {
+    if (currFighter.currHP <= 0){
+        return state = playerLoses(state)
+    }
+    if(enemy.currHP <= 0){
+        return state = advanceStage(state)
+    }else return {
         ...state,
         currFighter:currFighter,
-        enemy:enemy
+        enemy:enemy,
+        fightText:state.fightText
+    }
+}
+
+function setFighter(state, action){
+    let log = []
+    log.push(`${state.units[action.num].name} has joined the battle`)
+    log.push(`Enemy ${state.enemy.name} has joined the battle`)
+    log.push(`Begin!`)
+    return {
+        ...state,
+        currFighter:state.units[action.num],
+        currFighterSlot:action.num,
+        fightText:log
     }
 }
 
@@ -124,11 +163,7 @@ function reducers(state, action) {
     }
 
     if(action.type === "SET_F"){
-        console.log(action)
-        return {
-            ...state,
-            currFighter:state.units[action.num]
-        }
+        return setFighter(state, action)
     }
 
     if(action.type === "PURCHASE"){

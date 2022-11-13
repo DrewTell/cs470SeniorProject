@@ -47,6 +47,21 @@
     background: none;
 }
 
+
+.log{
+    background-color: white;
+    border-color: black;
+    border: solid;
+    height: 25vh;
+    width: 50vw;
+    position: fixed;
+    left:25%;
+    right:25%;
+    resize: 'vertical';
+    overflow: auto;
+    text-align: left;
+    margin: auto;
+}
 .enemy{
     position: fixed;
     right:0%;
