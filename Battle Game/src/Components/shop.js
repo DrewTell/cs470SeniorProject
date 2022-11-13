@@ -8,7 +8,6 @@ import { battle_mode } from "../actions"
 
 export const Shop = (props) => {
     const {units, members, dispatch} = props
-    console.log("units in shop", units) 
     return (
         <Fragment>
             <table className="shop">
@@ -24,7 +23,7 @@ export const Shop = (props) => {
                     {
                         units.map((unit, idx) => 
                             <td key={idx}>
-                                <UnitCard dispatch={dispatch} unit={randomizer()} location={'shop'}/>
+                                <UnitCard dispatch={dispatch} unit={randomizer(2,1)} location={'shop'}/>
                             </td>
                     )  
                     }  

@@ -1,7 +1,10 @@
-import { Party } from "./party"
+import { Typography } from "@mui/material"
+import { Party } from "../party"
 import { BattleBar } from "./BattleBar"
 import { Enemy } from "./Enemy"
 import { Fighter } from "./Fighter"
+import { UnitSelection } from "./UnitSelection"
+import { Options } from "./Options.js"
 
 export const Battle = (props) => {
     const{state, dispatch} = props
@@ -10,8 +13,9 @@ export const Battle = (props) => {
             <BattleBar stage={state.stage}/>
             <Enemy dispatch={dispatch} enemy={state.enemy}/>
             <Fighter unit={state.currFighter} dispatch={dispatch}/>
-            {state.currFighter.name === "unitName" && "pee pee"}
             <Party dispatch={dispatch} units={state.units}></Party>
+            {state.currFighter.name === "unitName" && <UnitSelection units={state.units} dispatch={dispatch}/>}
+            {state.currFighter.name !== "unitName" && <Options state={state} dispatch={dispatch}></Options>}
         </div>
     )
 }

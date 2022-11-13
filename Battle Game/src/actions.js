@@ -10,6 +10,25 @@ const battle_mode = () => {
     }
 }
 
+const set_fighter = (fighter) => {
+    return {
+        type: 'SET_F',
+        num:fighter
+    }
+}
+
+const attack = () => {
+    return {
+        type: 'ATTACK'
+    }
+}
+
+const defend = () => {
+    return {
+        type: 'DEFEND'
+    }
+}
+
 const add_member = (unit) => {
     return {
         type: 'PURCHASE',
@@ -20,5 +39,8 @@ const add_member = (unit) => {
 export {
     shop_mode,
     battle_mode,
+    set_fighter,
+    attack,
+    defend,
     add_member
 }

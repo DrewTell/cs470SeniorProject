@@ -1,4 +1,4 @@
-import { UnitCard } from "./unitCard"
+import { UnitCard } from "../unitCard"
 
 export const Enemy = (props) => {
     const{enemy, dispatch} = props

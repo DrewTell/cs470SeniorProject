@@ -4,8 +4,47 @@
 }
 
 .gradient{
-    background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 50%, rgba(0,0,0,1) 100%);
+    background: rgb(241,221,190);
+    background: linear-gradient(90deg, rgba(241,221,190,1) 0%, rgba(255,255,255,0) 50%, rgba(241,221,190,1) 100%);
+}
+
+.hidden1{
+    height: 157px;
+    width: 259px;
+    position:fixed;
+    bottom:10px;
+    left:25.8%;
+    right:25%;
+    z-index: 1;
+    font-size: 0;
+    border: none;
+    background: none;
+}
+
+.hidden2{
+    height: 157px;
+    width: 259px;
+    position:fixed;
+    bottom:10px;
+    left: 41.9%;
+    right:25%;
+    z-index: 1;
+    font-size: 0;
+    border: none;
+    background: none;
+}
+
+.hidden3{
+    height: 157px;
+    width: 259px;
+    position:fixed;
+    bottom:10px;
+    left: 58%;
+    right:25%;
+    z-index: 1;
+    font-size: 0;
+    border: none;
+    background: none;
 }
 
 .enemy{
@@ -16,6 +55,13 @@
 .curFighter{
     position: fixed;
     left: 0%;
+}
+
+.selector{
+    top:20%;
+    left: 25%;
+    right: 25%;
+    text-align: center;
 }
 
 .infoBar{
@@ -30,6 +76,7 @@
     bottom:10px;
     left:25%;
     right:25%;
+    z-index: 0;
 
 }
 
