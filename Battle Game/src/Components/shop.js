@@ -1,24 +1,26 @@
 import { Fragment } from "react"
 import { UnitCard } from "./unitCard"
-import "./start.css"
-import { randomizer } from "../randomizer"
-import { Button } from "@mui/material"
+import "./component.css"
+import { randomizer } from "./randomizer"
+import { Button, Typography } from "@mui/material"
+import { Party } from "./party"
+import { battle_mode } from "../actions"
 
 export const Shop = (props) => {
-    let units = props.units
-    let dispatch = props.dispatch
+    const {units, members, dispatch} = props
     console.log("units in shop", units) 
     return (
         <Fragment>
-            <div>
-            <table style={{margin:'auto'}}>
+            <table className="shop">
                 <tbody>
                     <tr>
                         <td>
-                            The Shop    
-                        </td>  
+                            <Typography>
+                                The Shop 
+                            </Typography>
+                        </td>
                     </tr>
-                    <tr className="party">
+                    <tr>
                     {
                         units.map((unit, idx) => 
                             <td key={idx}>
@@ -28,28 +30,15 @@ export const Shop = (props) => {
                     }  
                     </tr>
                 </tbody>
-            </table>
-            <br/>
-            <table style={{margin:'auto'}}>
-                <tbody>
-                    <tr>
-                        <td>
-                            Your party
-                        </td>
-                    </tr>
-                    <tr className="party">
-                    {
-                        units.map((unit, idx) => 
-                            <td key={idx}>
-                                <UnitCard dispatch={dispatch} unit={unit} location={'party'}/>
-                            </td>
-                    )  
-                    }  
-                    </tr>
-                </tbody>
             </table> 
-                <Button style={{margin:'auto'}}size="small" onClick={()=>console.log("yay")}>Battle Phase</Button>
-            </div>
+            <br/>
+            <Party units={units}></Party>
+            { members === 3 && 
+                <div className="battleButton">
+                    <Button style={{margin:'auto'}} size="large" onClick={()=>dispatch(battle_mode())}>Battle Phase</Button>
+                </div>
+                
+            }
         </Fragment>
     )
 }

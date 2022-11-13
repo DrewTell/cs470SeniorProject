@@ -1,0 +1,59 @@
+.center{
+    left:25%;
+    right:25%;
+}
+
+.gradient{
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 50%, rgba(0,0,0,1) 100%);
+}
+
+.enemy{
+    position: fixed;
+    right:0%;
+}
+
+.curFighter{
+    position: fixed;
+    left: 0%;
+}
+
+.infoBar{
+    left: 25%;
+    right: 25%;
+    text-align: center;
+}
+
+.party{
+    margin: auto;
+    position:fixed;
+    bottom:10px;
+    left:25%;
+    right:25%;
+
+}
+
+.battleButton{
+    text-align: center;
+    position:fixed;
+    bottom:50vh;
+    left:25%;
+    right:25%;
+}
+
+.start{
+    text-align: center;
+    position:fixed;
+    top:20vh;
+    left:25%;
+    right:25%;
+}
+
+.shop{
+    margin: auto;
+    position:fixed;
+    top:10px;
+    left:25%;
+    right:25%;
+
+}

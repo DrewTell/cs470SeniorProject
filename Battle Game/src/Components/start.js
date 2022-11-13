@@ -1,28 +1,16 @@
-import { Fragment, Grid, Item, useEffect } from "react"
-import { UnitCard } from "./unitCard"
-import "./start.css"
+import "./component.css"
 import { shop_mode } from "../actions"
-import { Button } from "@mui/material"
+import { Button, Typography } from "@mui/material"
+import "../font.ttf"
 
 export const Start = (props) => {
-    let dispatch = props.dispatch
-    let units = props.units
+    const {dispatch} = props;
     return (
-        <Fragment>
-            <table className="party">
-                <tbody>
-                    <tr className="center">
-                    {
-                        units.map((unit, idx) => 
-                            <td key={idx}>
-                                <UnitCard dispatch={dispatch} unit={unit} location={'party'}/>
-                            </td>
-                    )  
-                    }  
-                    </tr>
-                </tbody>
-            </table> 
-            <Button sx={{ml:1}} variant="contained" onClick={()=>dispatch(shop_mode())}>Enter Shop</Button>
-        </Fragment>
+        <div className="start">
+            <Typography variant="h2" style={{marginBottom:200}}>
+                Unit Battler
+            </Typography>
+            <Button variant="contained" onClick={()=>dispatch(shop_mode())}>Start Game</Button>
+        </div>
     )
 }

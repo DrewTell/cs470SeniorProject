@@ -1,14 +1,42 @@
-import { Card, Typography, Button, CardContent, CardActions } from '@mui/material';
+import { Card, Typography, Button, CardContent, CardActions, Grid, LinearProgress } from '@mui/material';
 import { add_member } from '../actions';
+import { styled } from '@mui/material/styles';
+import "./component.css"
+import { Stack } from '@mui/system';
+
+const Item = styled('div')(({ theme }) => ({
+    textAlign: 'center',
+  }));
+
 export const UnitCard = (props) => {
 
-    let unit = props.unit
-    let location = props.location
-    let dispatch = props.dispatch
-    
+    const {unit, location, dispatch, unitNum} = props
+    let percentHP = Math.floor((unit.currHP / unit.maxHP) * 100)
+    let hpColor = 'success'
+    if(percentHP < 40)
+        hpColor = 'inherit'
+
+    if(unit.name === "unitName"){
+        return (
+            <Card sx={{ width:250, border: 2, bordercolor:'white'}}>
+                <CardContent>
+                        <Grid container>
+                            <Item>
+                                Unit Slot {unitNum}
+                            </Item>
+                        </Grid>
+                        <Grid container>
+                            <Item className='center'>
+                                [Empty]
+                            </Item>
+                        </Grid>
+                </CardContent>
+            </Card>
+        )
+    }
     if (location === "shop"){
         return (
-            <Card sx={{ width:250, border: 1, bordercolor:'black'}}>
+            <Card sx={{ width:250, border: 2, bordercolor:'black'}}>
                 <CardContent>
                         <Typography>
                             {unit.name}
@@ -23,10 +51,12 @@ export const UnitCard = (props) => {
                         </Typography>
     
                         <Typography>
-                           HP: {unit.HP}
-                        <br />
-                           HP bar goes here
+                           HP: {unit.currHP}/{unit.maxHP}
                         </Typography>
+
+                        <Stack sx={{width:'100%', color:'red'}} spacing={2}>
+                            <LinearProgress color={hpColor} sx={{barColorPrimary:'green'}} variant='determinate' value={percentHP}/>
+                        </Stack>
                 </CardContent>
                 <CardActions>
                     <Button size="small" onClick={()=>dispatch(add_member(unit))}>Purchase Unit</Button>
@@ -34,9 +64,36 @@ export const UnitCard = (props) => {
             </Card>
         )
     }
+    else if(location === "enemy"){
+        return (
+            <Card sx={{ width:250, border: 2, bordercolor:'black'}}>
+                <CardContent>
+                        <Typography>
+                            Enemy {unit.name}
+                        </Typography>
+    
+                        <Typography variant="h5" component="div">
+                            Lvl: {unit.lvl}
+                        </Typography>
+    
+                        <Typography color="text.secondary">
+                            Strength: {unit.strength}   Defense: {unit.defense}
+                        </Typography>
+    
+                        <Typography>
+                        HP: {unit.currHP}/{unit.maxHP}
+                        </Typography>
+
+                        <Stack sx={{width:'100%', color:'red'}} spacing={2}>
+                            <LinearProgress color={hpColor} sx={{barColorPrimary:'green'}} variant='determinate' value={percentHP}/>
+                        </Stack>
+                </CardContent>
+            </Card>
+        )
+    }
     else{
         return (
-            <Card sx={{ width:250, border: 1, bordercolor:'black'}}>
+            <Card sx={{ width:250, border: 2, bordercolor:'black'}}>
                 <CardContent>
                         <Typography>
                             {unit.name}
@@ -51,10 +108,12 @@ export const UnitCard = (props) => {
                         </Typography>
     
                         <Typography>
-                           HP: {unit.HP}
-                        <br />
-                           HP bar goes here
+                        HP: {unit.currHP}/{unit.maxHP}
                         </Typography>
+
+                        <Stack sx={{width:'100%', color:'red'}} spacing={2}>
+                            <LinearProgress color={hpColor} sx={{barColorPrimary:'green'}} variant='determinate' value={percentHP}/>
+                        </Stack>
                 </CardContent>
             </Card>
         )
