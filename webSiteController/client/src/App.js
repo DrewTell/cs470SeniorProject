@@ -63,7 +63,7 @@ function App() {
           <CssBaseline />
       <Fragment>
 
-          <ResponsiveAppBar/>
+          <ResponsiveAppBar accountLogOut = {logOut} displayProfile = {isAuth}/>
         {isAuth ? (
             <Stack direction="column" divider={<Divider orientation="horizontal" flexItem />} sx = {{xs: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Box  sx={{  width: '50%' }}>
@@ -94,9 +94,6 @@ function App() {
               style={{ minHeight: '100vh' }}
           >
 
-              <Grid item xs={3}>
-                  <Button onClick={logOut} sx={{xs: 'flex', alignItems: 'center', justifyContent: 'center' }}> Log Out</Button>
-              </Grid>
           </Grid>
       </Fragment>
       </ThemeProvider>

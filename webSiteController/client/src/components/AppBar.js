@@ -10,11 +10,12 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import {VideogameAsset} from "@mui/icons-material";
+import Button from "@mui/material/Button";
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Logout'];
 
-function ResponsiveAppBar() {
+function ResponsiveAppBar(props) {
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
 
@@ -55,14 +56,6 @@ function ResponsiveAppBar() {
                         Bored Board Gaming
                     </Typography>
 
-
-
-
-
-
-
-
-
                     <Box sx={{ flexGrow: 0,  }}>
 
                         <Tooltip title="Open settings">
@@ -89,13 +82,11 @@ function ResponsiveAppBar() {
                         >
                             {settings.map((setting) => (
                                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
+                                    {((setting === "Logout") ? (<Button onClick={props.accountLogOut} sx={{xs: 'flex', alignItems: 'center', justifyContent: 'center' }}> Log Out</Button>) : <Typography textAlign="center">{setting}</Typography>)}
                                 </MenuItem>
                             ))}
                         </Menu>
                     </Box>
-
-
 
                 </Toolbar>
 
