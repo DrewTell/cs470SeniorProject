@@ -19,11 +19,14 @@ function ResponsiveAppBar(props) {
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
 
+    const cookieValueName = document.cookie
+        .split('; ')
+        .find((row) => row.startsWith('username='))
+        ?.split('=')[1];
+
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
     };
-
-
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
@@ -57,13 +60,13 @@ function ResponsiveAppBar(props) {
                     </Typography>
 
                     <Box sx={{ flexGrow: 0,  }}>
-
-                        <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar/>
-                            </IconButton>
-                        </Tooltip>
-
+                        {props.displayProfile &&
+                            <Tooltip title="Open settings">
+                                <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
+                                    <Avatar/>
+                                </IconButton>
+                            </Tooltip>
+                        }
                         <Menu
                             sx={{ mt: '45px' }}
                             id="menu-appbar"
@@ -80,6 +83,7 @@ function ResponsiveAppBar(props) {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
+                            <MenuItem> {cookieValueName} </MenuItem>
                             {settings.map((setting) => (
                                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                                     {((setting === "Logout") ? (<Button onClick={props.accountLogOut} sx={{xs: 'flex', alignItems: 'center', justifyContent: 'center' }}> Log Out</Button>) : <Typography textAlign="center">{setting}</Typography>)}
