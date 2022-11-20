@@ -9,7 +9,7 @@ export const Options = (props) => {
     return(
         <div className="selector">
             {
-                check && <Typography className="selector" variant="h4">Fight!</Typography>
+                check && <Typography variant="h4">Fight!</Typography>
             }
             {      
                 check && <button onClick={()=>dispatch(attack())}> Attack </button>
@@ -17,15 +17,17 @@ export const Options = (props) => {
             {
                 check && <button onClick={()=>dispatch(defend())}> Defend </button>
             }
-            <div className="log">
-                {
-                    log.map((message, idx) => 
-                        <Typography key={idx}>
-                            {message}
-                        </Typography>
-                )  
-                } 
+            { check &&
+                <div className="log">
+                    {
+                        log.map((message, idx) => 
+                            <Typography key={idx}>
+                                {message}
+                            </Typography>
+                    )  
+                    } 
             </div>
+            }
         </div>
         
     )

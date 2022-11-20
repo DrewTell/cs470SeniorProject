@@ -1,6 +1,6 @@
 export const randomizer = (level, range) => {
 
-    let names = ['Human', 'Dwarf', 'Elf', 'Demon']
+    let names = ['Human', 'Hobbit', 'Elf', 'Demon']
     let idx = Math.floor(Math.random() * 4)
     let name = names[idx]
 

@@ -8,9 +8,14 @@ export const UnitSelection = (props) => {
             <Typography variant="h4">
                 Select Your Fighter Below
             </Typography>
-            <button className="hidden1" onClick={()=>dispatch(set_fighter(0))}>1</button>
-            <button className="hidden2" onClick={()=>dispatch(set_fighter(1))}>2</button>
-            <button className="hidden3" onClick={()=>dispatch(set_fighter(2))}>3</button>
+
+            <button style={{visibility:"hidden"}} onClick={()=>console.log("wee")}>Attack</button>
+            <button style={{visibility:"hidden"}} onClick={()=>console.log("wee")}>Defend</button>
+            <div className="party">
+                <button className="hidden1" onClick={()=>dispatch(set_fighter(0))}>1</button>
+                <button className="hidden2" onClick={()=>dispatch(set_fighter(1))}>2</button>
+                <button className="hidden3" onClick={()=>dispatch(set_fighter(2))}>3</button>
+            </div>
         </div>
     )
 }
