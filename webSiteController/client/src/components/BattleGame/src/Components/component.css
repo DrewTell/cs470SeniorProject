@@ -57,10 +57,12 @@
 .enemy{
     position: fixed;
     right:0%;
+    top:7vh;
 }
 
-.curFighter{
+.currFighter{
     position: fixed;
+    top:7vh;
     left: 0%;
 }
 
@@ -71,6 +73,14 @@
     right: 25%;
     text-align: left;
     padding: 1px;
+    border: solid black 2px;
+    background-color: white;
+    color: black;
+    resize: 'vertical';
+    overflow: auto;
+    text-align: left;
+    margin: auto;
+
 }
 .logButtons{
     position: fixed;
@@ -86,9 +96,12 @@
     left: 25%;
     right: 25%;
     text-align: center;
+    color:black;
 }
 
 .infoBar{
+    position: fixed;
+    top:7vh;
     left: 25%;
     right: 25%;
     text-align: center;
@@ -127,7 +140,7 @@
     justify-content: center;
     margin: auto;
     position:fixed;
-    top:10px;
+    top:40px;
     left:25%;
     right:25%;
 

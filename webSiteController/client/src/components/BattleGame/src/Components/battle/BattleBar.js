@@ -4,7 +4,7 @@ export const BattleBar = (props) => {
     const{stage} = props
     return(
         <div className="infoBar">
-            <Typography variant="h6">
+            <Typography color="black" variant="h6">
                 Stage: {stage}/10
             </Typography>
         </div>

@@ -1,7 +1,15 @@
 .App{
+  position: absolute;
   background: rgb(245,229,205);
   background: linear-gradient(90deg, rgba(245,229,205,1) 0%, rgba(255,255,255,0) 50%, rgba(245,229,205,1) 100%);
   width: 100vw;
   height:100vh;
-  margin:0px;
+}
+
+.white{
+  background: white;
+  background-color: white;
+  width: 100vw;
+  height: 100vh;
+  margin-left:-25vw;
 }
