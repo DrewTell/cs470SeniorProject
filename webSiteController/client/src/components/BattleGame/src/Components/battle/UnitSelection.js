@@ -6,10 +6,10 @@ export const UnitSelection = (props) => {
     return(
         <div className="selector">
             {curr === "unitName" ?
-                <Typography variant="h4">
+                <Typography color="black" variant="h4">
                     Select Your Fighter Below
                 </Typography> :
-                <Typography variant="h4">
+                <Typography color="black" variant="h4">
                     Fight!
                 </Typography>
             }

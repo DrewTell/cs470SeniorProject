@@ -10,24 +10,28 @@ const [state, dispatch] = useReducer(reducers, undefined, createInitialState)
 
 if(state.mode === 'start'){
   return(
-  <div className='App'>
-    <Fragment>
-      <Start dispatch={dispatch}></Start>
-    </Fragment>
-  </div>
+    <div className='white'>
+      <div className='App'>
+        <Start dispatch={dispatch}></Start>
+      </div>
+    </div>
     )
   }
 if(state.mode === 'shop'){
   return(
-    <div className='App'>
-      <Shop units={state.units} members={state.members} dispatch={dispatch}></Shop>
+    <div className='white'>
+      <div className='App'>
+        <Shop units={state.units} members={state.members} dispatch={dispatch}></Shop>
+      </div>
     </div>
     )
   }
 if(state.mode === 'battle'){
   return(
-    <div className='App'>
-      <Battle state={state} dispatch={dispatch}></Battle>
+    <div className='white'>
+      <div className='App'>
+        <Battle state={state} dispatch={dispatch}></Battle>
+      </div>
     </div>
     )
   }

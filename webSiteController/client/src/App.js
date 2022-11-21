@@ -9,6 +9,7 @@ import Cookies from "universal-cookie";
 import { useState } from "react";
 import JoinPentago from "./components/pentago/JoinPentago";
 import LightsOutPlaceHolder from "./components/lightsOut/LightsOutPlaceHolder";
+import BattleGamePlaceHolder from "./components/BattleGame/src/BattleGamePlaceholder";
 import PlaceHolderGame from "./components/PlaceHolder";
 import React, {Fragment} from 'react';
 import Box from '@mui/material/Box';
@@ -89,6 +90,11 @@ function App() {
 
                 <Box sx = {{width: '50%'}}>
                     <LightsOutPlaceHolder gameSelected={gameSelected} setGameSelected={setGameSelected}
+                                            isSelected={isSelected} setIsSelected={setIsSelected}/>
+                </Box>
+
+                <Box sx = {{width: '50%'}}>
+                    <BattleGamePlaceHolder gameSelected={gameSelected} setGameSelected={setGameSelected}
                                             isSelected={isSelected} setIsSelected={setIsSelected}/>
                 </Box>
 

@@ -1,6 +1,7 @@
 import { Typography } from "@mui/material"
 import { attack, defend } from "../../actions"
 import {Button} from "@mui/material"
+import "../component.css"
 
 export const Options = (props) => {
     const{state, dispatch} = props
