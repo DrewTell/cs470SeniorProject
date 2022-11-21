@@ -2,19 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d50b5d56-9cd3-471e-bc54-ece8ad75fc4e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/Board.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/LightsOut.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/LightsOutPlaceHolder.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/Timer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/actions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/reducers.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/reportWebVitals.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webSiteController/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/pentago/Chat.css" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/pentago/Chat.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/LightsOut.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/LightsOut.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/LightsOutPlaceHolder.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/LightsOutPlaceHolder.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,16 +33,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Drewt/OneDrive/Documents/GitHub/cs470SeniorProject/webSiteController/client/src/components/lightsOut",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Drewt/OneDrive/Documents/GitHub/cs470SeniorProject/webSiteController/client/src/components/lightsOut&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Drewt\OneDrive\Documents\GitHub\cs470SeniorProject\webSiteController\client\src\components\lightsOut" />
@@ -71,6 +62,7 @@
       <workItem from="1668631525881" duration="6705000" />
       <workItem from="1669021877648" duration="143000" />
       <workItem from="1669022122409" duration="1581000" />
+      <workItem from="1669042975131" duration="2466000" />
     </task>
     <servers />
   </component>

@@ -4,17 +4,17 @@ import {TextField} from "@mui/material";
 import Typography from "@mui/material/Typography";
 
 
-function LightsOutGame() {
-
-    const [startGame, setStartGame] = useState(null);
+function LightsOutGame(props) {
     const handleClick = event => {
-        setStartGame(true);
+            props.setGameSelected();
+            props.setIsSelected(event);
     };
     return (
         <>
-            {startGame ? (
-                <LightsOut/>
-            ) : (
+            {(props.isSelected === 'lightsOut') ? (
+                <LightsOut setGameSelected={props.setGameSelected}
+                           setIsSelected={props.setIsSelected}/>
+            ) : props.gameSelected === false ? (
                 <div className="joinGame">
                     <Typography
                         variant="h6"
@@ -30,7 +30,7 @@ function LightsOutGame() {
                             textDecoration: 'none',
                         }}
                     >
-                        Placeholder (? Players):
+                        Lights Out (1 Player):
                     </Typography>
 
                     <Typography
@@ -50,16 +50,18 @@ function LightsOutGame() {
                             textDecoration: 'none',
                         }}
                     >
-                        Placeholder is an abstract strategy game for ? players with a game board revolving around ?.
-                        This game reimplements the well known ? with a whole new spin: After ?, the player has to make a move, thus
-                        changing the game state.
+                        The game consists of a grid of lights. When the game starts,
+                        a random number or a stored pattern of these lights is switched on.
+                        Pressing any of the lights will toggle it and the adjacent lights.
+                        The goal of the puzzle is to switch all the lights off, preferably
+                        in as few button presses as possible.
                     </Typography>
-                    <TextField
-                        placeholder="Username of placeholder rival..."
-                    />
-                    <button onClick={handleClick}> Join/Start Game</button>
+
+                    <button onClick={() => handleClick('lightsOut')}> Start Game</button>
                 </div>
-            )}
+            )
+            : null
+            }
         </>
     );
 }

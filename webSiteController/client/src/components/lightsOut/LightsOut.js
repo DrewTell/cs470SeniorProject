@@ -222,7 +222,7 @@ export default function LightsOut(props) {
         <Grid                   sx={{
             display: 'flex',
             justifyContent: 'center',
-            mt: 10
+            mt: 3
         }}>
             <Grid>  Click Count: {state.clickCount} </Grid>
             <Grid sx = {{ml : 1}}>  Time passed: {Math.floor(seconds / 60)} minute {seconds % 60} seconds</Grid>
@@ -230,11 +230,20 @@ export default function LightsOut(props) {
             <Grid sx={{
                 display: 'flex',
                 justifyContent: 'center',
-                mt: 10}} >
+                mt: 1}} >
                 <ChangeBoardState
                     dispatch={dispatch}
                     resetClick = {reset}
                 />
+            </Grid>
+            <Grid sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                }}>
+                <Button  onClick={() => {props.setGameSelected(false);
+                                        props.setIsSelected(null)}}>
+                    Leave Game
+                </Button>
             </Grid>
         </Fragment>
     </ThemeProvider>

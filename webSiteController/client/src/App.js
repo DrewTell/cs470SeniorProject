@@ -31,6 +31,9 @@ function App() {
   const client = StreamChat.getInstance(api_key);
   const [isAuth, setIsAuth] = useState(false);
 
+  const [gameSelected, setGameSelected] = useState(false);
+  const [isSelected, setIsSelected] = useState(null);
+
   const logOut = () => {
     cookies.remove("token");
     cookies.remove("userId");
@@ -58,6 +61,7 @@ function App() {
         .then((user) => {
           setIsAuth(true);
         });
+
   }
 
 
@@ -77,13 +81,12 @@ function App() {
                 <Chat client={client}>
                 <JoinPentago />
 
-
-
             </Chat>
             </Box>
 
                 <Box sx = {{width: '50%'}}>
-                    <LightsOutPlaceHolder/>
+                    <LightsOutPlaceHolder gameSelected={gameSelected} setGameSelected={setGameSelected}
+                                            isSelected={isSelected} setIsSelected={setIsSelected}/>
                 </Box>
 
                 <Box sx = {{width: '50%'}}>
