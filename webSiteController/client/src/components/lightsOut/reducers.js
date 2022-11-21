@@ -1,0 +1,192 @@
+import {NUM_COLUMNS, NUM_ROWS, START_LIGHT_ODDS} from "./constants";
+
+
+const  advanceColor = (color) => color === 'blue' ? 'white' : 'blue';
+const advanceCount = (count) => count + 1;
+function createInitialState(boardRows = NUM_ROWS, boardCol = NUM_COLUMNS) {
+
+    let board = Array(boardRows).fill(Array(boardCol).fill({color: "white", isOccupied: false}));
+    board.map((row, rowIdx) => row.map( (col, colIdx) => {
+        return {...board[rowIdx][colIdx], row: rowIdx, column: colIdx };
+    }));
+
+
+    for (let rowsInBoard = 0; rowsInBoard < boardRows; rowsInBoard++){
+        let affectedRow = board[rowsInBoard].slice();
+        for (let colInBoard = 0; colInBoard < boardCol; colInBoard++){
+            if (Math.random() < START_LIGHT_ODDS){
+                affectedRow[colInBoard] = {
+                  ...affectedRow[colInBoard],
+                    color: "blue"
+                };
+            }
+
+        }
+        board[rowsInBoard] = affectedRow;
+    }
+
+
+
+
+
+    return {
+        board,
+        haveAWinner: false,
+        clickCount: 0,
+        boardTime: 0,
+        boardActive: true,
+        boardAttributes: [boardRows, boardCol],
+    };
+}
+
+function integrateCascade(state, colIdx, rowIdx, cellColor){
+    console.log(state);
+    if (state.haveAWinner){
+        return state;
+    }
+    let boardDimension = state.boardAttributes[0];
+    let board = state.board;
+    let affectedRow = board[rowIdx].slice();
+
+    affectedRow[colIdx] = {
+        ...affectedRow[colIdx],
+        color: advanceColor(cellColor),
+        isOccupied: true
+    };
+    if (colIdx === (boardDimension - 1)){
+        console.log("In here: ");
+        affectedRow[colIdx - 1] = {
+            ...affectedRow[colIdx - 1],
+            color: advanceColor(affectedRow[colIdx - 1]['color']),
+            isOccupied: true
+        };
+    }
+    else if (colIdx === 0){
+        affectedRow[colIdx + 1] = {
+            ...affectedRow[colIdx + 1],
+            color: advanceColor(affectedRow[colIdx + 1]['color']),
+            isOccupied: true
+        };
+    }
+    else{
+        affectedRow[colIdx - 1] = {
+            ...affectedRow[colIdx - 1],
+            color: advanceColor(affectedRow[colIdx - 1]['color']),
+            isOccupied: true
+        };
+
+        affectedRow[colIdx + 1] = {
+            ...affectedRow[colIdx + 1],
+            color: advanceColor(affectedRow[colIdx + 1]['color']),
+            isOccupied: true
+        };
+
+    }
+
+    let affectedBotRow = 0;
+    let affectedTopRow = 0;
+
+    if (rowIdx === 0){
+        affectedBotRow = board[rowIdx + 1].slice();
+        affectedBotRow[colIdx] = {
+            ...affectedBotRow[colIdx],
+            color: advanceColor(affectedBotRow[colIdx]['color']),
+            isOccupied: true
+        };
+    }
+    else if (rowIdx === (boardDimension - 1)){
+        affectedTopRow = board[rowIdx - 1].slice();
+        affectedTopRow[colIdx] = {
+            ...affectedTopRow[colIdx],
+            color: advanceColor(affectedTopRow[colIdx]['color']),
+            isOccupied: true
+        };
+    }
+    else{
+        affectedBotRow = board[rowIdx + 1].slice();
+        affectedBotRow[colIdx] = {
+            ...affectedBotRow[colIdx],
+            color: advanceColor(affectedBotRow[colIdx]['color']),
+            isOccupied: true
+        };
+
+        affectedTopRow = board[rowIdx - 1].slice();
+        affectedTopRow[colIdx] = {
+            ...affectedTopRow[colIdx],
+            color: advanceColor(affectedTopRow[colIdx]['color']),
+            isOccupied: true
+        };
+
+
+    }
+
+    let newBoard = board.slice();
+    newBoard[rowIdx] = affectedRow;
+
+    if (affectedBotRow !== 0){
+        newBoard[rowIdx + 1] = affectedBotRow;
+    }
+    if (affectedTopRow !== 0){
+        newBoard[rowIdx - 1] = affectedTopRow;
+    }
+
+    let haveWeWon = (boardState) => {
+        let winTemp = true;
+        for (let i = 0; i < boardDimension; i++){
+            let currentRow = boardState[i].slice();
+            let rowWin = currentRow.every(function(item){
+                return item.color === "white"
+            });
+            winTemp = (winTemp && rowWin);
+        }
+        return winTemp;
+    }
+    let hasWon = haveWeWon(newBoard);
+
+    console.log("has won: ", hasWon);
+
+    const activeColor = state.nextColor;
+    const currentCount = state.clickCount;
+    let newState = {
+        ...state,
+        board: newBoard,
+        nextColor: advanceColor(activeColor),
+        clickCount: advanceCount(currentCount),
+        haveAWinner: hasWon,
+    };
+
+
+
+    return newState;
+
+
+}
+
+
+function reducers(state, action) {
+    if( state === undefined )
+        return state;
+
+    // console.log(`in reducers. action.type is: ${action.type}, board contains: ${JSON.stringify(state)}`);
+
+    if( action.type === 'RESET' ) {
+        const boardRow = state.boardAttributes[0];
+        const boardCol = state.boardAttributes[1];
+        return createInitialState(boardRow, boardCol);
+    } else if( action.type === 'CELL_CLICKED') {
+        if( state.haveAWinner )
+            return state;
+        return integrateCascade(state, action.colIdx, action.rowIdx, action.color);
+    }
+    else if (action.type === 'RESHAPE') {
+        return createInitialState(action.rowSize,action.colSize)
+    }
+
+    return state;
+
+}
+
+export {
+    reducers,
+    createInitialState
+};

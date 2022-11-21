@@ -8,16 +8,8 @@
     column-gap: 100px;
 }
 
-.str-chat__list {
-    background-color: dimgray;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-    padding: 3px;
-    height: 300px;
-    width: 310px;
-    overflow: hidden;
-    overflow-y: scroll;
-}
+
+
 
 .str-chat__list ul {
     color: #404c66;

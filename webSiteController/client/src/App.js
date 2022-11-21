@@ -8,6 +8,7 @@ import { Chat } from "stream-chat-react";
 import Cookies from "universal-cookie";
 import { useState } from "react";
 import JoinPentago from "./components/pentago/JoinPentago";
+import LightsOutPlaceHolder from "./components/lightsOut/LightsOutPlaceHolder";
 import PlaceHolderGame from "./components/PlaceHolder";
 import React, {Fragment} from 'react';
 import Box from '@mui/material/Box';
@@ -58,6 +59,10 @@ function App() {
           setIsAuth(true);
         });
   }
+
+
+
+
   return (
       <ThemeProvider theme={darkTheme}>
           <CssBaseline />
@@ -66,7 +71,9 @@ function App() {
           <ResponsiveAppBar accountLogOut = {logOut} displayProfile = {isAuth}/>
         {isAuth ? (
             <Stack direction="column" divider={<Divider orientation="horizontal" flexItem />} sx = {{xs: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Box  sx={{  width: '50%' }}>
+
+
+                <Box  sx={{  width: '50%' }}>
                 <Chat client={client}>
                 <JoinPentago />
 
@@ -74,9 +81,16 @@ function App() {
 
             </Chat>
             </Box>
+
+                <Box sx = {{width: '50%'}}>
+                    <LightsOutPlaceHolder/>
+                </Box>
+
                 <Box sx = {{width: '50%'}}>
                     <PlaceHolderGame/>
                 </Box>
+
+
                 </Stack>
         ) : (
 
