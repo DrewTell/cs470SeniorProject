@@ -1,6 +1,6 @@
 
 const click_on_cell_action = (clickColIdx, clickRowIdx, backGroundColor) => {
-    console.log("click on cell row: ", clickRowIdx, " col: ", clickColIdx);
+    // console.log("click on cell row: ", clickRowIdx, " col: ", clickColIdx);
     return {
         type: "CELL_CLICKED",
         colIdx: clickColIdx,

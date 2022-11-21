@@ -17,13 +17,10 @@ function createInitialState(boardRows = NUM_ROWS, boardCol = NUM_COLUMNS) {
             if (Math.random() < START_LIGHT_ODDS){
                 arrayOfClicks.push([rowsInBoard, colInBoard]);
                 board = integrateClick(board, colInBoard, rowsInBoard, boardRows);
-                // affectedRow[colInBoard] = {
-                //   ...affectedRow[colInBoard],
-                //     color: "blue"
-                // };
+
             }
         }
-        // board[rowsInBoard] = affectedRow;
+
     }
     console.log(arrayOfClicks);
     return {
@@ -134,7 +131,6 @@ function integrateClick(startBoard, colIdx, rowIdx, dimension){
 
 
 function integrateCascade(state, colIdx, rowIdx, cellColor){
-    console.log(state);
     if (state.haveAWinner){
         return state;
     }
@@ -148,7 +144,6 @@ function integrateCascade(state, colIdx, rowIdx, cellColor){
         isOccupied: true
     };
     if (colIdx === (boardDimension - 1)){
-        console.log("In here: ");
         affectedRow[colIdx - 1] = {
             ...affectedRow[colIdx - 1],
             color: advanceColor(affectedRow[colIdx - 1]['color']),
@@ -237,8 +232,6 @@ function integrateCascade(state, colIdx, rowIdx, cellColor){
     }
     let hasWon = haveWeWon(newBoard);
 
-    console.log("has won: ", hasWon);
-
     const activeColor = state.nextColor;
     const currentCount = state.clickCount;
     let newState = {
@@ -261,7 +254,6 @@ function reducers(state, action) {
     if( state === undefined )
         return state;
 
-    // console.log(`in reducers. action.type is: ${action.type}, board contains: ${JSON.stringify(state)}`);
 
     if( action.type === 'RESET' ) {
         const boardRow = state.boardAttributes[0];
