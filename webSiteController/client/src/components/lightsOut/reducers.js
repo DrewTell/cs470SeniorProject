@@ -10,25 +10,22 @@ function createInitialState(boardRows = NUM_ROWS, boardCol = NUM_COLUMNS) {
         return {...board[rowIdx][colIdx], row: rowIdx, column: colIdx };
     }));
 
-
+    let arrayOfClicks = [];
     for (let rowsInBoard = 0; rowsInBoard < boardRows; rowsInBoard++){
         let affectedRow = board[rowsInBoard].slice();
         for (let colInBoard = 0; colInBoard < boardCol; colInBoard++){
             if (Math.random() < START_LIGHT_ODDS){
-                affectedRow[colInBoard] = {
-                  ...affectedRow[colInBoard],
-                    color: "blue"
-                };
+                arrayOfClicks.push([rowsInBoard, colInBoard]);
+                board = integrateClick(board, colInBoard, rowsInBoard, boardRows);
+                // affectedRow[colInBoard] = {
+                //   ...affectedRow[colInBoard],
+                //     color: "blue"
+                // };
             }
-
         }
-        board[rowsInBoard] = affectedRow;
+        // board[rowsInBoard] = affectedRow;
     }
-
-
-
-
-
+    console.log(arrayOfClicks);
     return {
         board,
         haveAWinner: false,
@@ -38,6 +35,103 @@ function createInitialState(boardRows = NUM_ROWS, boardCol = NUM_COLUMNS) {
         boardAttributes: [boardRows, boardCol],
     };
 }
+
+
+function integrateClick(startBoard, colIdx, rowIdx, dimension){
+    let boardDimension = dimension;
+    let board = startBoard;
+    let affectedRow = board[rowIdx].slice();
+
+    affectedRow[colIdx] = {
+        ...affectedRow[colIdx],
+        color: advanceColor(affectedRow[colIdx]['color']),
+        isOccupied: true
+    };
+
+    if (colIdx === (boardDimension - 1)){
+        affectedRow[colIdx - 1] = {
+            ...affectedRow[colIdx - 1],
+            color: advanceColor(affectedRow[colIdx - 1]['color']),
+            isOccupied: true
+        };
+    }
+    else if (colIdx === 0){
+        affectedRow[colIdx + 1] = {
+            ...affectedRow[colIdx + 1],
+            color: advanceColor(affectedRow[colIdx + 1]['color']),
+            isOccupied: true
+        };
+    }
+    else{
+        affectedRow[colIdx - 1] = {
+            ...affectedRow[colIdx - 1],
+            color: advanceColor(affectedRow[colIdx - 1]['color']),
+            isOccupied: true
+        };
+
+        affectedRow[colIdx + 1] = {
+            ...affectedRow[colIdx + 1],
+            color: advanceColor(affectedRow[colIdx + 1]['color']),
+            isOccupied: true
+        };
+
+    }
+
+    let affectedBotRow = 0;
+    let affectedTopRow = 0;
+
+    if (rowIdx === 0){
+        affectedBotRow = board[rowIdx + 1].slice();
+        affectedBotRow[colIdx] = {
+            ...affectedBotRow[colIdx],
+            color: advanceColor(affectedBotRow[colIdx]['color']),
+            isOccupied: true
+        };
+    }
+    else if (rowIdx === (boardDimension - 1)){
+        affectedTopRow = board[rowIdx - 1].slice();
+        affectedTopRow[colIdx] = {
+            ...affectedTopRow[colIdx],
+            color: advanceColor(affectedTopRow[colIdx]['color']),
+            isOccupied: true
+        };
+    }
+    else{
+        affectedBotRow = board[rowIdx + 1].slice();
+        affectedBotRow[colIdx] = {
+            ...affectedBotRow[colIdx],
+            color: advanceColor(affectedBotRow[colIdx]['color']),
+            isOccupied: true
+        };
+
+        affectedTopRow = board[rowIdx - 1].slice();
+        affectedTopRow[colIdx] = {
+            ...affectedTopRow[colIdx],
+            color: advanceColor(affectedTopRow[colIdx]['color']),
+            isOccupied: true
+        };
+
+
+    }
+
+    let newBoard = board.slice();
+    newBoard[rowIdx] = affectedRow;
+
+    if (affectedBotRow !== 0){
+        newBoard[rowIdx + 1] = affectedBotRow;
+    }
+    if (affectedTopRow !== 0){
+        newBoard[rowIdx - 1] = affectedTopRow;
+    }
+
+    return newBoard;
+
+}
+
+
+
+
+
 
 function integrateCascade(state, colIdx, rowIdx, cellColor){
     console.log(state);

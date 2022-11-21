@@ -6,7 +6,8 @@ import Box from '@mui/material/Box';
 import Button from "@mui/material/Button";
 import {Typography} from "@mui/material";
 import Stack from '@mui/material/Stack'
-
+import {styled} from "@mui/material";
+import { keyframes } from '@emotion/react'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import {CssBaseline, Divider} from "@mui/material";
 
@@ -16,6 +17,20 @@ const darkTheme = createTheme({
     },
 });
 
+const flicker =keyframes` from, 0%,8%, 22%, 25%, 53%, 57%, 100%, to {
+    textShadow: "0 0 4px #fff,\n" +
+    "0 0 11px #fff,\n" +
+    "0 0 19px #fff,\n" +
+    "0 0 40px #0fa,\n" +
+    "0 0 80px #0fa,\n" +
+    "0 0 90px #0fa,\n" +
+    "0 0 100px #0fa,\n" +
+   " 0 0 150px #0fa;"
+}
+    20%, 24%, 55% {
+      textShadowshadow: none;
+    }})
+`
 
 let config = {
     num_rows: 6,
@@ -78,19 +93,17 @@ function Row(props) {
 function TopMessage(props) {
 
     const {haveAWinner, winnerColor, resetClick} = props;
-    
+
     const Title = () =>  "Lights Out";
     const firstMessage = () => haveAWinner ? `You Won. Game Over` : ``;
     return (
         <Stack width='100%'>
-            <Typography variant='h4' textAlign='center' sx={{boxShadow: "1px 1px 5px gray", textShadow: "    0 0 7px #fff,\n" +
+            <Typography variant='h4' textAlign='center' sx={{animation: `${flicker} 1s ease`, boxShadow: "1px 1px 5px gray", textShadow: "0 0 7px #fff,\n" +
                     "    0 0 10px #fff,\n" +
                     "    0 0 21px #fff,\n" +
                     "    0 0 42px #0fa,\n" +
-                    "    0 0 82px #0fa,\n" +
-                    "    0 0 92px #0fa,\n" +
-                    "    0 0 102px #0fa,\n" +
-                    "    0 0 151px #0fa;"}}>
+                    "    0 0 52px #0fa,\n" +
+                    "    0 0 62px #0fa;"}}>
                 {
                     Title()
 
@@ -103,16 +116,27 @@ function TopMessage(props) {
                 }
             </Typography>
 
+            <Grid align="center" sx={{justifyContent: 'center', }}>
+                <Button
+                        sx={{mt: 3, boxShadow: "1px 1px 5px gray", maxWidth: '30px', maxHeight: '60px',
+                            minWidth: '60px', minHeight: '30px',
 
-            <Button width='100%'
-                    sx={{textShadow: "2px 2px 10px green"
-                    }}
-                    onClick={() => {
-                        props.dispatch(reset_action())
-                        props.resetClick()
-                    }
-            }>Reset?
-            </Button>
+                            // textShadow: "0 0 7px #d32f2f,\n" +
+                            // "    0 0 10px #e53935,\n" +
+                            // "    0 0 21px #f44336,\n" +
+                            // "    0 0 42px #ef5350,\n" +
+                            // "    0 0 52px #e57373,\n" +
+                            // "    0 0 72px #ef9a9a;",
+                            textTransform: 'none',
+                        }}
+                        onClick={() => {
+                            props.dispatch(reset_action())
+                            props.resetClick()
+                        }
+                        }><Typography style={{ textTransform: 'none' }}>Reset</Typography>
+                </Button>
+            </Grid>
+
         </Stack>
     )
 }
