@@ -11,12 +11,18 @@
 
 
 
+.str-chat__list {
+    margin-top:-10vh;
+}
 .str-chat__list ul {
+    height:50vh;
     color: #404c66;
     list-style-type: none;
     margin: 5px;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
+    resize: 'vertical';
+    overflow: auto;
 }
 .str-chat__list li {
     list-style-type: none;
