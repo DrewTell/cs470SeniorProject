@@ -72,14 +72,17 @@ function App() {
           <CssBaseline />
       <Fragment>
 
-          <ResponsiveAppBar accountLogOut = {logOut} displayProfile = {isAuth}/>
+          <ResponsiveAppBar accountLogOut = {logOut} displayProfile = {isAuth}
+                            setGameSelected={setGameSelected}
+                            setIsSelected={setIsSelected}/>
         {isAuth ? (
             <Stack direction="column" divider={<Divider orientation="horizontal" flexItem />} sx = {{xs: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 
 
                 <Box  sx={{  width: '50%' }}>
                 <Chat client={client}>
-                <JoinPentago />
+                <JoinPentago gameSelected={gameSelected} setGameSelected={setGameSelected}
+                             isSelected={isSelected} setIsSelected={setIsSelected}/>
 
             </Chat>
             </Box>
@@ -90,7 +93,8 @@ function App() {
                 </Box>
 
                 <Box sx = {{width: '50%'}}>
-                    <PlaceHolderGame/>
+                    <PlaceHolderGame gameSelected={gameSelected} setGameSelected={setGameSelected}
+                                     isSelected={isSelected} setIsSelected={setIsSelected}/>
                 </Box>
 
 

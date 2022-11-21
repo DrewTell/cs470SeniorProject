@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import LightsOut from "./LightsOut";
-import {TextField} from "@mui/material";
+import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 
@@ -57,7 +57,7 @@ function LightsOutGame(props) {
                         in as few button presses as possible.
                     </Typography>
 
-                    <button onClick={() => handleClick('lightsOut')}> Start Game</button>
+                    <Button onClick={() => handleClick('lightsOut')}> Start Game</Button>
                 </div>
             )
             : null

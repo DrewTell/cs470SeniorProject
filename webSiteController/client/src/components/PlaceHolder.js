@@ -6,7 +6,7 @@ import {TextField} from "@mui/material";
 import Typography from "@mui/material/Typography";
 
 
-function PlaceHolderGame() {
+function PlaceHolderGame(props) {
     const [rivalUsername, setRivalUsername] = useState("");
     const { client } = useChatContext();
     const [channel, setChannel] = useState(null);
@@ -31,7 +31,7 @@ function PlaceHolderGame() {
                 <Channel channel={channel} Input={CustomInput}>
                     <div> Work in Progress </div>
                 </Channel>
-            ) : (
+            ) : props.gameSelected === false ? (
                 <div className="joinGame">
                     <Typography
                         variant="h6"
@@ -79,7 +79,7 @@ function PlaceHolderGame() {
                     />
                     <button onClick={createChannel}> Join/Start Game</button>
                 </div>
-            )}
+            ) : null }
         </>
     );
 }

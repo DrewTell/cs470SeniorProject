@@ -7,7 +7,7 @@ import "./Chat.css";
 
 
 import { Window, MessageList, MessageInput } from "stream-chat-react";
-function Game({ channel, setChannel }) {
+function Game({ channel, setChannel, setGameSelected }) {
     const [playersJoined, setPlayersJoined] = useState(
         channel.state.watcher_count === 2
     );
@@ -38,6 +38,7 @@ function Game({ channel, setChannel }) {
                 onClick={async () => {
                     await channel.stopWatching();
                     setChannel(null);
+                    setGameSelected(false);
                 }}
             >
                 {" "}
