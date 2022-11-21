@@ -10,7 +10,7 @@ const Item = styled('div')(({ theme }) => ({
 
 export const UnitCard = (props) => {
 
-    const {unit, location, dispatch, unitNum} = props
+    const {unit, location, dispatch, unitNum, enemy} = props
     let percentHP = Math.floor((unit.currHP / unit.maxHP) * 100)
     let hpColor = 'success'
     if(percentHP < 40)

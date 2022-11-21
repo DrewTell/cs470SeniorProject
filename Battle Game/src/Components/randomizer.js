@@ -1,8 +1,16 @@
-export const randomizer = (level, range) => {
+export const randomizer = (level, range, enemy) => {
 
-    let names = ['Human', 'Hobbit', 'Elf', 'Demon']
-    let idx = Math.floor(Math.random() * 4)
-    let name = names[idx]
+    let names = ['Human', 'Hobbit', 'Elf']
+    let enemyNames = ['Goblin','Mushroom', 'Skeleton', 'Eye Bat', 'Demon']
+    let name
+    if(!enemy){
+        let idx = Math.floor(Math.random() * 3)
+        name = names[idx]
+    }
+    else{
+        let idx = Math.floor(Math.random() * 5)
+        name = enemyNames[idx]
+    }
 
     let lRange = Math.floor(Math.random()*(range+1))
     lRange *= Math.round(Math.random()) ? 1 : -1

@@ -17,7 +17,7 @@ function createInitialState() {
         gold:0,
         currFighter:units[0],
         currFighterSlot:-1,
-        enemy:randomizer(1, 0),
+        enemy:randomizer(1, 0, true),
         fightText:[]
 
     };
@@ -38,7 +38,7 @@ function addMember(state, unit){
 }
 
 function advanceStage(state){
-    let enemy = randomizer(state.stage+1, 0)
+    let enemy = randomizer(state.stage+1, 0, true)
     return {
         ...state,
         stage:state.stage+1,
