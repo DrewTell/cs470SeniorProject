@@ -9,6 +9,7 @@ import Stack from '@mui/material/Stack'
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import {CssBaseline, Divider} from "@mui/material";
+
 const darkTheme = createTheme({
     palette: {
         mode: 'dark',
@@ -35,7 +36,8 @@ function Cell(props) {
             backgroundColor: cell['color'],
             border: 1,
             borderColor: 'black',
-            borderRadius: '2'
+            borderRadius: '2',
+            boxShadow: "1px 1px 4px gray"
         }}
              onClick={() => dispatch(click_on_cell_action(colIdx, rowIdx, cell['color']))}
         />
@@ -76,16 +78,19 @@ function Row(props) {
 function TopMessage(props) {
 
     const {haveAWinner, winnerColor, resetClick} = props;
-
-    // const playerColor = props.nextColor.charAt(0).toUpperCase() + props.nextColor.slice(1);
-    // const wColor = winnerColor ? winnerColor.charAt(0).toUpperCase() + winnerColor.slice(1) : null;
-
-    // const firstMessage = () => haveAWinner ? `${wColor} Wins. Game Over` : `${playerColor} plays next`;
+    
     const Title = () =>  "Lights Out";
     const firstMessage = () => haveAWinner ? `You Won. Game Over` : ``;
     return (
         <Stack width='100%'>
-            <Typography variant='h6' textAlign='center'>
+            <Typography variant='h4' textAlign='center' sx={{boxShadow: "1px 1px 5px gray", textShadow: "    0 0 7px #fff,\n" +
+                    "    0 0 10px #fff,\n" +
+                    "    0 0 21px #fff,\n" +
+                    "    0 0 42px #0fa,\n" +
+                    "    0 0 82px #0fa,\n" +
+                    "    0 0 92px #0fa,\n" +
+                    "    0 0 102px #0fa,\n" +
+                    "    0 0 151px #0fa;"}}>
                 {
                     Title()
 
@@ -100,7 +105,7 @@ function TopMessage(props) {
 
 
             <Button width='100%'
-                    sx={{
+                    sx={{textShadow: "2px 2px 10px green"
                     }}
                     onClick={() => {
                         props.dispatch(reset_action())

@@ -18,12 +18,13 @@ function PlaceHolderGame(props) {
                         variant="h6"
                         noWrap
                         component="a"
+
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
                             fontFamily: 'monospace',
                             fontWeight: 700,
-
+                            textShadow: 1,
                             color: 'inherit',
                             textDecoration: 'none',
                         }}
