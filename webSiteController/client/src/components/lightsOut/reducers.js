@@ -1,11 +1,11 @@
 import {NUM_COLUMNS, NUM_ROWS, START_LIGHT_ODDS} from "./constants";
-
-
-const  advanceColor = (color) => color === 'blue' ? 'white' : 'blue';
+let offColor = '#78909C';
+let onColor = '#FFEE58';
+const  advanceColor = (color) => color === onColor ? offColor : onColor;
 const advanceCount = (count) => count + 1;
 function createInitialState(boardRows = NUM_ROWS, boardCol = NUM_COLUMNS) {
 
-    let board = Array(boardRows).fill(Array(boardCol).fill({color: "white", isOccupied: false}));
+    let board = Array(boardRows).fill(Array(boardCol).fill({color: offColor, isOccupied: false}));
     board.map((row, rowIdx) => row.map( (col, colIdx) => {
         return {...board[rowIdx][colIdx], row: rowIdx, column: colIdx };
     }));
@@ -224,7 +224,7 @@ function integrateCascade(state, colIdx, rowIdx, cellColor){
         for (let i = 0; i < boardDimension; i++){
             let currentRow = boardState[i].slice();
             let rowWin = currentRow.every(function(item){
-                return item.color === "white"
+                return item.color === offColor;
             });
             winTemp = (winTemp && rowWin);
         }

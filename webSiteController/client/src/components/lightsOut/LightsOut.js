@@ -6,10 +6,12 @@ import Box from '@mui/material/Box';
 import Button from "@mui/material/Button";
 import {Typography} from "@mui/material";
 import Stack from '@mui/material/Stack'
+import ButtonGroup from "@mui/material/ButtonGroup";
 import {styled} from "@mui/material";
 import { keyframes } from '@emotion/react'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import {CssBaseline, Divider} from "@mui/material";
+import {green} from "@mui/material/colors";
 
 const darkTheme = createTheme({
     palette: {
@@ -19,7 +21,7 @@ const darkTheme = createTheme({
 
 const flicker =keyframes` from, 0%,8%, 22%, 25%, 53%, 57%, 100%, to {
     textShadow: "0 0 4px #fff,\n" +
-    "0 0 11px #fff,\n" +
+    "0 0 15px #fff,\n" +
     "0 0 19px #fff,\n" +
     "0 0 40px #0fa,\n" +
     "0 0 80px #0fa,\n" +
@@ -52,7 +54,14 @@ function Cell(props) {
             border: 1,
             borderColor: 'black',
             borderRadius: '2',
-            boxShadow: "1px 1px 4px gray"
+            boxShadow: "1px 2px 5px gray, 4px 4px 16px blue"
+
+            // textShadow: "0 0 7px #fff,\n" +
+            //     // "    0 0 15px #fff,\n" +
+            //     "    0 0 24px #fff,\n" +
+            //     "    0 0 42px #0fa,\n" +
+            //     "    0 0 52px #0fa,\n" +
+
         }}
              onClick={() => dispatch(click_on_cell_action(colIdx, rowIdx, cell['color']))}
         />
@@ -98,9 +107,9 @@ function TopMessage(props) {
     const firstMessage = () => haveAWinner ? `You Won. Game Over` : ``;
     return (
         <Stack width='100%'>
-            <Typography variant='h4' textAlign='center' sx={{animation: `${flicker} 1s ease`, boxShadow: "1px 1px 5px gray", textShadow: "0 0 7px #fff,\n" +
-                    "    0 0 10px #fff,\n" +
-                    "    0 0 21px #fff,\n" +
+            <Typography variant='h4' textAlign='center' sx={{fontWeight: "bold", animation: `${flicker} 1s ease`, textShadow: "0 0 7px #fff,\n" +
+                    // "    0 0 15px #fff,\n" +
+                    "    0 0 24px #fff,\n" +
                     "    0 0 42px #0fa,\n" +
                     "    0 0 52px #0fa,\n" +
                     "    0 0 62px #0fa;"}}>
@@ -145,18 +154,20 @@ function ChangeBoardState(props) {
 
     return (
         <Fragment>
-            <Button onClick={() => {props.dispatch(board_reshape(5, 5))
+            <ButtonGroup>
+            <Button sx={{fontWeight: "bold", color: 'black', boxShadow: "1px 1px 5px gray", padding : 2, backgroundColor: "#A5FFC9",}} onClick={() => {props.dispatch(board_reshape(5, 5))
                                     props.resetClick()}}>
                 5x5
             </Button>
-            <Button onClick={() => {props.dispatch(board_reshape(6, 6))
+            <Button sx={{fontWeight: "bold", color: 'black', boxShadow: "1px 1px 5px gray", backgroundColor: "#fdff85",}} onClick={() => {props.dispatch(board_reshape(6, 6))
                                     props.resetClick()}}>
                 6x6
             </Button>
-            <Button onClick={() => {props.dispatch(board_reshape(10, 10))
+            <Button sx={{fontWeight: "bold", color: 'black', boxShadow: "1px 1px 5px gray", backgroundColor: "#FF7979",}} onClick={() => {props.dispatch(board_reshape(10, 10))
                                     props.resetClick()}}>
                 10x10
             </Button>
+        </ButtonGroup>
         </Fragment>
 
     )
@@ -253,8 +264,23 @@ export default function LightsOut(props) {
             justifyContent: 'center',
             mt: 3
         }}>
-            <Grid>  Click Count: {state.clickCount} </Grid>
-            <Grid sx = {{ml : 1}}>  Time passed: {Math.floor(seconds / 60)} minute {seconds % 60} seconds</Grid>
+            <Grid>
+                <Typography variant='h7' textAlign='center' sx={{animation: `${flicker} 1s ease`,
+                    textShadow: "0 0 7px #fff,\n" +
+                        "    0 0 22px #0fa;"
+                }}>
+                    Count: {state.clickCount} Time passed: {Math.floor(seconds / 60)} minute {seconds % 60} seconds
+
+
+                </Typography>
+            </Grid>
+
+
+
+
+
+            {/*<Grid sx = {{ml : 1}}>  Time passed: {Math.floor(seconds / 60)} minute {seconds % 60} seconds</Grid>*/}
+
         </Grid>
             <Grid sx={{
                 display: 'flex',
@@ -265,11 +291,15 @@ export default function LightsOut(props) {
                     resetClick = {reset}
                 />
             </Grid>
+
+
             <Grid sx={{
                 display: 'flex',
                 justifyContent: 'center',
+                mt: 2,
+                mb: 2,
                 }}>
-                <Button  onClick={() => {props.setGameSelected(false);
+                <Button  sx = {{boxShadow: "1px 1px 5px gray",}} onClick={() => {props.setGameSelected(false);
                                         props.setIsSelected(null)}}>
                     Leave Game
                 </Button>
