@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material"
 import { attack, defend } from "../../actions"
+import {Button} from "@mui/material"
 
 export const Options = (props) => {
     const{state, dispatch} = props
@@ -7,27 +8,22 @@ export const Options = (props) => {
     let check = state.currFighter.name !=="unitName"
     
     return(
-        <div className="selector">
-            {
-                check && <Typography variant="h4">Fight!</Typography>
-            }
+        <div className="logButtons">
             {      
-                check && <button onClick={()=>dispatch(attack())}> Attack </button>
+                check && <Button onClick={()=>dispatch(attack())}> Attack </Button>
             }
             {
-                check && <button onClick={()=>dispatch(defend())}> Defend </button>
+                check && <Button onClick={()=>dispatch(defend())}> Defend </Button>
             }
-            { check &&
-                <div className="log">
-                    {
-                        log.map((message, idx) => 
-                            <Typography key={idx}>
-                                {message}
-                            </Typography>
-                    )  
-                    } 
+            <div className="log">
+                {
+                    log.map((message, idx) => 
+                        <Typography key={idx}>
+                            {message}
+                        </Typography>
+                )  
+                } 
             </div>
-            }
         </div>
         
     )

@@ -9,7 +9,7 @@ const Spritesheet = props => {
         console.log("index", loopIndex)
         let img = new Image()
         img.src = image
-        ctx.drawImage(img, 100*loopIndex, 0, 100, 100, 0, 0, width, height)
+        ctx.drawImage(img, 100*loopIndex, 0, 100, 100, 0, 0, width*1.2, height*1.2)
     }
   
     useEffect(() => {

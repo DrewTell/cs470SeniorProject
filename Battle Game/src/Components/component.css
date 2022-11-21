@@ -64,7 +64,24 @@
     left: 0%;
 }
 
+.log{
+    position: fixed;
+    top:40%;
+    left: 25%;
+    right: 25%;
+    text-align: left;
+    padding: 1px;
+}
+.logButtons{
+    position: fixed;
+    top:35%;
+    left: 25%;
+    right: 25%;
+    text-align: center;
+}
+
 .selector{
+    position: fixed;
     top:20%;
     left: 25%;
     right: 25%;

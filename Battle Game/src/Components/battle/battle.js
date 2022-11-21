@@ -13,7 +13,7 @@ export const Battle = (props) => {
             <Enemy dispatch={dispatch} enemy={state.enemy}/>
             <Fighter unit={state.currFighter} dispatch={dispatch}/>
             <Party dispatch={dispatch} units={state.units}></Party>
-            {state.currFighter.name === "unitName" && <UnitSelection units={state.units} dispatch={dispatch}/>}
+            <UnitSelection curr={state.currFighter.name} units={state.units} dispatch={dispatch}/>
             <Options state={state} dispatch={dispatch}></Options>
         </div>
     )
