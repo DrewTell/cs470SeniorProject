@@ -110,9 +110,6 @@ function App() {
                     </Chat>
                 </Box>
 
-                <Box sx = {{width: '100%'}}>
-                    <PlaceHolderGame gameSelected={gameSelected} setGameSelected={setGameSelected}/>
-                </Box>
 
                 <Box sx = {{width: '100%'}}>
                     <LoteriaGame gameSelected={gameSelected} setGameSelected={setGameSelected}
