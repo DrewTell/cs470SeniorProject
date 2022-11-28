@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {Fragment} from "react";
-import Board from "./PentagoBoard";
+import Board from "./boardTicTacToe";
 import Button from '@mui/material/Button';
 import Typography from "@mui/material/Typography";
 import "./Chat.css";
@@ -11,17 +11,23 @@ import Stack from '@mui/material/Stack';
 
 import { Window, MessageList, MessageInput } from "stream-chat-react";
 import Grid from "@mui/material/Grid";
-function Game({ channel, setChannel, setGameSelected }) {
-
+function Game({ channel, setChannel, setGameSelected, player1, player2, clientID, setIsSelected}) {
+    const [firstConnected, setFirstConnected] = useState(null);
     const [playersJoined, setPlayersJoined] = useState(
         channel.state.watcher_count === 2
     );
+    const handleFirst = () => {
+        setFirstConnected(player1);
+    }
     const [result, setResult] = useState({ winner: "none", state: "none" });
 
     channel.on("user.watching.start", (event) => {
         setPlayersJoined(event.watcher_count === 2);
     });
     if (!playersJoined) {
+        if (firstConnected === null){
+            handleFirst(clientID);
+        }
         return <Fragment>
             <Grid align="center" sx={{justifyContent: 'center', mt: 4, mb: 4, ml: 18}}>
             <Stack direction="row">
@@ -36,28 +42,22 @@ function Game({ channel, setChannel, setGameSelected }) {
 
     return (
         <div className="gameContainer">
-            <Board result={result} setResult={setResult} />
+            <Box sx={{height: "100vh", width: "90vh"}}>
+            <Board result={result} setResult={setResult} player1={player1} player2={player2}
+                   firstConnected={firstConnected} setGameSelected={setGameSelected}
+                   setIsSelected={setIsSelected} setChannel={setChannel}/>
+            </Box>
 
-            <Window>
-                <MessageList
-                    disableDateSeparator
-                    closeReactionSelectorOnClick
-                    hideDeletedMessages
-                    messageActions={["react"]}
-                />
-                <MessageInput noFiles />
-            </Window>
+            {/*<Window>*/}
+            {/*    <MessageList*/}
+            {/*        disableDateSeparator*/}
+            {/*        closeReactionSelectorOnClick*/}
+            {/*        hideDeletedMessages*/}
+            {/*        messageActions={["react"]}*/}
+            {/*    />*/}
+            {/*    <MessageInput noFiles />*/}
+            {/*</Window>*/}
 
-            <Button
-                onClick={async () => {
-                    await channel.stopWatching();
-                    setChannel(null);
-                    setGameSelected(false);
-                }}
-            >
-                {" "}
-                Leave Game
-            </Button>
 
             {result.state === "won" && <div> {result.winner} Won The Game</div>}
             {result.state === "tie" && <div> Game Tied</div>}

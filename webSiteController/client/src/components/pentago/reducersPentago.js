@@ -388,6 +388,7 @@ function reducers(state, action) {
         }
         return newState
     }
+
     else if(action.type === 'DO_NOTHING'){
         return state;
     }

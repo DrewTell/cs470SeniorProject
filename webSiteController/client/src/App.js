@@ -10,7 +10,10 @@ import { useState } from "react";
 import JoinPentago from "./components/pentago/JoinPentago";
 import LightsOutPlaceHolder from "./components/lightsOut/LightsOutPlaceHolder";
 import BattleGamePlaceHolder from "./components/BattleGame/src/BattleGamePlaceholder";
+import TicTacToeLobby from "./components/TicTacToe/TicTacToeLobby";
 import PlaceHolderGame from "./components/PlaceHolder";
+
+
 import React, {Fragment} from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -18,11 +21,13 @@ import Grid from "@mui/material/Grid";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import {CssBaseline, Divider} from "@mui/material";
 import ResponsiveAppBar from "./components/AppBar";
+
 const darkTheme = createTheme({
     palette: {
         mode: 'dark',
     },
 });
+
 
 
 function App() {
@@ -99,6 +104,13 @@ function App() {
                 </Box>
 
                 <Box sx = {{width: '50%'}}>
+                    <Chat client={client}>
+                    <TicTacToeLobby gameSelected={gameSelected} setGameSelected={setGameSelected}
+                                    isSelected={isSelected} setIsSelected={setIsSelected}/>
+                    </Chat>
+                </Box>
+
+                <Box sx = {{width: '50%'}}>
                     <PlaceHolderGame gameSelected={gameSelected} setGameSelected={setGameSelected}
                                      isSelected={isSelected} setIsSelected={setIsSelected}/>
                 </Box>
@@ -113,15 +125,15 @@ function App() {
 
         )
         }
-          <Grid
-              container
-              spacing={0}
-              direction="column"
-              alignItems="center"
-              style={{ minHeight: '100vh' }}
-          >
+          {/*<Grid*/}
+          {/*    container*/}
+          {/*    spacing={0}*/}
+          {/*    direction="column"*/}
+          {/*    alignItems="center"*/}
+          {/*    style={{ minHeight: '100vh' }}*/}
+          {/*>*/}
 
-          </Grid>
+          {/*</Grid>*/}
       </Fragment>
       </ThemeProvider>
   );
