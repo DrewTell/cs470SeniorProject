@@ -290,7 +290,7 @@ function reducers(state, action) {
     else if (action.type === 'RESHAPE') {
         return createInitialState(action.rowSize,action.colSize)
     }
-    else if (action.type == 'HINT'){
+    else if (action.type === 'HINT'){
         if (state.haveAWinner){
             return state;
         }

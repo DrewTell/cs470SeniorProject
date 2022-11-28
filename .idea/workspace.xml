@@ -2,11 +2,75 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d50b5d56-9cd3-471e-bc54-ece8ad75fc4e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/GuessingGame/GuessingGamePlaceHolder.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/LoteriaPlaceHolder.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/marked.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/start.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/reducersTicTacToe.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/reducersTicTacToe.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/GuessingGame/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/GuessingGame/GuessingGame.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/GuessingGame/Components/Game.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/GuessingGame/Components/Game.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/GuessingGame/Components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/GuessingGame/Components/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/GuessingGame/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/GuessingGame/setupTests.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/Loteria.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/LightsOut.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/LightsOut.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/actions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/reducers.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/reducers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/10.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/10.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/11.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/11.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/12.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/12.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/13.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/13.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/14.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/14.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/15.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/15.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/16.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/16.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/17.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/17.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/18.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/18.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/19.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/19.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/20.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/20.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/21.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/21.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/22.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/22.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/23.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/23.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/24.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/24.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/25.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/25.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/26.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/26.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/27.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/27.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/28.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/28.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/29.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/29.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/3.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/30.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/30.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/31.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/31.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/32.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/32.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/33.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/33.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/34.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/34.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/35.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/35.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/36.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/36.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/37.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/37.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/38.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/38.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/39.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/39.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/4.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/40.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/40.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/41.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/41.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/42.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/42.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/43.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/43.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/44.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/44.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/45.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/45.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/46.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/46.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/47.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/47.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/48.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/48.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/49.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/49.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/5.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/5.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/50.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/50.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/51.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/51.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/52.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/52.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/53.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/53.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/54.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/54.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/6.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/6.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/7.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/7.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/8.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/8.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/9.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/9.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/images/temp" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Loteria/_images/temp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +133,7 @@
       <workItem from="1669518035260" duration="14977000" />
       <workItem from="1669599710117" duration="3493000" />
       <workItem from="1669604459376" duration="6950000" />
-      <workItem from="1669625765307" duration="30854000" />
+      <workItem from="1669625765307" duration="32554000" />
     </task>
     <servers />
   </component>

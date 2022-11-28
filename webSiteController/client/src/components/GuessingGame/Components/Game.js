@@ -13,13 +13,13 @@ import {
 import { color } from "@mui/system";
 
 const bull = (
-    <Box
-      component="span"
-      sx={{ display: "inline-block", mx: "2px", transform: "scale(3)" }}
-    >
-      |
-    </Box>
-  );
+  <Box
+    component="span"
+    sx={{ display: "inline-block", mx: "2px", transform: "scale(3.5)" }}
+  >
+    |
+  </Box>
+);
 
 const generateNums = () => {
   let arr = new Set();
@@ -34,35 +34,34 @@ const generateNums = () => {
 let nums = generateNums();
 console.log(nums);
 let solution = [];
-const shuffleArray = array => {
-    solution = [...array]
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      const temp = solution[i];
-      solution[i] = solution[j];
-      solution[j] = temp;
-    }
+const shuffleArray = (array) => {
+  solution = [...array];
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = solution[i];
+    solution[i] = solution[j];
+    solution[j] = temp;
   }
+};
 shuffleArray(nums);
 console.log(nums);
 console.log(solution);
 
-
 const newArray = () => {
-    nums = generateNums();
-    console.log(nums);
-    shuffleArray(nums);
-    console.log(nums);
-    console.log(solution);
-}
+  nums = generateNums();
+  console.log(nums);
+  shuffleArray(nums);
+  console.log(nums);
+  console.log(solution);
+};
 
 function Game() {
   const [input1, setInput1] = useState("");
   const [input2, setInput2] = useState("");
   const [input3, setInput3] = useState("");
   const [streak, setStreak] = useState(0);
+  const [guessesRemaining, setGuessesRemaining] = useState(10);
   const [totalGuesses, setTotalGuesses] = useState(0);
-
 
   const clear = () => {
     setInput1("");
@@ -73,6 +72,7 @@ function Game() {
   const clearScores = () => {
     setStreak(0);
     setTotalGuesses(0);
+    setGuessesRemaining(10);
   };
 
   const equal = (guess2) => {
@@ -87,14 +87,16 @@ function Game() {
   const handleSubmit = (e) => {
     e.preventDefault();
     let guess2 = [];
-    let guessCount = totalGuesses + 1;
-    setTotalGuesses(guessCount);
+    let guessCount = guessesRemaining - 1;
+    setGuessesRemaining(guessCount);
     if (input1 && input2 && input3) {
       guess2 = [Number(input1), Number(input2), Number(input3)];
     }
     if (equal(guess2)) {
       console.log("correct guess!");
       let newStreak = streak + 1;
+      let totalCount = totalGuesses + 1;
+      setTotalGuesses(totalCount);
       setStreak(newStreak);
     } else {
       setStreak(0);
@@ -105,8 +107,7 @@ function Game() {
 
   return (
     <>
-      
-      <Stack ml={58} mr={58} alignItems="center" bgcolor="#eeca98">
+      <Stack ml={58} mr={58} alignItems="center" bgcolor="#393e46">
         <Grid my={4}>
           <Card sx={{ minWidth: 115 }}>
             <CardContent>
@@ -116,9 +117,10 @@ function Game() {
             </CardContent>
           </Card>
         </Grid>
-        <form noValidate autoComplete="off" >
+        <form noValidate autoComplete="off">
+          <div>Guesses remaining: {guessesRemaining} </div>{" "}
           <div>Total Guesses: {totalGuesses} </div> <div>Streak: {streak} </div>
-          <Card sx={{ maxWidth: 300}}>
+          <Card sx={{ maxWidth: 300 }}>
             <CardContent>
               <TextField
                 value={input1}
@@ -143,17 +145,47 @@ function Game() {
               />{" "}
             </CardContent>
           </Card>
-          {streak === 3? 
-            <Box >
+          {streak === 3 && (
+            <Box>
               <Typography>Congrats! You guessed 3 in a row!</Typography>
-              <Button type="submit" color="secondary" variant="contained" onClick={clearScores}>
-             Play Again
-           </Button>
-            </Box> : <Box alignContent="center" alignItems="center" > <Button color="secondary" variant="contained" onClick={handleSubmit}>
-            Submit Guess
-          </Button></Box>
-
-          }
+              <Button
+                type="submit"
+                color="secondary"
+                variant="contained"
+                onClick={clearScores}
+              >
+                Play Again
+              </Button>
+            </Box>
+          )}
+          {guessesRemaining === 0 && (
+            <Box>
+              <Typography>Guess limit reached!</Typography>
+              <Typography>You obtained a score of {totalGuesses}.</Typography>
+              <Button
+                type="submit"
+                color="secondary"
+                variant="contained"
+                onClick={clearScores}
+              >
+                Play Again
+              </Button>
+            </Box>
+          )}
+          {streak !== 3 && guessesRemaining !== 0 ? (
+            <Box alignContent="center" alignItems="center">
+              {" "}
+              <Button
+                color="secondary"
+                variant="contained"
+                onClick={handleSubmit}
+              >
+                Submit Guess
+              </Button>
+            </Box>
+          ) : (
+            ""
+          )}
         </form>
       </Stack>
     </>

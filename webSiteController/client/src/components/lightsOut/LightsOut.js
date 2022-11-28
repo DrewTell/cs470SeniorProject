@@ -19,20 +19,20 @@ const darkTheme = createTheme({
     },
 });
 
-const flicker =keyframes` from, 0%,8%, 22%, 25%, 53%, 57%, 100%, to {
-    textShadow: "0 0 4px #fff,\n" +
-    "0 0 15px #fff,\n" +
-    "0 0 19px #fff,\n" +
-    "0 0 40px #0fa,\n" +
-    "0 0 80px #0fa,\n" +
-    "0 0 90px #0fa,\n" +
-    "0 0 100px #0fa,\n" +
-   " 0 0 150px #0fa;"
-}
-    20%, 24%, 55% {
-      textShadowshadow: none;
-    }})
-`
+// const flicker =keyframes` from, 0%,8%, 22%, 25%, 53%, 57%, 100%, to {
+//     textShadow: "0 0 4px #fff,\n" +
+//     "0 0 15px #fff,\n" +
+//     "0 0 19px #fff,\n" +
+//     "0 0 40px #0fa,\n" +
+//     "0 0 80px #0fa,\n" +
+//     "0 0 90px #0fa,\n" +
+//     "0 0 100px #0fa,\n" +
+//    " 0 0 150px #0fa;"
+// }
+//     20%, 24%, 55% {
+//       textShadowshadow: none;
+//     }})
+// `
 
 let config = {
     num_rows: 6,
@@ -107,7 +107,9 @@ function TopMessage(props) {
     const firstMessage = () => haveAWinner ? `You Won. Game Over` : ``;
     return (
         <Stack width='100%'>
-            <Typography variant='h4' textAlign='center' sx={{fontWeight: "bold", animation: `${flicker} 1s ease`, textShadow: "0 0 7px #fff,\n" +
+            <Typography variant='h4' textAlign='center' sx={{fontWeight: "bold",
+                // animation: `${flicker} 1s ease`,
+                textShadow: "0 0 7px #fff,\n" +
                     // "    0 0 15px #fff,\n" +
                     "    0 0 24px #fff,\n" +
                     "    0 0 32px #0fa,\n" +
@@ -265,7 +267,8 @@ export default function LightsOut(props) {
             mt: 3
         }}>
             <Grid>
-                <Typography variant='h7' textAlign='center' sx={{animation: `${flicker} 1s ease`,
+                <Typography variant='h7' textAlign='center' sx={{
+                    // animation: `${flicker} 1s ease`,
                     textShadow: "0 0 7px #fff,\n" +
                         "    0 0 22px #0fa;"
                 }}>

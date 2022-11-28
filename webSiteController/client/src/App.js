@@ -13,6 +13,8 @@ import BattleGamePlaceHolder from "./components/BattleGame/src/BattleGamePlaceho
 import TicTacToeLobby from "./components/TicTacToe/TicTacToeLobby";
 import PlaceHolderGame from "./components/PlaceHolder";
 
+import LoteriaGame from "./components/Loteria/LoteriaPlaceHolder";
+import GuessingGame from "./components/GuessingGame/GuessingGamePlaceHolder";
 
 import React, {Fragment} from 'react';
 import Box from '@mui/material/Box';
@@ -84,14 +86,12 @@ function App() {
         {isAuth ? (
             <Stack direction="column" divider={<Divider orientation="horizontal" flexItem />} sx = {{xs: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 
-
                 <Box  sx={{  width: '50%' }}>
-                <Chat client={client}>
-                <JoinPentago gameSelected={gameSelected} setGameSelected={setGameSelected}
-                             isSelected={isSelected} setIsSelected={setIsSelected}/>
-
-            </Chat>
-            </Box>
+                    <Chat client={client}>
+                        <JoinPentago gameSelected={gameSelected} setGameSelected={setGameSelected}
+                                 isSelected={isSelected} setIsSelected={setIsSelected}/>
+                    </Chat>
+                </Box>
 
                 <Box sx = {{width: '50%'}}>
                     <LightsOutPlaceHolder gameSelected={gameSelected} setGameSelected={setGameSelected}
@@ -111,16 +111,25 @@ function App() {
                 </Box>
 
                 <Box sx = {{width: '50%'}}>
-                    <PlaceHolderGame gameSelected={gameSelected} setGameSelected={setGameSelected}
+                    <PlaceHolderGame gameSelected={gameSelected} setGameSelected={setGameSelected}/>
+                </Box>
+
+                <Box sx = {{width: '100%'}}>
+                    <LoteriaGame gameSelected={gameSelected} setGameSelected={setGameSelected}
                                      isSelected={isSelected} setIsSelected={setIsSelected}/>
                 </Box>
 
+
+                <Box sx = {{width: '100%'}}>
+                    <GuessingGame gameSelected={gameSelected} setGameSelected={setGameSelected}
+                                     isSelected={isSelected} setIsSelected={setIsSelected}/>
+                </Box>
 
                 </Stack>
         ) : (
 
                 <Box component="span" sx={{ display: 'block', p: 35, border: '1'}}>
-                <ToggleButtonNotEmpty setIsAuth={setIsAuth} />
+                    <ToggleButtonNotEmpty setIsAuth={setIsAuth} />
                 </Box>
 
         )
