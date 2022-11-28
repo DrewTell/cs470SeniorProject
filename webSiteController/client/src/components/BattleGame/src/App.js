@@ -21,7 +21,7 @@ if(state.mode === 'shop'){
   return(
     <div className='white'>
       <div className='App'>
-        <Shop units={state.units} members={state.members} dispatch={dispatch}></Shop>
+        <Shop units={state.units} members={state.members} stage={state.stage} gold={state.gold} dispatch={dispatch}></Shop>
       </div>
     </div>
     )

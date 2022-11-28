@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material"
-import { attack, defend } from "../../actions"
+import { attack, defend, update_log } from "../../actions"
 import {Button} from "@mui/material"
 import "../component.css"
 
@@ -11,12 +11,12 @@ export const Options = (props) => {
     return(
         <div className="logButtons">
             {      
-                check && <Button onClick={()=>dispatch(attack())}> Attack </Button>
+                check && <Button onClick={()=>dispatch(attack(), update_log())}> Attack </Button>
             }
             {
-                check && <Button onClick={()=>dispatch(defend())}> Defend </Button>
+                check && <Button onClick={()=>dispatch(defend(), update_log())}> Defend </Button>
             }
-            <div className="log">
+            <div id="log">
                 {
                     log.map((message, idx) => 
                         <Typography key={idx}>

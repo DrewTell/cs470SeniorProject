@@ -10,6 +10,55 @@
 
 .sprite{
     margin: auto;
+    height: 55%;
+    width: 55%;
+}
+
+.floor{ 
+    position: relative;
+    height: 6vh;
+    width: 12vw;
+    top: -8vh;
+    left: 2.5vh;
+    z-index: -1;
+
+}
+
+
+#battle1{
+    background-image: url("./battle/backgrounds/Battleground1.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+}
+
+#battle2{
+    background-image: url("./battle/backgrounds/Battleground2.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+}
+
+#battle3{
+    background-image: url("./battle/backgrounds/Battleground3.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+}
+
+#battle4{
+    background-image: url("./battle/backgrounds/Battleground4.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
 }
 
 .hidden1{
@@ -40,33 +89,21 @@
 }
 
 
-.log{
-    background-color: white;
-    border-color: black;
-    border: solid;
-    height: 25vh;
-    width: 50vw;
-    position: fixed;
-    left:25%;
-    right:25%;
-    resize: 'vertical';
-    overflow: auto;
-    text-align: left;
-    margin: auto;
-}
 .enemy{
     position: fixed;
     right:0%;
-    top:7vh;
+    top:8vh;
 }
 
 .currFighter{
     position: fixed;
-    top:7vh;
+    top:8vh;
     left: 0%;
 }
 
-.log{
+#log{
+    height: 25vh;
+    width: 50vw;
     position: fixed;
     top:40%;
     left: 25%;
@@ -76,10 +113,10 @@
     border: solid black 2px;
     background-color: white;
     color: black;
-    resize: 'vertical';
     overflow: auto;
     text-align: left;
     margin: auto;
+    scroll-snap-align: end;
 
 }
 .logButtons{
@@ -97,14 +134,16 @@
     right: 25%;
     text-align: center;
     color:black;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
 
 .infoBar{
     position: fixed;
-    top:7vh;
+    top:8vh;
     left: 25%;
     right: 25%;
     text-align: center;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
 
 .party{
@@ -140,7 +179,7 @@
     justify-content: center;
     margin: auto;
     position:fixed;
-    top:40px;
+    top:65px;
     left:25%;
     right:25%;
 

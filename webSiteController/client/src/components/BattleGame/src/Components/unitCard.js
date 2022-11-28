@@ -11,7 +11,8 @@ const Item = styled('div')(({ theme }) => ({
 export const UnitCard = (props) => {
 
     const {unit, location, dispatch, unitNum, enemy} = props
-    let percentHP = Math.floor((unit.currHP / unit.maxHP) * 100)
+    let percentHP = Math.round((unit.currHP / unit.maxHP) * 100)
+    let percentXP = Math.round((unit.kills / (unit.lvl + 2)) * 100)
     let hpColor = 'success'
     if(percentHP < 40)
         hpColor = 'inherit'
@@ -49,7 +50,11 @@ export const UnitCard = (props) => {
                         <Typography color="text.secondary">
                             Strength: {unit.strength}   Defense: {unit.defense}
                         </Typography>
-    
+
+                        <Typography color="text.secondary">
+                            Accuracy: {unit.accuracy}%
+                        </Typography>
+
                         <Typography>
                            HP: {unit.currHP}/{unit.maxHP}
                         </Typography>
@@ -59,7 +64,7 @@ export const UnitCard = (props) => {
                         </Stack>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" onClick={()=>dispatch(add_member(unit))}>Purchase Unit</Button>
+                    <Button size="small" onClick={()=>dispatch(add_member(unit, (unit.lvl*100)))}>Purchase Unit: {unit.lvl*100} gold</Button>
                 </CardActions>
             </Card>
         )
@@ -78,6 +83,10 @@ export const UnitCard = (props) => {
     
                         <Typography color="text.secondary">
                             Strength: {unit.strength}   Defense: {unit.defense}
+                        </Typography>
+
+                        <Typography color="text.secondary">
+                            Accuracy: {unit.accuracy}%
                         </Typography>
     
                         <Typography>
@@ -106,6 +115,10 @@ export const UnitCard = (props) => {
                         <Typography color="text.secondary">
                             Strength: {unit.strength}   Defense: {unit.defense}
                         </Typography>
+
+                        <Typography color="text.secondary">
+                            Accuracy: {unit.accuracy}%
+                        </Typography>
     
                         <Typography>
                         HP: {unit.currHP}/{unit.maxHP}
@@ -114,6 +127,12 @@ export const UnitCard = (props) => {
                         <Stack sx={{width:'100%', color:'red'}} spacing={2}>
                             <LinearProgress color={hpColor} sx={{barColorPrimary:'green'}} variant='determinate' value={percentHP}/>
                         </Stack>
+
+                        <Typography>
+                        XP: {unit.kills}/{unit.lvl + 2}
+                        </Typography>
+
+                        <LinearProgress color="primary" variant='determinate' value={percentXP}/>
                 </CardContent>
             </Card>
         )
