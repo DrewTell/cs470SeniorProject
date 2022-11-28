@@ -125,24 +125,6 @@ function App() {
 
         )
         }
-
-          {/*<Grid*/}
-          {/*    container*/}
-          {/*    spacing={0}*/}
-          {/*    direction="column"*/}
-          {/*    alignItems="center"*/}
-          {/*    style={{ minHeight: '100vh' }}*/}
-          {/*>*/}
-          <Grid
-              container
-              spacing={0}
-              direction="column"
-              alignItems="center"
-              style={{ minHeight: '100vh' , display: 'inline'}}
-          >
-
-
-          {/*</Grid>*/}
       </Fragment>
       </ThemeProvider>
   );

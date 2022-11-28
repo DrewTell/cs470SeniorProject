@@ -2,20 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d50b5d56-9cd3-471e-bc54-ece8ad75fc4e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/Chat.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/JoinPentago.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/TicTacToeLobby.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/actionsTicTacToe.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/boardTicTacToe.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/constantsTicTacToe.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/doWeHaveAWinner.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/reducersTicTacToe.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/ticTacToeGameController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webSiteController/client/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webSiteController/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/pentago/PentagoGame.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/pentago/PentagoGame.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/pentago/reducersPentago.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/pentago/reducersPentago.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +66,7 @@
       <workItem from="1669518035260" duration="14977000" />
       <workItem from="1669599710117" duration="3493000" />
       <workItem from="1669604459376" duration="6950000" />
-      <workItem from="1669625765307" duration="24393000" />
+      <workItem from="1669625765307" duration="24962000" />
     </task>
     <servers />
   </component>
