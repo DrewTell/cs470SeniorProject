@@ -93,13 +93,6 @@ function App() {
                     </Chat>
                 </Box>
 
-                <Box  sx={{  width: '100%' }}>
-                <Chat client={client}>
-                <JoinPentago gameSelected={gameSelected} setGameSelected={setGameSelected}
-                             isSelected={isSelected} setIsSelected={setIsSelected}/>
-
-            </Chat>
-            </Box>
 
                 <Box sx = {{width: '100%'}}>
                     <LightsOutPlaceHolder gameSelected={gameSelected} setGameSelected={setGameSelected}

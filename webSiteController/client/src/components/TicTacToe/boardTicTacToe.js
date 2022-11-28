@@ -183,10 +183,10 @@ function TopMessage(props) {
     let winnersName = '';
     let playingName = (playerTurn === 'player1' ? player1 : player2);
     if (haveAWinner){
-        winnersName = (winningPlayer === 'player1' ? player1 : player2);
+        winnersName = (winningPlayer === 'player1' ? player1 : winningPlayer == 'player2' ? player2 : 'tie');
     }
 
-    const firstMessage = () => haveAWinner ? `${winnersName} wins.` : `${playingName} plays next`;
+    const firstMessage = () => (haveAWinner && winnersName !== 'tie') ? `${winnersName} wins.` : (haveAWinner) ? `Tie Game.` : `${playingName} plays next`;
 
     return (
         <Stack width='100%' sx={{mt: 2}}>

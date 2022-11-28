@@ -28,7 +28,7 @@ function createInitialState(player1Points, player2Points, winningPlayer) {
         turn: playerToStart,
         player1Score: score1,
         player2Score: score2,
-
+        movesTaken: 0,
 
 
     };
@@ -57,10 +57,12 @@ function integrateClick(state, colIdx, rowGroup, channel, turn ) {
     let newBoard = board.slice();
     newBoard[rowGroup] = affectedRow;
 
+    const newMoves = state.movesTaken + 1;
     let newState = {
         ...state,
         board: newBoard,
         turn: nextTurn,
+        movesTaken: newMoves,
     };
 
     if( doWeHaveAWinner(rowGroup, colIdx, playerSymbol, board) ) {
@@ -77,7 +79,18 @@ function integrateClick(state, colIdx, rowGroup, channel, turn ) {
             player2Score: player2Points,
         };
     }
+    if (newMoves === 9 && newState.haveAWinner === false){
+        console.log("Its a tie");
+        newState = {
+            ...newState,
+            haveAWinner: true,
+            winningPlayer: 'tie',
+        }
+
+    }
+
     sendState(newState, channel);
+    console.log("state after integrate click:", state);
     return newState;
 }
 
