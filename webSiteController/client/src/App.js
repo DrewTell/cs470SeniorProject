@@ -10,6 +10,8 @@ import { useState } from "react";
 import JoinPentago from "./components/pentago/JoinPentago";
 import LightsOutPlaceHolder from "./components/lightsOut/LightsOutPlaceHolder";
 import PlaceHolderGame from "./components/PlaceHolder";
+import LoteriaGame from "./components/Loteria/LoteriaPlaceHolder";
+import GuessingGame from "./components/GuessingGame/GuessingGamePlaceHolder";
 import React, {Fragment} from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -92,11 +94,15 @@ function App() {
                                             isSelected={isSelected} setIsSelected={setIsSelected}/>
                 </Box>
 
-                <Box sx = {{width: '50%'}}>
-                    <PlaceHolderGame gameSelected={gameSelected} setGameSelected={setGameSelected}
+                <Box sx = {{width: '100%'}}>
+                    <LoteriaGame gameSelected={gameSelected} setGameSelected={setGameSelected}
                                      isSelected={isSelected} setIsSelected={setIsSelected}/>
                 </Box>
 
+                <Box sx = {{width: '100%'}}>
+                    <GuessingGame gameSelected={gameSelected} setGameSelected={setGameSelected}
+                                     isSelected={isSelected} setIsSelected={setIsSelected}/>
+                </Box>
 
                 </Stack>
         ) : (

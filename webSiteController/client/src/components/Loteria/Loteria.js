@@ -1,7 +1,7 @@
 import "./App.css";
-import Header from "./Components/Header";
-import CardComponent from "./Components/Card";
-import { NextCard } from "./Components/Card";
+import Header from "./components/Header";
+import CardComponent from "./components/Card";
+import { NextCard } from "./components/Card";
 import { Typography, Grid, Button, Table, Box, Stack } from "@mui/material";
 
 function App() {
