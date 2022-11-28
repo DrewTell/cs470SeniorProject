@@ -10,29 +10,23 @@ const [state, dispatch] = useReducer(reducers, undefined, createInitialState)
 
 if(state.mode === 'start'){
   return(
-    <div className='white'>
       <div className='App'>
         <Start dispatch={dispatch}></Start>
       </div>
-    </div>
     )
   }
 if(state.mode === 'shop'){
   return(
-    <div className='white'>
       <div className='App'>
         <Shop units={state.units} members={state.members} stage={state.stage} gold={state.gold} dispatch={dispatch}></Shop>
       </div>
-    </div>
     )
   }
 if(state.mode === 'battle'){
   return(
-    <div className='white'>
       <div className='App'>
         <Battle state={state} dispatch={dispatch}></Battle>
       </div>
-    </div>
     )
   }
 }

@@ -93,6 +93,14 @@ function App() {
                     </Chat>
                 </Box>
 
+                <Box  sx={{  width: '100%' }}>
+                <Chat client={client}>
+                <JoinPentago gameSelected={gameSelected} setGameSelected={setGameSelected}
+                             isSelected={isSelected} setIsSelected={setIsSelected}/>
+
+            </Chat>
+            </Box>
+
                 <Box sx = {{width: '100%'}}>
                     <LightsOutPlaceHolder gameSelected={gameSelected} setGameSelected={setGameSelected}
                                             isSelected={isSelected} setIsSelected={setIsSelected}/>
@@ -104,6 +112,7 @@ function App() {
                 </Box>
 
                 <Box sx = {{width: '100%'}}>
+
                     <Chat client={client}>
                     <TicTacToeLobby gameSelected={gameSelected} setGameSelected={setGameSelected}
                                     isSelected={isSelected} setIsSelected={setIsSelected}/>
@@ -112,6 +121,7 @@ function App() {
 
 
                 <Box sx = {{width: '100%'}}>
+
                     <LoteriaGame gameSelected={gameSelected} setGameSelected={setGameSelected}
                                      isSelected={isSelected} setIsSelected={setIsSelected}/>
                 </Box>
