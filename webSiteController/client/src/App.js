@@ -82,7 +82,7 @@ function App() {
             <Stack direction="column" divider={<Divider orientation="horizontal" flexItem />} sx = {{xs: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 
 
-                <Box  sx={{  width: '50%' }}>
+                <Box  sx={{  width: '100%' }}>
                 <Chat client={client}>
                 <JoinPentago gameSelected={gameSelected} setGameSelected={setGameSelected}
                              isSelected={isSelected} setIsSelected={setIsSelected}/>
@@ -90,17 +90,17 @@ function App() {
             </Chat>
             </Box>
 
-                <Box sx = {{width: '50%'}}>
+                <Box sx = {{width: '100%'}}>
                     <LightsOutPlaceHolder gameSelected={gameSelected} setGameSelected={setGameSelected}
                                             isSelected={isSelected} setIsSelected={setIsSelected}/>
                 </Box>
 
-                <Box sx = {{width: '50%'}}>
+                <Box sx = {{width: '100%'}}>
                     <BattleGamePlaceHolder gameSelected={gameSelected} setGameSelected={setGameSelected}
                                             isSelected={isSelected} setIsSelected={setIsSelected}/>
                 </Box>
 
-                <Box sx = {{width: '50%'}}>
+                <Box sx = {{width: '100%'}}>
                     <LoteriaGame gameSelected={gameSelected} setGameSelected={setGameSelected}
                                      isSelected={isSelected} setIsSelected={setIsSelected}/>
                 </Box>
