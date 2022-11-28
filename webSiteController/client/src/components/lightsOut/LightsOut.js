@@ -1,5 +1,5 @@
 import React, {Fragment, useReducer, useEffect, useState} from 'react';
-import { click_on_cell_action, reset_action, board_reshape } from './actions';
+import { click_on_cell_action, reset_action, board_reshape, game_hint } from './actions';
 import { reducers, createInitialState } from './reducers';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -110,9 +110,9 @@ function TopMessage(props) {
             <Typography variant='h4' textAlign='center' sx={{fontWeight: "bold", animation: `${flicker} 1s ease`, textShadow: "0 0 7px #fff,\n" +
                     // "    0 0 15px #fff,\n" +
                     "    0 0 24px #fff,\n" +
+                    "    0 0 32px #0fa,\n" +
                     "    0 0 42px #0fa,\n" +
-                    "    0 0 52px #0fa,\n" +
-                    "    0 0 62px #0fa;"}}>
+                    "    0 0 52px #0fa;"}}>
                 {
                     Title()
 
@@ -127,8 +127,8 @@ function TopMessage(props) {
 
             <Grid align="center" sx={{justifyContent: 'center', }}>
                 <Button
-                        sx={{mt: 3, boxShadow: "1px 1px 5px gray", maxWidth: '30px', maxHeight: '60px',
-                            minWidth: '60px', minHeight: '30px',
+                        sx={{mt: 3, boxShadow: "1px 1px 5px green", maxWidth: '30px', maxHeight: '60px',
+                            minWidth: '60px', minHeight: '30px', color: 'green',
 
                             // textShadow: "0 0 7px #d32f2f,\n" +
                             // "    0 0 10px #e53935,\n" +
@@ -292,14 +292,26 @@ export default function LightsOut(props) {
                 />
             </Grid>
 
+            <Grid sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                mt: 2,
+                mb: 2,
+            }}>
+                <Button  sx = {{boxShadow: "1px 1px 5px yellow", color: "yellow"}} onClick={() => {dispatch(game_hint())}}>
+                    Hint
+                </Button>
 
+
+
+            </Grid>
             <Grid sx={{
                 display: 'flex',
                 justifyContent: 'center',
                 mt: 2,
                 mb: 2,
                 }}>
-                <Button  sx = {{boxShadow: "1px 1px 5px gray",}} onClick={() => {props.setGameSelected(false);
+                <Button  sx = {{boxShadow: "1px 1px 5px red", color: "red"}} onClick={() => {props.setGameSelected(false);
                                         props.setIsSelected(null)}}>
                     Leave Game
                 </Button>

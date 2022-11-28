@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="d50b5d56-9cd3-471e-bc54-ece8ad75fc4e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/reducersTicTacToe.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/reducersTicTacToe.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/LightsOut.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/LightsOut.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/reducers.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/reducers.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +69,7 @@
       <workItem from="1669518035260" duration="14977000" />
       <workItem from="1669599710117" duration="3493000" />
       <workItem from="1669604459376" duration="6950000" />
-      <workItem from="1669625765307" duration="24962000" />
+      <workItem from="1669625765307" duration="30854000" />
     </task>
     <servers />
   </component>

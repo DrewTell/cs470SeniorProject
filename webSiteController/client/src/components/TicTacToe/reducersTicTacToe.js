@@ -30,6 +30,7 @@ function createInitialState(player1Points, player2Points, winningPlayer) {
         player2Score: score2,
 
 
+
     };
 }
 

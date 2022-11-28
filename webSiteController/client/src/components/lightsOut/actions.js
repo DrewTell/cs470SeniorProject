@@ -25,8 +25,16 @@ const reset_action = () => {
     }
 }
 
+const game_hint = () => {
+    return {
+        type: 'HINT',
+    }
+}
+
 export {
     click_on_cell_action,
     reset_action,
-    board_reshape
+    board_reshape,
+    game_hint,
+
 };

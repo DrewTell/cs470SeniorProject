@@ -30,6 +30,7 @@ function createInitialState(boardRows = NUM_ROWS, boardCol = NUM_COLUMNS) {
         boardTime: 0,
         boardActive: true,
         boardAttributes: [boardRows, boardCol],
+        winningClick: arrayOfClicks,
     };
 }
 
@@ -137,6 +138,26 @@ function integrateCascade(state, colIdx, rowIdx, cellColor){
     let boardDimension = state.boardAttributes[0];
     let board = state.board;
     let affectedRow = board[rowIdx].slice();
+    const buttonClicked = [rowIdx, colIdx];
+    // const find = state.winningClick.find(cellClick => {
+    //     console.log("cell click: ", cellClick, "   BUtton clicked: ", buttonClicked);
+    //     return (cellClick[0] === buttonClicked[0] && cellClick[1] === buttonClicked[1]);
+    // });
+    let tempWinningClicks = state.winningClick;
+    let cellExistence = JSON.stringify(tempWinningClicks).includes(JSON.stringify(buttonClicked));
+
+    console.log("state clicks: ", state.winningClick, "  checking for: ", buttonClicked);
+    console.log("cell exists: ", cellExistence);
+    if (cellExistence){
+        tempWinningClicks = tempWinningClicks.filter(item => ((item[0] !== buttonClicked[0] && item[1] !== buttonClicked[1]) || (item[0] !== buttonClicked[0] && item[1] === buttonClicked[1]) || (item[0] === buttonClicked[0] && item[1] !== buttonClicked[1])));
+        // let fe = keyboard.tempWinningClicks.filter(k => k.every(e => e !== buttonClicked));
+    }
+    else{
+        tempWinningClicks.push(buttonClicked);
+    }
+    console.log("post temp: ", tempWinningClicks);
+
+
 
     affectedRow[colIdx] = {
         ...affectedRow[colIdx],
@@ -232,6 +253,8 @@ function integrateCascade(state, colIdx, rowIdx, cellColor){
     }
     let hasWon = haveWeWon(newBoard);
 
+
+
     const activeColor = state.nextColor;
     const currentCount = state.clickCount;
     let newState = {
@@ -240,6 +263,7 @@ function integrateCascade(state, colIdx, rowIdx, cellColor){
         nextColor: advanceColor(activeColor),
         clickCount: advanceCount(currentCount),
         haveAWinner: hasWon,
+        winningClick: tempWinningClicks
     };
 
 
@@ -254,7 +278,6 @@ function reducers(state, action) {
     if( state === undefined )
         return state;
 
-
     if( action.type === 'RESET' ) {
         const boardRow = state.boardAttributes[0];
         const boardCol = state.boardAttributes[1];
@@ -266,6 +289,15 @@ function reducers(state, action) {
     }
     else if (action.type === 'RESHAPE') {
         return createInitialState(action.rowSize,action.colSize)
+    }
+    else if (action.type == 'HINT'){
+        if (state.haveAWinner){
+            return state;
+        }
+        const hintCell = state.winningClick[0];
+        const clickRow = hintCell[0];
+        const clickCol = hintCell[1];
+        return integrateCascade(state, clickCol, clickRow, state.board[clickRow][clickCol]['color']);
     }
 
     return state;
