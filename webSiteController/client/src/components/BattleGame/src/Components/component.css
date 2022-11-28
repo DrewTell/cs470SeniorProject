@@ -16,10 +16,10 @@
 
 .floor{ 
     position: relative;
-    height: 12vh;
-    width: 8vw;
-    top: -12vh;
-    left: 3vh;
+    height: 6vh;
+    width: 12vw;
+    top: -8vh;
+    left: 2.5vh;
     z-index: -1;
 
 }
@@ -89,20 +89,6 @@
 }
 
 
-.log{
-    background-color: white;
-    border-color: black;
-    border: solid;
-    height: 25vh;
-    width: 50vw;
-    position: fixed;
-    left:25%;
-    right:25%;
-    resize: 'vertical';
-    overflow: auto;
-    text-align: left;
-    margin: auto;
-}
 .enemy{
     position: fixed;
     right:0%;
@@ -115,7 +101,9 @@
     left: 0%;
 }
 
-.log{
+#log{
+    height: 25vh;
+    width: 50vw;
     position: fixed;
     top:40%;
     left: 25%;
@@ -125,10 +113,10 @@
     border: solid black 2px;
     background-color: white;
     color: black;
-    resize: 'vertical';
     overflow: auto;
     text-align: left;
     margin: auto;
+    scroll-snap-align: end;
 
 }
 .logButtons{

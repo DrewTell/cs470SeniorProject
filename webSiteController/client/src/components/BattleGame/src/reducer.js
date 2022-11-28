@@ -11,7 +11,7 @@ function createInitialState() {
         members:0,
         stage:1,
         enemies:1,
-        gold:200,
+        gold:300,
         currFighter:units[0],
         currFighterSlot:-1,
         enemy:randomizer(1, 0, true),
@@ -183,7 +183,6 @@ function attack(state){
         chance = Math.round(Math.random() * 100)
         //enemy attack
         if(chance <= state.enemy.accuracy){
-            state.fightText.push(`Enemy ${enemy.name} attacks!`)
             currFighter.currHP -= d2
             state.fightText.push(`${state.currFighter.name} takes ${d2} damage!`)
         }
@@ -192,7 +191,6 @@ function attack(state){
             state.fightText.push(`${state.enemy.name} misses!`)
         }
     }
-
     if (currFighter.currHP <= 0){
         return state = fighterDeath(state)
     }
@@ -212,6 +210,7 @@ function attack(state){
 }
 
 function levelUp(fighter){
+    //Could put a switch case on fighter.name to implement race specific growth rates
     fighter.lvl += 1
     let str = Math.round(Math.random() * 1.6)
     let def = Math.round(Math.random() * 0.60)
@@ -235,19 +234,25 @@ function defend(state){
         return state
     state.fightText.push(`${currFighter.name} defends!`)
     let d1 = enemy.strength - (Math.floor(currFighter.defense * 1.5) + 1)
-    if(d1 < 0)
-        d1 = 0
-
     state.fightText.push(`Enemy ${enemy.name} attacks!`)
-    currFighter.currHP -= d1
-    state.fightText.push(`${state.currFighter.name} takes ${d1} damage!`)
+    if(d1 < 0){
+        enemy.currHP += d1
+        state.fightText.push(`${enemy.name} breaks themself upon ${state.currFighter.name}'s body for ${d1} damage!`)
+    }else{
+        currFighter.currHP -= d1
+        state.fightText.push(`${state.currFighter.name} takes ${d1} damage!`)
+    }
 
     if (currFighter.currHP <= 0){
         return state = fighterDeath(state)
     }
     if(enemy.currHP <= 0){
-        return state = advanceStage(state)
-    }else return {
+        currFighter.kills += 1
+        if(currFighter.kills >= currFighter.lvl + 2)
+            currFighter = levelUp(currFighter)
+        return state = advanceEnemy(state)
+    }
+    return {
         ...state,
         currFighter:currFighter,
         enemy:enemy,
@@ -266,6 +271,11 @@ function setFighter(state, action){
         currFighterSlot:action.num,
         fightText:log
     }
+}
+
+function log(){
+    let element = document.getElementById("log");
+    element.scrollTop = element.scrollHeight - element.clientHeight;
 }
 
 function reducers(state, action) {
@@ -308,6 +318,10 @@ function reducers(state, action) {
 
     if(action.type === "ITEM"){
         return addItem(state, action.item, action.cost)
+    }
+
+    if(action.type === "LOG"){
+        return log()
     }
 }
 

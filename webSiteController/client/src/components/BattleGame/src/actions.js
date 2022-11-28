@@ -45,6 +45,11 @@ const add_item = (item, cost) => {
     }
 }
 
+const update_log = () => {
+    return {
+        type: 'LOG'
+    }
+}
 export {
     shop_mode,
     battle_mode,
@@ -52,5 +57,6 @@ export {
     attack,
     defend,
     add_member,
-    add_item
+    add_item,
+    update_log
 }
