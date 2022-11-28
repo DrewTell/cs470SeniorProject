@@ -95,7 +95,7 @@ function App() {
                                             isSelected={isSelected} setIsSelected={setIsSelected}/>
                 </Box>
 
-                <Box sx = {{width: '100%'}}>
+                <Box sx = {{width: '50%'}}>
                     <BattleGamePlaceHolder gameSelected={gameSelected} setGameSelected={setGameSelected}
                                             isSelected={isSelected} setIsSelected={setIsSelected}/>
                 </Box>
