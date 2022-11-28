@@ -86,14 +86,14 @@ function App() {
         {isAuth ? (
             <Stack direction="column" divider={<Divider orientation="horizontal" flexItem />} sx = {{xs: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 
-                <Box  sx={{  width: '50%' }}>
+                <Box  sx={{  width: '100%' }}>
                     <Chat client={client}>
                         <JoinPentago gameSelected={gameSelected} setGameSelected={setGameSelected}
                                  isSelected={isSelected} setIsSelected={setIsSelected}/>
                     </Chat>
                 </Box>
 
-                <Box sx = {{width: '50%'}}>
+                <Box sx = {{width: '100%'}}>
                     <LightsOutPlaceHolder gameSelected={gameSelected} setGameSelected={setGameSelected}
                                             isSelected={isSelected} setIsSelected={setIsSelected}/>
                 </Box>
@@ -103,14 +103,14 @@ function App() {
                                             isSelected={isSelected} setIsSelected={setIsSelected}/>
                 </Box>
 
-                <Box sx = {{width: '50%'}}>
+                <Box sx = {{width: '100%'}}>
                     <Chat client={client}>
                     <TicTacToeLobby gameSelected={gameSelected} setGameSelected={setGameSelected}
                                     isSelected={isSelected} setIsSelected={setIsSelected}/>
                     </Chat>
                 </Box>
 
-                <Box sx = {{width: '50%'}}>
+                <Box sx = {{width: '100%'}}>
                     <PlaceHolderGame gameSelected={gameSelected} setGameSelected={setGameSelected}/>
                 </Box>
 
