@@ -238,19 +238,21 @@ export default function LightsOut(props) {
                       mt: 10
                   }}
             >
-                <Grid item sx={{mb: 3}}>
+
                     <TopMessage
                                 haveAWinner={haveAWinner}
                                 dispatch={dispatch}
                                 resetClick = {reset}
                     />
-                </Grid>
+
+                    <Box sx={{boxShadow: "0px 0px 7px pink, 0 0 10px #fff, 0 0 12px #fff", border: "2px solid", mt: 2, borderColor: 'white'}}>
+                        <Grid item sx={{mb: 1}}>
                 {
                     board.map((row, rowIdx) => (
                         <Grid item
                               key={rowIdx}
                               width='100%'
-                              sx={{mb: 1}}
+                              sx={{mb: -1}}
                               xs={1}
                         >
                             <Row key={rowIdx}
@@ -260,6 +262,8 @@ export default function LightsOut(props) {
                             />
                         </Grid>))
                 }
+                </Grid>
+                    </Box>
             </Grid>
         <Grid                   sx={{
             display: 'flex',
