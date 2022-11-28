@@ -7,7 +7,7 @@ export const Start = (props) => {
     const {dispatch} = props;
     return (
         <div className="start">
-            <Typography variant="h2" style={{marginBottom:200}}>
+            <Typography color="black" variant="h2" style={{marginBottom:200}}>
                 Unit Battler
             </Typography>
             <Button variant="contained" onClick={()=>dispatch(shop_mode())}>Start Game</Button>

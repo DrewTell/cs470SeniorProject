@@ -49,7 +49,11 @@ export const UnitCard = (props) => {
                         <Typography color="text.secondary">
                             Strength: {unit.strength}   Defense: {unit.defense}
                         </Typography>
-    
+
+                        <Typography color="text.secondary">
+                            Accuracy: {unit.accuracy}%
+                        </Typography>
+
                         <Typography>
                            HP: {unit.currHP}/{unit.maxHP}
                         </Typography>
@@ -59,7 +63,7 @@ export const UnitCard = (props) => {
                         </Stack>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" onClick={()=>dispatch(add_member(unit))}>Purchase Unit</Button>
+                    <Button size="small" onClick={()=>dispatch(add_member(unit, (unit.lvl*100)))}>Purchase Unit: {unit.lvl*100} gold</Button>
                 </CardActions>
             </Card>
         )
@@ -78,6 +82,10 @@ export const UnitCard = (props) => {
     
                         <Typography color="text.secondary">
                             Strength: {unit.strength}   Defense: {unit.defense}
+                        </Typography>
+
+                        <Typography color="text.secondary">
+                            Accuracy: {unit.accuracy}%
                         </Typography>
     
                         <Typography>
@@ -105,6 +113,10 @@ export const UnitCard = (props) => {
     
                         <Typography color="text.secondary">
                             Strength: {unit.strength}   Defense: {unit.defense}
+                        </Typography>
+
+                        <Typography color="text.secondary">
+                            Accuracy: {unit.accuracy}%
                         </Typography>
     
                         <Typography>

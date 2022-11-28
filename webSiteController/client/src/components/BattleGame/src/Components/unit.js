@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import elfIdle from "./sprites/elf/Idle.png"
 import elfAt from "./sprites/elf/Idle.png"
 import elfDef from "./sprites/elf/Idle.png"
@@ -20,7 +20,7 @@ import {Spritesheet} from "./Spritesheet.js"
 
 export const Unit = props => {
     const { name, anim} = props 
-    let image, width, height, steps, loop, fps
+    let image, steps, loop, fps
 
     switch(name){
         case "Elf":
@@ -52,23 +52,19 @@ export const Unit = props => {
                 case "Idle":
                     image = humanIdle
                     steps = 15
-                    fps=15
+                    fps=10
                     loop = true
                     break
                 case "Attack":
                     image = humanAt
-                    width = 144
-                    height = 64
                     steps = 22
-                    loop = true
+                    loop = false
                     fps=12
                     break
                 case "Defend":
                     image = humanDef
-                    width = 96
-                    height = 64
                     steps = 7
-                    loop = true
+                    loop = false
                     fps=12
                     break
                 default:

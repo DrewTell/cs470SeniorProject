@@ -118,7 +118,7 @@ function App() {
               spacing={0}
               direction="column"
               alignItems="center"
-              style={{ minHeight: '100vh' }}
+              style={{ minHeight: '100vh' , display: 'inline'}}
           >
 
           </Grid>

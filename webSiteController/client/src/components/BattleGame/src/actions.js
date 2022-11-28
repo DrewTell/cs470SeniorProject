@@ -29,10 +29,19 @@ const defend = () => {
     }
 }
 
-const add_member = (unit) => {
+const add_member = (unit, cost) => {
     return {
         type: 'PURCHASE',
-        unit:unit
+        unit:unit,
+        cost:cost
+    }
+}
+
+const add_item = (item, cost) => {
+    return {
+        type: 'ITEM',
+        item:item,
+        cost:cost
     }
 }
 
@@ -42,5 +51,6 @@ export {
     set_fighter,
     attack,
     defend,
-    add_member
+    add_member,
+    add_item
 }
