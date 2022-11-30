@@ -12,6 +12,7 @@ import LightsOutPlaceHolder from "./components/lightsOut/LightsOutPlaceHolder";
 import BattleGamePlaceHolder from "./components/BattleGame/src/BattleGamePlaceholder";
 import TicTacToeLobby from "./components/TicTacToe/TicTacToeLobby";
 import PlaceHolderGame from "./components/PlaceHolder";
+import MegaTTTPlaceHolder from "./components/megaTicTacToe/MegaTTTPlaceHolder";
 
 import LoteriaGame from "./components/Loteria/LoteriaPlaceHolder";
 import GuessingGame from "./components/GuessingGame/GuessingGamePlaceHolder";
@@ -112,6 +113,13 @@ function App() {
                     </Chat>
                 </Box>
 
+                <Box sx = {{width: '100%'}}>
+
+                    <Chat client={client}>
+                        <MegaTTTPlaceHolder gameSelected={gameSelected} setGameSelected={setGameSelected}
+                                        isSelected={isSelected} setIsSelected={setIsSelected}/>
+                    </Chat>
+                </Box>
 
                 <Box sx = {{width: '100%'}}>
 
@@ -124,6 +132,7 @@ function App() {
                     <GuessingGame gameSelected={gameSelected} setGameSelected={setGameSelected}
                                      isSelected={isSelected} setIsSelected={setIsSelected}/>
                 </Box>
+
 
                 </Stack>
         ) : (

@@ -2,10 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d50b5d56-9cd3-471e-bc54-ece8ad75fc4e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/megaTicTacToe/MegaTTTBoard.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/megaTicTacToe/MegaTTTLobby.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/megaTicTacToe/MegaTTTPlaceHolder.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webSiteController/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/Chat.css" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/Chat.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/boardTicTacToe.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/boardTicTacToe.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/reducersTicTacToe.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/reducersTicTacToe.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/ticTacToeGameController.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/ticTacToeGameController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/pentago/reducersPentago.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/pentago/reducersPentago.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,6 +75,7 @@
       <workItem from="1669599710117" duration="3493000" />
       <workItem from="1669604459376" duration="6950000" />
       <workItem from="1669625765307" duration="34165000" />
+      <workItem from="1669770519382" duration="6338000" />
     </task>
     <servers />
   </component>

@@ -3,11 +3,11 @@ import doWeHaveAWinner from "./doWeHaveAWinner";
 
 const advanceTurn = (turn) => turn === 'player1' ? 'player2' : 'player1';
 
-function createInitialState(player1Points, player2Points, winningPlayer) {
+function createInitialState(idkey, player1Points, player2Points, winningPlayer) {
     // The board is a 2D array of Objects. Each Object holds the state of the "cell" that it represents.
     // Each of the elements of firstAvailableIndex contains an index for each column of the 2D array.
     // The value at the index specifies which row in that column a disk can be deposited.
-    console.log("init: ", player1Points, "   - 2 : ", player2Points);
+
     let score1 = 0;
     let score2 = 0;
     let playerToStart = 'player1';
@@ -29,6 +29,7 @@ function createInitialState(player1Points, player2Points, winningPlayer) {
         player1Score: score1,
         player2Score: score2,
         movesTaken: 0,
+        identity: idkey,
 
 
     };
@@ -103,7 +104,7 @@ function reducers(state, action) {
     if( action.type === 'RESET' ) {
         console.log("In reset:");
         let channel = action.channel;
-        let newState = createInitialState(state.player1Score, state.player2Score, state.winningPlayer);
+        let newState = createInitialState(state.identity, state.player1Score, state.player2Score, state.winningPlayer);
         //If this sentResetState was put inside createInitialState, the game board would reset on exit and rejoin to the lobby
         //This might be a good idea because the games currently are desynced until a move is played on exit and rejoin
         sendState(newState, channel);

@@ -220,7 +220,7 @@ function TopMessage(props) {
 
 
 export default function Board(props) {
-    const {player1, player2, firstConnected, clientID, setGameSelected, setIsSelected} = props;
+    const {player1, player2, firstConnected, clientID, setGameSelected, setIsSelected, isNotMegaTTT, idkey} = props;
     const cookieIDName = document.cookie
         .split('; ')
         .find((row) => row.startsWith('username='))
@@ -232,7 +232,7 @@ export default function Board(props) {
     const { channel } = useChannelStateContext();
     const { client } = useChatContext();
 
-    const [state, dispatch] = useReducer(reducers, undefined, createInitialState);
+    const [state, dispatch] = useReducer(reducers, idkey, createInitialState);
     const {winningPlayer, haveAWinner, board, turn, player1Score, player2Score} = state;
 
     const calcWidth = () => config.num_columns * config.cell_width +
@@ -261,7 +261,9 @@ export default function Board(props) {
     useEffect(() => {
         channel.on((event) => {
             if (event.type === "game-move" && event.user.id !== client.userID) {
-                dispatch(update_Board(event.data.newState))
+                console.log("event data: ", event.data);
+                if (event.data.newState.identity === state.identity)
+                    dispatch(update_Board(event.data.newState));
             }
         });
     }, [])
@@ -279,9 +281,10 @@ export default function Board(props) {
                           display: 'flex',
                           direction: 'flex-column',
                           justifyContent: 'center',
-                          mt: 8
+                          mt: 1
                       }}
                 >
+                    {isNotMegaTTT &&
                     <Grid item sx={{mb: 3}}>
                         <TopMessage playerTurn={turn}
                                     winningPlayer={winningPlayer}
@@ -293,7 +296,7 @@ export default function Board(props) {
 
                         />
                     </Grid>
-
+                    }
                     {
                         board.map((row, rowIdx) => (
                             <Grid item
@@ -316,14 +319,19 @@ export default function Board(props) {
                                 />
                             </Grid>))
                     }
+                    {isNotMegaTTT &&
                     <Grid>
+
+
                         <GameInfo player1={player1Name} player2={player2Name}
                                     player1Score={player1Score} player2Score={player2Score}
                             />
-                    </Grid>
+                    </Grid>}
+
+
                 </Grid>
 
-
+                {isNotMegaTTT &&
                 <Grid sx={{
                     display: 'flex',
                     direction: 'flex-column',
@@ -341,6 +349,7 @@ export default function Board(props) {
 
                     </Button>
                 </Grid>
+                }
             </Fragment>
         </ThemeProvider>
     );
