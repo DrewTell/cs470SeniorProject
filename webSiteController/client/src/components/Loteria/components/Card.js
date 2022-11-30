@@ -12,7 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import start from "../_images/start.png";
-import marked from "../_images/marked.png";
+import marked from "../_images/marked2.png";
 
 import img1 from "../_images/1.jpg";  
 import img2 from "../_images/2.jpg";
