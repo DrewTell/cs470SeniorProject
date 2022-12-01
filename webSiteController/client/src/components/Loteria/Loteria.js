@@ -1,21 +1,19 @@
 import "./App.css";
 import Header from "./components/Header";
 import { useState } from "react";
-//import WinningMessage from "./components/WinningMessage";
+import WinningMessage from "./components/WinningMessage";
 import CardComponent from "./components/Card";
 import { NextCard } from "./components/Card";
 import { Typography, Grid, Button, Table, Box, Stack } from "@mui/material";
 
 function App() {
-  // on click set winning player
-  // if game over display winning message
   const [winningPlayer, setWinningPlayer] = useState();
   const [gameOver, setGameOver] = useState(false);
 
   const handleClick = (player) => {
     setWinningPlayer(player);
     setGameOver(true);
-  }
+  };
 
   const genereateArr = () => {
     let tempSet = new Set();
@@ -37,10 +35,9 @@ function App() {
     <>
       <Header />
       <NextCard />
-      {/* <WinningMessage/> */}
       <Grid display="flex" pb={2}>
         <Stack mx={"auto"}>
-        <h3>Player 1</h3>
+          <h3>Player 1</h3>
           <Box sx={{ mx: "auto", bgcolor: "#b29c7c" }}>
             <CardComponent arr={arr1} />
           </Box>
@@ -53,13 +50,12 @@ function App() {
               width: 100,
             }}
             onClick={() => handleClick(1)}
-            
           >
             Loteria
           </Button>
         </Stack>
         <Stack mx={"auto"}>
-        <h3>Player 2</h3>
+          <h3>Player 2</h3>
           <Box sx={{ mx: "auto", bgcolor: "#b29c7c" }}>
             <CardComponent arr={arr2} />
           </Box>
@@ -77,7 +73,7 @@ function App() {
           </Button>
         </Stack>
         <Stack mx={"auto"}>
-        <h3>Player 3</h3>
+          <h3>Player 3</h3>
           <Box sx={{ mx: "auto", bgcolor: "#b29c7c" }}>
             <CardComponent arr={arr3} />
           </Box>
@@ -95,7 +91,7 @@ function App() {
           </Button>
         </Stack>
         <Stack mx={"auto"}>
-        <h3>Player 4</h3>
+          <h3>Player 4</h3>
           <Box sx={{ mx: "auto", bgcolor: "#b29c7c" }}>
             <CardComponent arr={arr4} />
           </Box>
@@ -113,6 +109,7 @@ function App() {
           </Button>
         </Stack>
       </Grid>
+      {gameOver && ( <WinningMessage player={winningPlayer} />)}
     </>
   );
 }
