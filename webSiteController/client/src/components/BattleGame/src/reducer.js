@@ -16,7 +16,9 @@ function createInitialState() {
         currFighterSlot:-1,
         enemy:randomizer(1, 0, true),
         fightText:[],
-        stageMap:"battle1"
+        stageMap:"battle1",
+        fAnimation:"Idle",
+        eAnimation:"Idle"
 
     };
 }
@@ -148,7 +150,7 @@ function fighterDeath(state){
 }
 
 function attack(state){
-    state.fightText.push(`**********************************************************`)
+    let text = []
     let currFighter = state.currFighter
     if(currFighter.name === "unitName")
         return state
@@ -161,34 +163,32 @@ function attack(state){
         d1 = 0
     if(d2 < 0)
         d2 = 0
-    state.fightText.push(`${currFighter.name} attacks!`)
     let chance = Math.round(Math.random() * 100)
     //unit attacks
     if(chance <= currFighter.accuracy){
         if(chance >= 95){
             d1 = Math.round(d1*1.5)
             enemy.currHP -= d1
-            state.fightText.push(`* CRIT *`)
-            state.fightText.push(`Enemy ${state.enemy.name} takes ${d1} damage!`)
+            text.push(`* CRIT *`)
+            text.push(`Enemy ${state.enemy.name} takes ${d1} damage!`)
         }
         enemy.currHP -= d1
-        state.fightText.push(`Enemy ${state.enemy.name} takes ${d1} damage!`)
+        text.push(`Enemy ${state.enemy.name} takes ${d1} damage!`)
     }
     //unit misses
     else{
-        state.fightText.push(`${state.currFighter.name} misses!`)
+        text.push(`${state.currFighter.name} misses!`)
     }
     if(enemy.currHP > 0){
-        state.fightText.push(`Enemy ${enemy.name} attacks!`)
         chance = Math.round(Math.random() * 100)
         //enemy attack
         if(chance <= state.enemy.accuracy){
             currFighter.currHP -= d2
-            state.fightText.push(`${state.currFighter.name} takes ${d2} damage!`)
+            text.push(`${state.currFighter.name} takes ${d2} damage!`)
         }
         //enemy misses
         else{
-            state.fightText.push(`${state.enemy.name} misses!`)
+            text.push(`${state.enemy.name} misses!`)
         }
     }
     if (currFighter.currHP <= 0){
@@ -204,7 +204,7 @@ function attack(state){
         ...state,
         currFighter:currFighter,
         enemy:enemy,
-        fightText:state.fightText
+        fightText:text
     }
 
 }
@@ -232,12 +232,10 @@ function defend(state){
     let enemy = state.enemy
     if(enemy.name === "unitName")
         return state
-    state.fightText.push(`${currFighter.name} defends!`)
     let d1 = enemy.strength - (Math.floor(currFighter.defense * 1.5) + 1)
-    state.fightText.push(`Enemy ${enemy.name} attacks!`)
     if(d1 < 0){
         enemy.currHP += d1
-        state.fightText.push(`${enemy.name} breaks themself upon ${state.currFighter.name}'s body for ${d1} damage!`)
+        state.fightText.push(`${enemy.name}'s attack is countered for ${d1} damage!`)
     }else{
         currFighter.currHP -= d1
         state.fightText.push(`${state.currFighter.name} takes ${d1} damage!`)
@@ -256,7 +254,7 @@ function defend(state){
         ...state,
         currFighter:currFighter,
         enemy:enemy,
-        fightText:state.fightText
+        fightText:state.fightText,
     }
 }
 
@@ -273,10 +271,6 @@ function setFighter(state, action){
     }
 }
 
-function log(){
-    let element = document.getElementById("log");
-    element.scrollTop = element.scrollHeight - element.clientHeight;
-}
 
 function reducers(state, action) {
     if( state === undefined )
@@ -318,10 +312,6 @@ function reducers(state, action) {
 
     if(action.type === "ITEM"){
         return addItem(state, action.item, action.cost)
-    }
-
-    if(action.type === "LOG"){
-        return log()
     }
 }
 

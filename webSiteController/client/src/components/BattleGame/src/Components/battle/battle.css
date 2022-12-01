@@ -1,0 +1,71 @@
+#battle1{
+    background-image: url("backgrounds/Battleground1.png");
+}
+
+#battle2{
+    background-image: url("backgrounds/Battleground2.png");
+}
+
+#battle3{
+    background-image: url("backgrounds/Battleground3.png");
+}
+
+#battle4{
+    background-image: url("backgrounds/Battleground4.png");
+}
+
+.battle{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    z-index: 1;
+}
+
+.enemy{
+    position: fixed;
+    right:0%;
+    top:8vh;
+}
+
+.currFighter{
+    position: fixed;
+    top:8vh;
+    left: 0%;
+}
+
+.eSprite{
+    position: relative;
+    right:300%;
+    margin-top: 15vh;
+    z-index: -1;
+}
+
+.fSprite{
+    position: relative;
+    left: 300%;
+    margin-top: 15vh;
+    z-index: -1;
+}
+
+
+
+.floor{ 
+    position: relative;
+    width: 30vw;
+    height:25vh;
+    top: 30vh;
+    left: 39.5vw;
+    z-index: -1;
+
+}
+
+.logButtons{
+    position: fixed;
+    width:15vw;
+    top:35%;
+    left: 42.5%;
+    right: 25%;
+    text-align: center;
+}

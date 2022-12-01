@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 import "./component.css"
 import { Stack } from '@mui/system';
 
-const Item = styled('div')(({ theme }) => ({
+const Item = styled('Stack')(({ theme }) => ({
     textAlign: 'center',
   }));
 
@@ -35,106 +35,47 @@ export const UnitCard = (props) => {
             </Card>
         )
     }
-    if (location === "shop"){
-        return (
-            <Card sx={{ width:250, border: 2, bordercolor:'black'}}>
-                <CardContent>
-                        <Typography>
-                            {unit.name}
-                        </Typography>
-    
-                        <Typography variant="h5" component="div">
-                            Lvl: {unit.lvl}
-                        </Typography>
-    
-                        <Typography color="text.secondary">
-                            Strength: {unit.strength}   Defense: {unit.defense}
-                        </Typography>
+    return (
+        <Card sx={{ width:250, border: 2, bordercolor:'black'}}>
+            <CardContent>
+                    <Typography>
+                        {unit.name}
+                    </Typography>
 
-                        <Typography color="text.secondary">
-                            Accuracy: {unit.accuracy}%
-                        </Typography>
+                    <Typography variant="h5" component="Stack">
+                        Lvl: {unit.lvl}
+                    </Typography>
 
-                        <Typography>
-                           HP: {unit.currHP}/{unit.maxHP}
-                        </Typography>
+                    <Typography color="text.secondary">
+                        Strength: {unit.strength}   Defense: {unit.defense}
+                    </Typography>
 
-                        <Stack sx={{width:'100%', color:'red'}} spacing={2}>
-                            <LinearProgress color={hpColor} sx={{barColorPrimary:'green'}} variant='determinate' value={percentHP}/>
-                        </Stack>
-                </CardContent>
-                <CardActions>
-                    <Button size="small" onClick={()=>dispatch(add_member(unit, (unit.lvl*100)))}>Purchase Unit: {unit.lvl*100} gold</Button>
-                </CardActions>
-            </Card>
-        )
-    }
-    else if(location === "enemy"){
-        return (
-            <Card sx={{ width:250, border: 2, bordercolor:'black'}}>
-                <CardContent>
-                        <Typography>
-                            Enemy {unit.name}
-                        </Typography>
-    
-                        <Typography variant="h5" component="div">
-                            Lvl: {unit.lvl}
-                        </Typography>
-    
-                        <Typography color="text.secondary">
-                            Strength: {unit.strength}   Defense: {unit.defense}
-                        </Typography>
+                    <Typography color="text.secondary">
+                        Accuracy: {unit.accuracy}%
+                    </Typography>
 
-                        <Typography color="text.secondary">
-                            Accuracy: {unit.accuracy}%
-                        </Typography>
-    
-                        <Typography>
+                    <Typography>
                         HP: {unit.currHP}/{unit.maxHP}
-                        </Typography>
+                    </Typography>
 
-                        <Stack sx={{width:'100%', color:'red'}} spacing={2}>
-                            <LinearProgress color={hpColor} sx={{barColorPrimary:'green'}} variant='determinate' value={percentHP}/>
-                        </Stack>
+                    <Stack sx={{width:'100%', color:'red'}} spacing={2}>
+                        <LinearProgress color={hpColor} sx={{barColorPrimary:'green'}} variant='determinate' value={percentHP}/>
+                    </Stack>
                 </CardContent>
-            </Card>
-        )
-    }
-    else{
-        return (
-            <Card sx={{ width:250, border: 2, bordercolor:'black'}}>
-                <CardContent>
+                {location === "party" &&
+                    <CardContent sx={{mt:-3}}>
                         <Typography>
-                            {unit.name}
-                        </Typography>
-    
-                        <Typography variant="h5" component="div">
-                            Lvl: {unit.lvl}
-                        </Typography>
-    
-                        <Typography color="text.secondary">
-                            Strength: {unit.strength}   Defense: {unit.defense}
-                        </Typography>
-
-                        <Typography color="text.secondary">
-                            Accuracy: {unit.accuracy}%
-                        </Typography>
-    
-                        <Typography>
-                        HP: {unit.currHP}/{unit.maxHP}
-                        </Typography>
-
-                        <Stack sx={{width:'100%', color:'red'}} spacing={2}>
-                            <LinearProgress color={hpColor} sx={{barColorPrimary:'green'}} variant='determinate' value={percentHP}/>
-                        </Stack>
-
-                        <Typography>
-                        XP: {unit.kills}/{unit.lvl + 2}
+                            XP: {unit.kills}/{unit.lvl + 2}
                         </Typography>
 
                         <LinearProgress color="primary" variant='determinate' value={percentXP}/>
-                </CardContent>
-            </Card>
-        )
-    }
+                    </CardContent>
+                }
+            {location === "shop" &&
+                <CardActions>
+                    <Button size="small" onClick={()=>dispatch(add_member(unit, (unit.lvl*100)))}>Purchase Unit: {unit.lvl*100} gold</Button>
+                </CardActions>
+            }
+        </Card>
+    )
 }

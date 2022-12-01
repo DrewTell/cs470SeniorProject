@@ -45,11 +45,19 @@ const add_item = (item, cost) => {
     }
 }
 
-const update_log = () => {
+const e_attack = () => {
     return {
-        type: 'LOG'
+        type: 'eATTACK'
     }
 }
+
+const idle = (time) => {
+    return {
+        type: 'IDLE',
+        time:time
+    }
+}
+
 export {
     shop_mode,
     battle_mode,
@@ -58,5 +66,6 @@ export {
     defend,
     add_member,
     add_item,
-    update_log
+    e_attack,
+    idle
 }

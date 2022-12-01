@@ -2,7 +2,7 @@ import { Fragment } from "react"
 import { UnitCard } from "./unitCard"
 import "./component.css"
 import { randomizer } from "./randomizer"
-import { Button, Typography } from "@mui/material"
+import { Button, Stack, Typography } from "@mui/material"
 import { Party } from "./party"
 import { battle_mode } from "../actions"
 import { Unit } from "./unit"
@@ -28,10 +28,10 @@ export const Shop = (props) => {
                         {
                             units.map((unit, idx) => 
                                 <td key={idx}>
-                                    <div>
+                                    <Stack>
                                         <UnitCard dispatch={dispatch} unit={rand[idx]} location={'shop'}/>
                                         <Unit dispatch={dispatch} name={rand[idx].name} anim={'Idle'}/>
-                                    </div>
+                                    </Stack>
                                 </td>
                             )  
                         }  
@@ -41,19 +41,19 @@ export const Shop = (props) => {
                         <tr>
                         
                                 <td>
-                                    <div>
+                                    <Stack>
                                         <Items stage={stage} dispatch={dispatch}/>
-                                    </div>
+                                    </Stack>
                                 </td>
                                 <td>
-                                    <div>
+                                    <Stack>
                                         <Items stage={stage} dispatch={dispatch}/>
-                                    </div>
+                                    </Stack>
                                 </td>
                                 <td>
-                                    <div>
+                                    <Stack>
                                         <Items stage={stage} dispatch={dispatch}/>
-                                    </div>
+                                    </Stack>
                                 </td>
                             
                         </tr>
@@ -63,9 +63,9 @@ export const Shop = (props) => {
             <br/>
             <Party dispatch={dispatch} units={units} gold={gold}></Party>
             { members > 0 && 
-                <div className="battleButton">
+                <Stack className="battleButton">
                     <Button style={{margin:'auto'}} size="large" onClick={()=>dispatch(battle_mode())}>Battle Phase</Button>
-                </div>
+                </Stack>
                 
             }
         </Fragment>

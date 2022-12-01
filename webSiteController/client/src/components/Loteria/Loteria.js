@@ -1,7 +1,7 @@
 import "./App.css";
 import Header from "./components/Header";
 import { useState } from "react";
-import WinningMessage from "./components/WinningMessage";
+//import WinningMessage from "./components/WinningMessage";
 import CardComponent from "./components/Card";
 import { NextCard } from "./components/Card";
 import { Typography, Grid, Button, Table, Box, Stack } from "@mui/material";
@@ -113,7 +113,6 @@ function App() {
           </Button>
         </Stack>
       </Grid>
-      {gameOver? <WinningMessage player={winningPlayer}/>: ""}
     </>
   );
 }

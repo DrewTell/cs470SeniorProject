@@ -1,14 +1,17 @@
 import { UnitCard } from "../unitCard"
 import { Unit } from "../unit"
 import { Floor } from "./floor"
+import { Stack } from "@mui/material"
+import "./battle.css"
 
 export const Fighter = (props) => {
-    const{unit, dispatch} = props
+    const{unit, dispatch, animation} = props
     return(
-        <div className="currFighter">
-            <UnitCard unit={unit} location="party" dispatch={dispatch}></UnitCard>
-            {unit.name !== "unitName" && <Unit dispatch={dispatch} name={unit.name} anim={'Idle'}/>}
-            <Floor/>
-        </div>
+        <Stack className="currFighter">
+            <UnitCard unit={unit} location="fight" dispatch={dispatch}></UnitCard>
+            <Stack className="fSprite">
+                {unit.name !== "unitName" && <Unit dispatch={dispatch} name={unit.name} anim={animation}/>}
+            </Stack>
+        </Stack>
     )
 }

@@ -3,36 +3,54 @@ import { BattleBar } from "./BattleBar"
 import { Enemy } from "./Enemy"
 import { Fighter } from "./Fighter"
 import { UnitSelection } from "./UnitSelection"
-import { Options } from "./Options.js"
-import "../component.css"
+import "./battle.css"
+import { Log } from "./log"
+import { Button, Stack } from "@mui/material"
+import { Floor } from "./floor"
+import { attack, defend } from "../../actions"
+import { useState } from "react"
+
 export const Battle = (props) => {
     const{state, dispatch} = props
 
-    let id
+    let id = "battle" + `${state.stage}`
+    let check = state.currFighter.name !== "unitName"
+    const [fAnim, setfAnim] = useState(state.fAnimation)
+    const [eAnim, seteAnim] = useState(state.eAnimation)
 
-    switch(state.stage){
-        case 1:
-            id = "battle1"
-            break;
-        case 2:
-            id = "battle2"
-            break;
-        case 3:
-            id = "battle3"
-            break;
-        case 4:
-            id = "battle4"
-            break;
+
+    function changeAnims(f, e, time){
+        setfAnim(f)
+        seteAnim(e)
+        setTimeout(() => {
+            setfAnim(f)
+            seteAnim(e)
+          }, 1000*time)
     }
-
     return(
-        <div id={id}>
+        <Stack id={id} className="battle">
             <BattleBar stage={state.stage} enemies={state.enemies}/>
-            <Enemy dispatch={dispatch} enemy={state.enemy}/>
-            <Fighter unit={state.currFighter} dispatch={dispatch}/>
+            <Enemy dispatch={dispatch} enemy={state.enemy} animation={eAnim}/>
+            <Fighter unit={state.currFighter} dispatch={dispatch} animation={fAnim}/>
+            <Floor/>
             <Party dispatch={dispatch} units={state.units} gold={state.gold}></Party>
             <UnitSelection curr={state.currFighter.name} units={state.units} dispatch={dispatch}/>
-            <Options state={state} dispatch={dispatch}></Options>
-        </div>
+            <Log log={state.fightText}/>
+            <Stack className="logButtons">
+                {      
+                    check && <Button variant="outlined" onClick={()=>{dispatch(attack()); 
+                                                                      changeAnims("Attack","Defend",0)
+                                                                      changeAnims("Defend","Attack",1)
+                                                                      changeAnims("Idle","Idle",2)        
+                                                                                        }}> Attack </Button>
+                }
+                {
+                    check && <Button variant="outlined" onClick={()=>{dispatch(defend());
+                                                                      changeAnims("Defend","Attack",0)
+                                                                      changeAnims("Idle","Idle",1)
+                                                                                        }}> Defend </Button>
+                }
+            </Stack>
+        </Stack>
     )
 }

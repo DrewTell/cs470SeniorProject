@@ -1,18 +1,19 @@
 import React from 'react'
 import elfIdle from "./sprites/elf/Idle.png"
-import elfAt from "./sprites/elf/Idle.png"
+import elfAt from "./sprites/elf/Attack.png"
 import elfDef from "./sprites/elf/Idle.png"
 import humanIdle from "./sprites/human/Idle.png"
-import humanAt from "./sprites/human/Idle.png"
-import humanDef from "./sprites/human/Idle.png"
+import humanAt from "./sprites/human/Attack.png"
+import humanDef from "./sprites/human/Defend.png"
 import hobbitIdle from "./sprites/hobbit/Idle.png"
 import hobbitAt from "./sprites/hobbit/Idle.png"
 import hobbitDef from "./sprites/hobbit/Idle.png"
 import demonIdle from "./sprites/demon/Idle.png"
-import demonAt from "./sprites/demon/Idle.png"
-import demonDef from "./sprites/demon/Idle.png"
+import demonAt from "./sprites/demon/Attack.png"
+import demonDef from "./sprites/demon/Defend.png"
 import skeleIdle from "./sprites/Skeleton/Idle.png"
 import goblinIdle from "./sprites/Goblin/Idle.png"
+import goblinDef from "./sprites/Goblin/Defend.png"
 import mushroomIdle from "./sprites/Mushroom/Idle.png"
 import eyeIdle from "./sprites/Flyingeye/Idle.png"
 import wizardIdle from "./sprites/EvilWizard/Idle.png"
@@ -34,7 +35,7 @@ export const Unit = props => {
                 case "Attack":
                     image = elfAt
                     steps = 6
-                    loop = false
+                    loop = true
                     fps=12
                     break
                 case "Defend":
@@ -57,9 +58,9 @@ export const Unit = props => {
                     break
                 case "Attack":
                     image = humanAt
-                    steps = 22
-                    loop = false
-                    fps=12
+                    steps = 8
+                    loop = true
+                    fps=8
                     break
                 case "Defend":
                     image = humanDef
@@ -80,8 +81,16 @@ export const Unit = props => {
                     loop = true
                     break
                 case "Attack":
+                    image = demonAt
+                    steps = 8
+                    fps=8
+                    loop = true
                     break
                 case "Defend":
+                    image = demonDef
+                    steps = 3
+                    fps=12
+                    loop = true
                     break
                 default:
                     break
@@ -136,6 +145,10 @@ export const Unit = props => {
                     break
 
                 case "Defend":
+                    image = goblinDef
+                    steps = 4
+                    fps = 12
+                    loop = true
                     break
                 default:
                     break
