@@ -6,7 +6,7 @@ export const Enemy = (props) => {
     const{enemy, dispatch} = props
     return(
         <Stack className="enemy">
-            <UnitCard unit={enemy} location="enemy" dispatch={dispatch}></UnitCard>
+            <UnitCard unit={enemy} location="enemy" dispatch={dispatch} enemy={true}></UnitCard>
         </Stack>
     )
 }

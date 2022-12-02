@@ -5,7 +5,7 @@ export const BattleBar = (props) => {
     return(
         <Stack className="infoBar">
             <Typography color="white" variant="h4">
-                Stage: {stage}/5
+                Stage: {stage}/4
             </Typography>
             <Typography color="white" variant="h6">
                 Enemy: {enemies}/5

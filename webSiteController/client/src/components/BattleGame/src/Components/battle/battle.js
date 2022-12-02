@@ -5,17 +5,17 @@ import { Fighter } from "./Fighter"
 import { UnitSelection } from "./UnitSelection"
 import "./battle.css"
 import { Log } from "./log"
-import { Button, Stack } from "@mui/material"
+import { Stack } from "@mui/material"
 import { Floor } from "./floor"
 import { advance_enemy, advance_stage, attack, defend, fighter_death } from "../../actions"
 import { useState } from "react"
 import { Unit } from "../unit"
+import { grey } from '@mui/material/colors';
+
 
 export const Battle = (props) => {
     const{state, dispatch} = props
 
-
-    let blankUnit = {name: "unitName", lvl:0, strength:0, defense:0, currHP: 0, maxHP: 0}
     let unit = state.currFighter
     let id = "battle" + `${state.stage}`
     let check = unit.name !== "unitName"
@@ -23,30 +23,38 @@ export const Battle = (props) => {
     const [eAnim, seteAnim] = useState(state.eAnimation)
     const [ID, setID] = useState("logButtons")
 
+
+    const primary = grey[900]; // #f44336
+
     function changeAnims(f, e, time){
         setID("logButtonsH")
+        setTimeout(() => {
+            if(e === "Attack" && state.enemy.currHP <= 0){
+                f = "Idle"
+                e = "Death"
+            }
+          }, 100)
         setTimeout(() => {
             if(e === "Idle")
                 setID("logButtons")
             setfAnim(f)
             seteAnim(e)
-          }, 1000*time)
+          }, 750*time)
     }
 
     function advanceEnemy(time){
         setTimeout(() => {
-            setTimeout(() => {
-                if (state.currFighter.currHP <= 0)
-                    return dispatch(fighter_death())
-                if(state.enemy.currHP > 0){
-                    return
-                }
-                else if (state.enemies >= 5)
-                    return dispatch(advance_stage())
-                else
-                    return dispatch(advance_enemy())
-              }, 1000*time-1)
-        }, 100)
+            if (state.currFighter.currHP <= 0)
+                return dispatch(fighter_death())
+            if(state.enemy.currHP > 0){
+                return
+            }
+            else if (state.enemies >= 5)
+                return dispatch(advance_stage())
+            else{
+                return dispatch(advance_enemy())
+             }
+        }, 800*time-1)
     }
     
 
@@ -69,19 +77,19 @@ export const Battle = (props) => {
             <Log log={state.fightText}/>
             <Stack id={ID}>
                 {      
-                    check && <Button variant="outlined" onClick={()=>{dispatch(attack())
+                    check && <button className="options" onClick={()=>{dispatch(attack())
                                                                       changeAnims("Attack","Defend",0)
                                                                       changeAnims("Defend","Attack",1)
                                                                       changeAnims("Idle","Idle",2)
                                                                       advanceEnemy(2)        
-                                                                                        }}> Attack </Button>
+                                                                                        }}> Attack </button>
                 }
                 {
-                    check && <Button variant="outlined" onClick={()=>{dispatch(defend())
+                    check && <button className="options" onClick={()=>{dispatch(defend())
                                                                       changeAnims("Defend","Attack",0)
                                                                       changeAnims("Idle","Idle",1)
                                                                       advanceEnemy(1)
-                                                                                        }}> Defend </Button>
+                                                                                        }}> Defend </button>
                 }
             </Stack>
         </Stack>

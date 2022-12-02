@@ -1,14 +1,14 @@
 import React, { useRef, useEffect } from 'react'
 
 const Spritesheet = props => {
-    const {image, width, height, steps, fps, loop} = props;
+    const {image, width, height, steps, fps, loop, enemy} = props;
   
     const canvasRef = useRef(null)
   
     const draw = (ctx, loopIndex) => {
         let img = new Image()
         img.src = image
-        ctx.drawImage(img, 100*loopIndex, 0, 100, 100, 0, 0, width*1.2, height*1.2)
+        ctx.drawImage(img, width*loopIndex, 0, width, 100, 0, 0, width*1.2, height*1.2)
     }
   
     useEffect(() => {

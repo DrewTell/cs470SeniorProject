@@ -1,4 +1,5 @@
 
+import { shop_mode } from "./actions";
 import { randomizer } from "./Components/randomizer";
 
 let blankUnit = {name: "unitName", lvl:0, strength:0, defense:0, currHP: 0, maxHP: 0}
@@ -107,7 +108,7 @@ function advanceEnemy(state){
     let enemy = randomizer(state.stage, 0, true)
 
     let percent = (Math.random() * .50) + .90
-    let loot = Math.floor(state.enemy.lvl * 50 * percent)
+    let loot = Math.floor(state.enemy.lvl * 75 * percent)
 
     if(state.enemies === 5)
         return advanceStage({...state, gold:state.gold+loot})
@@ -125,10 +126,13 @@ function advanceStage(state){
     let enemy = randomizer(state.stage+1, 0, true)
     let old = "battle" + state.stage
     let next = "battle" + (state.stage+1)
+    let mode = "shop"
+    if(state.stage === 4)
+        mode = "victory"
     document.getElementById(old).id = next; 
     return {
         ...state,
-        mode:"shop",
+        mode:mode,
         enemies:1,
         stage:state.stage+1,
         enemy:enemy,
@@ -301,6 +305,8 @@ function reducers(state, action) {
     }
 
     if(action.type === "ITEM"){
+        if(state.gold < action. cost)
+            return state
         return addItem(state, action.item, action.cost)
     }
 

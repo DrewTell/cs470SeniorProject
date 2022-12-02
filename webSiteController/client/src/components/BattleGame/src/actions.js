@@ -76,6 +76,12 @@ const advance_stage = () => {
     }
 }
 
+const reset = () => {
+    return {
+        type: 'START'
+    }
+}
+
 export {
     shop_mode,
     battle_mode,
@@ -88,5 +94,6 @@ export {
     idle,
     fighter_death,
     advance_enemy,
-    advance_stage
+    advance_stage,
+    reset
 }

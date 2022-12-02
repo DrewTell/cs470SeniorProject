@@ -2,6 +2,7 @@ import { Fragment, useReducer } from 'react';
 import { Start } from "./Components/start.js"
 import { Shop } from "./Components/shop.js"
 import { Battle } from './Components/battle/battle.js';
+import { Victory } from './Components/victory.js';
 import { createInitialState, reducers } from './reducer';
 import "./App.css"
 import { Stack } from '@mui/material';
@@ -27,6 +28,13 @@ if(state.mode === 'battle'){
   return(
       <Stack className='App'>
         <Battle state={state} dispatch={dispatch}></Battle>
+      </Stack>
+    )
+  }
+if(state.mode === 'victory'){
+  return(
+      <Stack className='App'>
+        <Victory units={state.units} dispatch={dispatch}></Victory>
       </Stack>
     )
   }

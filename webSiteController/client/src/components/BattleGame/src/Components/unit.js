@@ -11,23 +11,30 @@ import hobbitDef from "./sprites/hobbit/Defend.png"
 import demonIdle from "./sprites/demon/Idle.png"
 import demonAt from "./sprites/demon/Attack.png"
 import demonDef from "./sprites/demon/Defend.png"
+import demonDeath from "./sprites/demon/Death.png"
 import skeleIdle from "./sprites/Skeleton/Idle.png"
 import skeleAt from "./sprites/Skeleton/Attack.png"
 import skeleDef from "./sprites/Skeleton/Defend.png"
+import skeleDeath from "./sprites/Skeleton/Death.png"
 import goblinIdle from "./sprites/Goblin/Idle.png"
 import goblinAt from "./sprites/Goblin/Attack.png"
 import goblinDef from "./sprites/Goblin/Defend.png"
+import goblinDeath from "./sprites/Goblin/Death.png"
 import mushroomIdle from "./sprites/Mushroom/Idle.png"
 import mushroomAt from "./sprites/Mushroom/Attack.png"
 import mushroomDef from "./sprites/Mushroom/Defend.png"
+import mushroomDeath from "./sprites/Mushroom/Death.png"
 import eyeIdle from "./sprites/Flyingeye/Idle.png"
 import eyeAt from "./sprites/Flyingeye/Attack.png"
 import eyeDef from "./sprites/Flyingeye/Defend.png"
+import eyeDeath from "./sprites/Flyingeye/Death.png"
 import {Spritesheet} from "./Spritesheet.js"
 
 export const Unit = props => {
     const { name, anim, enemy} = props 
     let image, steps, loop, fps
+    let width = 100
+    let height= 100
 
     switch(name){
         case "Elf":
@@ -47,7 +54,7 @@ export const Unit = props => {
                 case "Defend":
                     image = elfDef
                     steps = 3
-                    loop = false
+                    loop = true
                     fps=8
                     break
                 default:
@@ -58,20 +65,20 @@ export const Unit = props => {
             switch(anim){
                 case "Idle":
                     image = humanIdle
-                    steps = 15
+                    steps = 4
                     fps=10
                     loop = true
                     break
                 case "Attack":
                     image = humanAt
-                    steps = 8
-                    loop = false
-                    fps=8
+                    steps = 4
+                    loop = true
+                    fps=11
                     break
                 case "Defend":
                     image = humanDef
-                    steps = 7
-                    loop = false
+                    steps = 3
+                    loop = true
                     fps=12
                     break
                 default:
@@ -88,14 +95,20 @@ export const Unit = props => {
                     break
                 case "Attack":
                     image = demonAt
-                    steps = 14
-                    fps=10
+                    steps = 22
+                    fps=2
                     loop = false
                     break
                 case "Defend":
                     image = demonDef
                     steps = 3
                     fps=12
+                    loop = true
+                    break
+                case "Death":
+                    image = demonDeath
+                    steps = 8
+                    fps=8
                     loop = false
                     break
                 default:
@@ -122,7 +135,7 @@ export const Unit = props => {
                     image = hobbitDef
                     steps = 4
                     fps=6
-                    loop = false
+                    loop = true
                     break
                 default:
                     break
@@ -141,12 +154,18 @@ export const Unit = props => {
                     image = skeleAt
                     steps = 8
                     fps=8
-                    loop = false
+                    loop = true
                     break
                 case "Defend":
                     image = skeleDef
                     steps = 4
                     fps=8
+                    loop = true
+                    break
+                case "Death":
+                    image = skeleDeath
+                    steps = 4
+                    fps=13
                     loop = false
                     break
                 default:
@@ -168,11 +187,16 @@ export const Unit = props => {
                     fps=8
                     loop = false
                     break
-
                 case "Defend":
                     image = goblinDef
                     steps = 4
-                    fps = 8
+                    fps = 10
+                    loop = true
+                    break
+                case "Death":
+                    image = goblinDeath
+                    steps = 4
+                    fps = 13
                     loop = false
                     break
                 default:
@@ -191,11 +215,17 @@ export const Unit = props => {
                     image = eyeAt
                     steps = 8
                     fps=10
-                    loop = false
+                    loop = true
                     break
 
                 case "Defend":
                     image = eyeDef
+                    steps = 4
+                    fps=8
+                    loop = true
+                    break
+                case "Death":
+                    image = eyeDeath
                     steps = 4
                     fps=8
                     loop = false
@@ -221,6 +251,12 @@ export const Unit = props => {
                 case "Defend":
                     image = mushroomDef
                     steps = 4
+                    fps=12
+                    loop = true
+                    break
+                case "Death":
+                    image = mushroomDeath
+                    steps = 4
                     fps=10
                     loop = false
                     break
@@ -234,11 +270,11 @@ export const Unit = props => {
     return (
         <Spritesheet
             image={image}
-            width={100}
-            height={100}
+            width={width}
+            height={height}
             steps={steps}
             fps={fps}
-            loop={true}
+            loop={loop}
             enemy={enemy}
         />
     )
