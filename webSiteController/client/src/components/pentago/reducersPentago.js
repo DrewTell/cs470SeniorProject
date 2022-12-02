@@ -21,7 +21,7 @@ function createInitialState() {
         haveAWinner: false,
         nextColor: 'black',
         timeToRotate: false,
-        playerColor: ''
+        playerColor: '',
 
     };
 }

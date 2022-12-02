@@ -2,15 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d50b5d56-9cd3-471e-bc54-ece8ad75fc4e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/megaTicTacToe/MegaTTTBoard.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/megaTicTacToe/MegaTTTLobby.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/megaTicTacToe/MegaTTTPlaceHolder.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/megaTicTacToe/actionsMTT.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/megaTicTacToe/constantsMTT.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/megaTicTacToe/doWeHaveAWinnerMTT.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/megaTicTacToe/reducersMTTT.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webSiteController/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/Chat.css" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/Chat.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/boardTicTacToe.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/boardTicTacToe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/reducersTicTacToe.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/reducersTicTacToe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/ticTacToeGameController.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/ticTacToeGameController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/LightsOut.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/LightsOut.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/megaTicTacToe/MegaTTTBoard.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/megaTicTacToe/MegaTTTBoard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/megaTicTacToe/MegaTTTLobby.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/megaTicTacToe/MegaTTTLobby.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/pentago/reducersPentago.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/pentago/reducersPentago.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,13 +46,15 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Drewt/OneDrive/Documents/GitHub/cs470SeniorProject/webSiteController/client/src/components/TicTacToe&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Drewt/OneDrive/Documents/GitHub/cs470SeniorProject/webSiteController/client/src/components/megaTicTacToe&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Drewt\OneDrive\Documents\GitHub\cs470SeniorProject\webSiteController\client\src\components\megaTicTacToe" />
       <recent name="C:\Users\Drewt\OneDrive\Documents\GitHub\cs470SeniorProject\webSiteController\client\src\components\TicTacToe" />
       <recent name="C:\Users\Drewt\OneDrive\Documents\GitHub\cs470SeniorProject\webSiteController\client\src\components\lightsOut" />
     </key>
@@ -75,7 +79,11 @@
       <workItem from="1669599710117" duration="3493000" />
       <workItem from="1669604459376" duration="6950000" />
       <workItem from="1669625765307" duration="34165000" />
-      <workItem from="1669770519382" duration="6338000" />
+      <workItem from="1669770519382" duration="8246000" />
+      <workItem from="1669833034615" duration="4543000" />
+      <workItem from="1669837677190" duration="23569000" />
+      <workItem from="1669936695311" duration="969000" />
+      <workItem from="1669938997211" duration="18079000" />
     </task>
     <servers />
   </component>

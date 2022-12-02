@@ -40,16 +40,16 @@ function GameLobby({ channel, setChannel, setGameSelected, player1, player2, cli
     }
 
     return (
-        <div className="gameContainer">
-            <Box sx={{height: "100vh", width: "90vh"}}>
+        <Fragment>
+
                 <MTTBoard result={result} setResult={setResult} player1={player1} player2={player2}
                        firstConnected={firstConnected} setGameSelected={setGameSelected}
                        setIsSelected={setIsSelected} setChannel={setChannel}/>
-            </Box>
+
 
             {result.state === "won" && <div> {result.winner} Won The Game</div>}
             {result.state === "tie" && <div> Game Tied</div>}
-        </div>
+    </Fragment>
     );
 }
 

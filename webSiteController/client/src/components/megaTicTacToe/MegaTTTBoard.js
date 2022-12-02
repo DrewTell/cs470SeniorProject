@@ -8,10 +8,11 @@ import {Typography} from "@mui/material";
 import Stack from '@mui/material/Stack'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { createMuiTheme} from "@mui/material";
+import { reducers, createInitialState } from './reducersMTTT';
 
 import {CssBaseline} from "@mui/material";
-import {green} from "@mui/material/colors";
-import Board from "../TicTacToe/boardTicTacToe";
+import {click_on_cell_action, update_Board, updateEnemyBoard, checkBoardState} from "./actionsMTT";
+
 const darkTheme = createTheme({
     palette: {
         mode: 'dark',
@@ -25,87 +26,351 @@ const theme = createMuiTheme({
         ].join(','),
     },});
 
+const config = {
+    num_rows: 3,
+    num_columns: 3,
+    h_gap:1,
+    cell_width: 100,
+    cell_height: 100
+}
+
+function Cell(props) {
+
+    const { cell, colIdx, rowGroup, dispatch, turn, player, client, channel, cookieIDName} = props;
+
+    return (
+        <Fragment>
+
+                <Box aria-label="Tiny Cell container"
+                    // justifyContent="center" alignItems="center" display="flex"
+                    sx={{
+                    // width: config.cell_width,
+                    // height: config.cell_height,
+                    width: "100%",
+                    height: "100%",
+
+                    ...(colIdx === 0 && rowGroup === 0 && {
+                        borderRight: '4px solid',
+                        borderBottom: '4px solid',
+                    }),
+
+                    ...(colIdx === 1 && rowGroup === 0 && {
+                        borderLeft: '4px solid',
+                        borderRight: '4px solid',
+                        borderBottom: '4px solid',
+                    }),
+
+                    ...(colIdx === 2 && rowGroup === 0 && {
+                        borderLeft: '4px solid',
+                        borderBottom: '4px solid',
+                    }),
+
+
+                    ...(colIdx === 0 && rowGroup === 1 && {
+                        borderBottom: '4px solid',
+                        borderRight: '4px solid',
+                        borderTop: '4px solid',
+                    }),
+
+
+                    ...(colIdx === 1 && rowGroup === 1 && {
+                        border: '4px solid',
+                    }),
+
+                    ...(colIdx === 2 && rowGroup === 1 && {
+                        borderLeft: '4px solid',
+                        borderBottom: '4px solid',
+                        borderTop: '4px solid',
+                    }),
+
+
+
+                    ...(colIdx === 0 && rowGroup === 2 && {
+                        borderRight: '4px solid',
+                        borderTop: '4px solid',
+                    }),
+
+                    ...(colIdx === 1 && rowGroup === 2 && {
+                        borderLeft: '4px solid',
+                        borderRight: '4px solid',
+                        borderTop: '4px solid',
+                    }),
+
+                    ...(colIdx === 2 && rowGroup === 2 && {
+                        borderLeft: '4px solid',
+                        borderTop: '4px solid',
+
+                    }),
+                    borderColor: '#443a4c',
+                }}
+                       onClick={() => dispatch(click_on_cell_action(colIdx, rowGroup, turn, player, client, channel, cookieIDName, props.megaRowKey, props.megaColKey))}
+                >
+                    <Typography sx={{fontFamily: 'Train One', fontWeight: 700, fontSize: '2.5rem',
+                        ...(cell['playerMarking'] === 'X' && {
+                            color: '#845c85',
+                        }),
+                        ...(cell['playerMarking'] === 'O' && {
+                            color: '#845c85',
+                        }),
+                    }}>
+                        {cell['playerMarking']}
+                    </Typography>
+
+                </Box>
+        </Fragment>
+    );
+}
+
+function Row(props) {
+    const {row, rowKey, dispatch, turn, player, client, channel, cookieIDName} = props;
+    return (
+        <Stack
+              aria-label="This is a row"
+              // columns={3}
+              direction={"row"}
+              sx={{
+                  height: '100%',
+                  width: '100%',
+
+              }}
+
+        >
+
+
+
+            {
+                props.row.map((cell, idx, rowIdx) =>
+                    <Stack aria-label="Grid item in row map" direction={"row"}
+                          key={idx} sx={{width:'100%', height:'100%',
+                        // mt: -1,
+                        direction: 'flex-row',
+                        whiteSpace: 'nowrap',
+                        // overflow: 'hidden',
+                    }}
+                    >
+                        <Cell key={idx}
+                              cell={cell}
+                              colIdx={idx}
+                              rowGroup={props.rowKey}
+                              dispatch={dispatch}
+                              turn={turn}
+                              player={player}
+                              client={client}
+                              channel={channel}
+                              cookieIDName={cookieIDName}
+                              megaRowKey={props.megaRowIdx}
+                              megaColKey={props.megaColIdx}
+                        />
+                    </Stack>)
+            }
+        </Stack>
+    )
+}
+
+function MegaCol(props){
+    const {megaCol, rowKey, dispatch, turn, player, client, channel, cookieIDName} = props;
+    console.log("This is the grand board: ", props.state.grandBoard);
+    console.log("This is megacol: ", props.megaRowKey, ', ', props.megaColKey);
+    const renderMiniBoard = props.state.grandBoard[props.megaRowKey][props.megaColKey]['isOccupied'];
+    const playerMarker = props.state.grandBoard[props.megaRowKey][props.megaColKey]['playerMarking']
+    return (
+        <Stack direction={"column"}  width='100%'
+               sx = {{height:"100%", width:"100%", border: '2px solid', borderColor:'pink'}}>
+            {!renderMiniBoard && megaCol.map((row, rowIdx) => (
+                    <Grid
+                          aria-label="THis is grid item in MegaCol"
+                          key={rowIdx}
+
+
+                          sx={{width:'100%', height:"100%"}}
+                    >
+                        <Row key={rowIdx}
+                             row={row}
+                             rowKey={rowIdx}
+                             dispatch={dispatch}
+                             turn={turn}
+                             player={player}
+                             client={client}
+                             channel={channel}
+                             cookieIDName={cookieIDName}
+                             player1={props.player1}
+                             player2={props.player2}
+                             megaRowIdx={props.megaRowKey}
+                             megaColIdx={props.megaColKey}
+                        />
+                    </Grid>))
+            }
+            {renderMiniBoard && <Grid
+                aria-label="THis is grid item in MegaCol"
+
+
+                sx={{width:'100%', height:"100%", display: 'flex',
+                    direction: 'flex-column',
+                    justifyContent: 'center',
+                    alignItems: 'center',}}
+                ><Typography  sx={{fontFamily: 'Train One', fontWeight: 700, fontSize: '4.5rem',
+                ...(props.state.grandBoard['playerMarking'] === 'X' && {
+                    color: '#845c85',
+                }),
+                ...(props.state.grandBoard['playerMarking'] === 'O' && {
+                    color: '#845c85',
+                }),
+            }}>
+                {playerMarker}
+
+            </Typography>
+
+            </Grid>}
+
+
+        </Stack>
+
+    );
+
+
+
+
+
+
+
+
+}
+
+function MegaRow(props){
+
+    const {megaBoardRow, megaRowKey, dispatch, turn, player, client, channel, cookieIDName} = props;
+    // const renderGridWin = props.state.grandBoard[props.megaRowKey][props.megaColKey].isOccupied;
+    // const gridWinSymbol = props.state.grandBoard[props.megaRowKey][props.megaColKey].playerMarking;
+    // console.log("This is renderGridWin at: ", renderGridWin);
+    return (
+        <Stack aria-label="Mega Row Stack" direction={"row"} columns={3}
+               sx = {{width:'100%', height:"100%",
+                   borderColor: 'pink'} }>
+            {megaBoardRow.map((megaRow, megaRowIdx) =>
+                <Grid item aria-label="Mega Row Grid Item"
+                      key={megaRowIdx} sx={{width:"100%", height:"100%", border: '1px solid'}}
+                >
+
+                    <MegaCol key={megaRowIdx}
+                             megaCol={megaRow}
+                             dispatch={dispatch}
+                             turn={turn}
+                             player={player}
+                             client={client}
+                             channel={channel}
+                             cookieIDName={cookieIDName}
+                             player1={props.player1}
+                             player2={props.player2}
+                             megaRowKey={megaRowKey}
+                             megaColKey={megaRowIdx}
+                             state={props.state}
+                    />
+
+                </Grid>
+            )}
+
+           {/*<Grid item width='100%' sx={{mb: 1}} xs={1}>*/}
+           {/*     <Box>*/}
+           {/*         hiiiii*/}
+           {/*     </Box>*/}
+           {/* </Grid>*/}
+
+        </Stack>
+    );
+}
+
 
 export default function MTTBoard(props) {
-    const {player1, player2, firstConnected, clientID, setGameSelected, setIsSelected, setChannel} = props;
     const [result, setResult] = useState(null);
+    const {player1, player2, firstConnected, clientID, setGameSelected, setIsSelected, isNotMegaTTT, idkey} = props;
+    const cookieIDName = document.cookie
+        .split('; ')
+        .find((row) => row.startsWith('username='))
+        ?.split('=')[1];
+
+    const [player, setPlayer] = useState(null);
+    const [player1Name, setPlayer1Name] = useState(null);
+    const [player2Name, setPlayer2Name] = useState(null);
+    const { channel } = useChannelStateContext();
+    const { client } = useChatContext();
+
+    const [state, dispatch] = useReducer(reducers, idkey, createInitialState);
+    const {winningPlayer, haveAWinner, board, turn, player1Score, player2Score} = state;
+    const calcWidth = () => config.num_columns * config.cell_width +
+        (config.num_columns - 1) * config.h_gap;
+
+
+
+    useEffect(() => {
+
+        if (firstConnected === null){
+            setPlayer('player2');
+            setPlayer2Name(player1);
+            setPlayer1Name(player2);
+        }
+        else if (cookieIDName === firstConnected){
+            setPlayer('player1');
+            setPlayer1Name(player1);
+            setPlayer2Name(player2);
+
+        }
+    }, [])
+
+    useEffect(() => {
+        channel.on((event) => {
+            if (event.type === "game-move" && event.user.id !== client.userID) {
+                console.log("event data: ", event.data);
+                if (event.data.newState.identity === state.identity) {
+                    console.log("Using update_Board")
+                    dispatch(update_Board(event.data.newState));
+                }
+            }
+            if (event.type === "enemy-move" && event.user.id !== client.userID){
+                console.log("Received enemy move as: ", event.data);
+                dispatch(updateEnemyBoard(event.data.gameMove));
+            }
+        });
+    }, [])
+
 
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
             <Fragment>
-                <Stack direction={"column"} sx = {{mt: 12}}>
+                <Grid sx={{justifyContent:'center', alignItems:'center'}}>
+            <Stack aria-label="Game Stack" column={1} sx={{width: "100%", height:"100%",
+                display: 'flex',
+                direction: 'flex-column',
+                justifyContent: 'center',
+                alignItems: 'center',
 
+            }}>
+                {
+                    board.map((megaRow, megaRowIdx) => (
+                        <Grid item
+                              key={megaRowIdx}
 
-                    <Stack direction={"row"}>
-                        <Grid columns={3} sx={{border: '2px solid'}}>
-                            <Board idkey={1} result={result} setResult={setResult} player1={player1} player2={player2}
-                               firstConnected={firstConnected} setGameSelected={setGameSelected}
-                               setIsSelected={setIsSelected} setChannel={setChannel} isNotMegaTTT={false}/>
+                              sx={{height:"200px", width:"637px"}}
+                              xs={1}
+                        >
+                            <MegaRow key={megaRowIdx}
+                                     megaBoardRow={megaRow}
+                                     megaRowKey={megaRowIdx}
+                                     dispatch={dispatch}
+                                     turn={turn}
+                                     player={player}
+                                     client={client}
+                                     channel={channel}
+                                     cookieIDName={cookieIDName}
+                                     player1={player1}
+                                     player2={player2}
+                                     state={state}
+                                />
                         </Grid>
-                        <Grid sx={{border: '2px solid'}}>
-                            <Board idkey={2} result={result} setResult={setResult} player1={player1} player2={player2}
-                                   firstConnected={firstConnected} setGameSelected={setGameSelected}
-                                   setIsSelected={setIsSelected} setChannel={setChannel} isNotMegaTTT={false}/>
-                        </Grid>
-                        <Grid sx={{border: '2px solid'}}>
-                            <Board idkey={3} result={result} setResult={setResult} player1={player1} player2={player2}
-                                   firstConnected={firstConnected} setGameSelected={setGameSelected}
-                                   setIsSelected={setIsSelected} setChannel={setChannel} isNotMegaTTT={false}/>
-                        </Grid>
-
-                    </Stack>
-
-
-
-
-                        <Stack direction={"row"}>
-                            <Grid sx={{border: '2px solid'}}>
-                                <Board idkey={4} result={result} setResult={setResult} player1={player1} player2={player2}
-                                       firstConnected={firstConnected} setGameSelected={setGameSelected}
-                                       setIsSelected={setIsSelected} setChannel={setChannel} isNotMegaTTT={false}/>
-                            </Grid>
-                            <Grid sx={{border: '2px solid'}}>
-                                <Board idkey={5} result={result} setResult={setResult} player1={player1} player2={player2}
-                                       firstConnected={firstConnected} setGameSelected={setGameSelected}
-                                       setIsSelected={setIsSelected} setChannel={setChannel} isNotMegaTTT={false}/>
-                            </Grid>
-                            <Grid sx={{border: '2px solid'}}>
-                                <Board idkey={6} result={result} setResult={setResult} player1={player1} player2={player2}
-                                       firstConnected={firstConnected} setGameSelected={setGameSelected}
-                                       setIsSelected={setIsSelected} setChannel={setChannel} isNotMegaTTT={false}/>
-                            </Grid>
-                            <Stack/>
-
-
-
-
-                        </Stack>
-
-
-                    <Stack direction={"row"}>
-                        <Grid sx={{border: '2px solid'}}>
-                            <Board idkey={7} result={result} setResult={setResult} player1={player1} player2={player2}
-                                   firstConnected={firstConnected} setGameSelected={setGameSelected}
-                                   setIsSelected={setIsSelected} setChannel={setChannel} isNotMegaTTT={false}/>
-                        </Grid>
-                        <Grid sx={{border: '2px solid'}}>
-                            <Board idkey={8} result={result} setResult={setResult} player1={player1} player2={player2}
-                                   firstConnected={firstConnected} setGameSelected={setGameSelected}
-                                   setIsSelected={setIsSelected} setChannel={setChannel} isNotMegaTTT={false}/>
-                        </Grid>
-                        <Grid sx={{border: '2px solid'}}>
-                            <Board idkey={9} result={result} setResult={setResult} player1={player1} player2={player2}
-                                   firstConnected={firstConnected} setGameSelected={setGameSelected}
-                                   setIsSelected={setIsSelected} setChannel={setChannel} isNotMegaTTT={false}/>
-                        </Grid>
-
-                    </Stack>
-
-
+                    ))
+                }
             </Stack>
-
-
+                </Grid>
             </Fragment>
         </ThemeProvider>
     );

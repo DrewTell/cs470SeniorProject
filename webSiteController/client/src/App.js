@@ -85,7 +85,7 @@ function App() {
                             setGameSelected={setGameSelected}
                             setIsSelected={setIsSelected}/>
         {isAuth ? (
-            <Stack direction="column" divider={<Divider orientation="horizontal" flexItem />} sx = {{xs: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Stack direction="column"  sx = {{xs: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 
                 <Box  sx={{  width: '100%' }}>
                     <Chat client={client}>

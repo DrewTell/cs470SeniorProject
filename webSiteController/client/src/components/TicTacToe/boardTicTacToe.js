@@ -154,6 +154,10 @@ function Row(props) {
         </Grid>
     )
 }
+
+
+
+
 function GameInfo(props) {
 
     let {player1, player2, player1Score, player2Score} = props;
@@ -240,10 +244,6 @@ export default function Board(props) {
 
 
     useEffect(() => {
-        console.log("channel: ", channel);
-    }, [channel])
-
-    useEffect(() => {
 
         if (firstConnected === null){
             setPlayer('player2');
@@ -273,6 +273,10 @@ export default function Board(props) {
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
             <Fragment>
+
+
+
+
 
                 <Grid container margin='auto'
                       columns={1}

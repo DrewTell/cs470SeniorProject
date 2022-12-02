@@ -183,7 +183,7 @@ export default function LightsOut(props) {
 
     const calcWidth = () => boardAttributes[1] * config.cell_width +
         (boardAttributes[1] - 1) * config.h_gap
-
+    console.log("calcwidth: ", calcWidth());
     const [seconds, setSeconds] = useState(0);
     const [isActive, setIsActive] = useState(true);
 
@@ -273,10 +273,11 @@ export default function LightsOut(props) {
             <Grid>
                 <Typography variant='h7' textAlign='center' sx={{
                     // animation: `${flicker} 1s ease`,
+                    whiteSpace: "pre-wrap",
                     textShadow: "0 0 7px #fff,\n" +
                         "    0 0 22px #0fa;"
                 }}>
-                    Count: {state.clickCount} Time passed: {Math.floor(seconds / 60)} minute {seconds % 60} seconds
+                    Clicks: {state.clickCount}  Time: {Math.floor(seconds / 60)} minutes {seconds % 60} seconds
 
 
                 </Typography>
