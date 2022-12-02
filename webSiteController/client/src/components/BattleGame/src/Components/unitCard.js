@@ -39,19 +39,11 @@ export const UnitCard = (props) => {
         <Card sx={{ width:250, border: 2, bordercolor:'black'}}>
             <CardContent>
                     <Typography>
-                        {unit.name}
-                    </Typography>
-
-                    <Typography variant="h5" component="Stack">
-                        Lvl: {unit.lvl}
+                    Lvl: {unit.lvl} {unit.name}
                     </Typography>
 
                     <Typography color="text.secondary">
-                        Strength: {unit.strength}   Defense: {unit.defense}
-                    </Typography>
-
-                    <Typography color="text.secondary">
-                        Accuracy: {unit.accuracy}%
+                        Str: {unit.strength}   Def: {unit.defense} Hit: {unit.accuracy}%
                     </Typography>
 
                     <Typography>

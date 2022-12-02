@@ -58,6 +58,24 @@ const idle = (time) => {
     }
 }
 
+const fighter_death = () => {
+    return {
+        type: 'DEATH'
+    }
+}
+
+const advance_enemy = () => {
+    return {
+        type: 'ENEMY'
+    }
+}
+
+const advance_stage = () => {
+    return {
+        type: 'STAGE',
+    }
+}
+
 export {
     shop_mode,
     battle_mode,
@@ -67,5 +85,8 @@ export {
     add_member,
     add_item,
     e_attack,
-    idle
+    idle,
+    fighter_death,
+    advance_enemy,
+    advance_stage
 }

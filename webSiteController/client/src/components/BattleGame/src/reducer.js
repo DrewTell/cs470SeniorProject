@@ -110,13 +110,12 @@ function advanceEnemy(state){
     let loot = Math.floor(state.enemy.lvl * 50 * percent)
 
     if(state.enemies === 5)
-        return advanceStage({...state,
-                            gold:state.gold+loot})
+        return advanceStage({...state, gold:state.gold+loot})
     return {
         ...state,
         enemies:state.enemies+1,
         enemy:enemy,
-        fightText:["Stage advanced, next battle commencing"],
+        fightText:["Enemy advanced, next battle commencing"],
         currFighter:blankUnit,
         gold:state.gold+loot
     }
@@ -191,16 +190,12 @@ function attack(state){
             text.push(`${state.enemy.name} misses!`)
         }
     }
-    if (currFighter.currHP <= 0){
-        return state = fighterDeath(state)
-    }
     if(enemy.currHP <= 0){
         currFighter.kills += 1
         if(currFighter.kills >= currFighter.lvl + 2)
             currFighter = levelUp(currFighter)
-        return state = advanceEnemy(state)
     }
-    else return {
+    return {
         ...state,
         currFighter:currFighter,
         enemy:enemy,
@@ -225,7 +220,7 @@ function levelUp(fighter){
 }
 
 function defend(state){
-    state.fightText.push(`**********************************************************`)  
+    let text = []
     let currFighter = state.currFighter
     if(currFighter.name === "unitName")
         return state
@@ -235,26 +230,21 @@ function defend(state){
     let d1 = enemy.strength - (Math.floor(currFighter.defense * 1.5) + 1)
     if(d1 < 0){
         enemy.currHP += d1
-        state.fightText.push(`${enemy.name}'s attack is countered for ${d1} damage!`)
+        text.push(`${enemy.name}'s attack is countered for ${d1} damage!`)
     }else{
         currFighter.currHP -= d1
-        state.fightText.push(`${state.currFighter.name} takes ${d1} damage!`)
-    }
-
-    if (currFighter.currHP <= 0){
-        return state = fighterDeath(state)
+        text.push(`${state.currFighter.name} takes ${d1} damage!`)
     }
     if(enemy.currHP <= 0){
         currFighter.kills += 1
         if(currFighter.kills >= currFighter.lvl + 2)
             currFighter = levelUp(currFighter)
-        return state = advanceEnemy(state)
     }
     return {
         ...state,
         currFighter:currFighter,
         enemy:enemy,
-        fightText:state.fightText,
+        fightText:text,
     }
 }
 
@@ -312,6 +302,18 @@ function reducers(state, action) {
 
     if(action.type === "ITEM"){
         return addItem(state, action.item, action.cost)
+    }
+
+    if(action.type === "ENEMY"){
+        return advanceEnemy(state)
+    }
+
+    if(action.type === "STAGE"){
+        return advanceStage(state)
+    }
+
+    if(action.type === "DEATH"){
+        return fighterDeath(state)
     }
 }
 

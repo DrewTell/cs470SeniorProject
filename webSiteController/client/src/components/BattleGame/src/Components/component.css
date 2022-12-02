@@ -17,7 +17,21 @@
 .hidden{
     position: relative;
     left:0.3%;
-    height: 212px;
+    height: 156px;
+    width: 250px;
+    margin-right: 4px;
+    margin-bottom:3px;
+    font-size: 0;
+    border: none;
+    background: none;
+    border-radius: 5px;
+    
+}
+
+.hidden2{
+    position: relative;
+    left:0.3%;
+    height: 156px;
     width: 250px;
     margin-right: 4px;
     margin-bottom:3px;
@@ -34,7 +48,7 @@
 }
 
 #log{
-    height: 8vh;
+    height: 9vh;
     width: 30vw;
     position: fixed;
     top:65%;
@@ -45,7 +59,7 @@
     border: solid black 2px;
     background-color: white;
     color: black;
-    overflow: auto;
+    overflow: hidden;
     text-align: left;
     margin: auto;
     scroll-snap-align: end;

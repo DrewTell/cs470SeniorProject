@@ -7,47 +7,80 @@ import "./battle.css"
 import { Log } from "./log"
 import { Button, Stack } from "@mui/material"
 import { Floor } from "./floor"
-import { attack, defend } from "../../actions"
+import { advance_enemy, advance_stage, attack, defend, fighter_death } from "../../actions"
 import { useState } from "react"
+import { Unit } from "../unit"
 
 export const Battle = (props) => {
     const{state, dispatch} = props
 
+
+    let blankUnit = {name: "unitName", lvl:0, strength:0, defense:0, currHP: 0, maxHP: 0}
+    let unit = state.currFighter
     let id = "battle" + `${state.stage}`
-    let check = state.currFighter.name !== "unitName"
+    let check = unit.name !== "unitName"
     const [fAnim, setfAnim] = useState(state.fAnimation)
     const [eAnim, seteAnim] = useState(state.eAnimation)
-
+    const [ID, setID] = useState("logButtons")
 
     function changeAnims(f, e, time){
-        setfAnim(f)
-        seteAnim(e)
+        setID("logButtonsH")
         setTimeout(() => {
+            if(e === "Idle")
+                setID("logButtons")
             setfAnim(f)
             seteAnim(e)
           }, 1000*time)
     }
+
+    function advanceEnemy(time){
+        setTimeout(() => {
+            setTimeout(() => {
+                if (state.currFighter.currHP <= 0)
+                    return dispatch(fighter_death())
+                if(state.enemy.currHP > 0){
+                    return
+                }
+                else if (state.enemies >= 5)
+                    return dispatch(advance_stage())
+                else
+                    return dispatch(advance_enemy())
+              }, 1000*time-1)
+        }, 100)
+    }
+    
+
     return(
         <Stack id={id} className="battle">
             <BattleBar stage={state.stage} enemies={state.enemies}/>
             <Enemy dispatch={dispatch} enemy={state.enemy} animation={eAnim}/>
             <Fighter unit={state.currFighter} dispatch={dispatch} animation={fAnim}/>
-            <Floor/>
+            <div className="fightScene">
+                <Stack className="eSprite">
+                    <Unit dispatch={dispatch} name={state.enemy.name} anim={eAnim}/>
+                </Stack>
+                <Stack className="fSprite">
+                    {unit.name !== "unitName" && <Unit dispatch={dispatch} name={unit.name} anim={fAnim}/>}
+                </Stack>
+                <Floor/>
+            </div>
             <Party dispatch={dispatch} units={state.units} gold={state.gold}></Party>
             <UnitSelection curr={state.currFighter.name} units={state.units} dispatch={dispatch}/>
             <Log log={state.fightText}/>
-            <Stack className="logButtons">
+            <Stack id={ID}>
                 {      
-                    check && <Button variant="outlined" onClick={()=>{dispatch(attack()); 
+                    check && <Button variant="outlined" onClick={()=>{dispatch(attack())
                                                                       changeAnims("Attack","Defend",0)
                                                                       changeAnims("Defend","Attack",1)
-                                                                      changeAnims("Idle","Idle",2)        
+                                                                      changeAnims("Idle","Idle",2)
+                                                                      advanceEnemy(2)        
                                                                                         }}> Attack </Button>
                 }
                 {
-                    check && <Button variant="outlined" onClick={()=>{dispatch(defend());
+                    check && <Button variant="outlined" onClick={()=>{dispatch(defend())
                                                                       changeAnims("Defend","Attack",0)
                                                                       changeAnims("Idle","Idle",1)
+                                                                      advanceEnemy(1)
                                                                                         }}> Defend </Button>
                 }
             </Stack>

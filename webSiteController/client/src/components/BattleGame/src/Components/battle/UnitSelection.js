@@ -16,9 +16,12 @@ export const UnitSelection = (props) => {
 
             {curr === "unitName" && 
                 <div className="party">
-                    <button className="hidden" onClick={()=>dispatch(set_fighter(0))}>1</button>
-                    <button className="hidden" onClick={()=>dispatch(set_fighter(1))}>2</button>
-                    <button className="hidden" onClick={()=>dispatch(set_fighter(2))}>3</button>
+                    {units[0].name === "unitName" ? <button className="hidden2">1</button>: 
+                                                    <button className="hidden" onClick={()=>dispatch(set_fighter(0))}>1</button>}
+                    {units[1].name === "unitName" ? <button className="hidden2">2</button>: 
+                                                    <button className="hidden" onClick={()=>dispatch(set_fighter(1))}>1</button>}
+                    {units[2].name === "unitName" ? <button className="hidden2">3</button>: 
+                                                    <button className="hidden" onClick={()=>dispatch(set_fighter(2))}>1</button>}
                 </div>
             }
         </Stack>
