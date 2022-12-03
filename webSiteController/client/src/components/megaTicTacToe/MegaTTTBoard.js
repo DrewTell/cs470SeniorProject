@@ -36,8 +36,7 @@ const config = {
 
 function Cell(props) {
 
-    const { cell, colIdx, rowGroup, dispatch, turn, player, client, channel, cookieIDName} = props;
-
+    const { cell, colIdx, rowGroup, dispatch, turn, player, client, channel, cookieIDName, state} = props;
     return (
         <Fragment>
 
@@ -101,7 +100,16 @@ function Cell(props) {
                         borderTop: '4px solid',
 
                     }),
+
+                    ...(  (cell['playerMarking'] === null) && (props.megaRowKey === state.forcedPlay[0]) && (props.megaColKey === state.forcedPlay[1]) &&
+                        {
+                            backgroundColor: 'pink',
+                        }
+                    ),
+
                     borderColor: '#443a4c',
+
+
                 }}
                        onClick={() => dispatch(click_on_cell_action(colIdx, rowGroup, turn, player, client, channel, cookieIDName, props.megaRowKey, props.megaColKey))}
                 >
@@ -136,8 +144,6 @@ function Row(props) {
 
         >
 
-
-
             {
                 props.row.map((cell, idx, rowIdx) =>
                     <Stack aria-label="Grid item in row map" direction={"row"}
@@ -160,6 +166,7 @@ function Row(props) {
                               cookieIDName={cookieIDName}
                               megaRowKey={props.megaRowIdx}
                               megaColKey={props.megaColIdx}
+                              state={props.state}
                         />
                     </Stack>)
             }
@@ -169,8 +176,6 @@ function Row(props) {
 
 function MegaCol(props){
     const {megaCol, rowKey, dispatch, turn, player, client, channel, cookieIDName} = props;
-    console.log("This is the grand board: ", props.state.grandBoard);
-    console.log("This is megacol: ", props.megaRowKey, ', ', props.megaColKey);
     const renderMiniBoard = props.state.grandBoard[props.megaRowKey][props.megaColKey]['isOccupied'];
     const playerMarker = props.state.grandBoard[props.megaRowKey][props.megaColKey]['playerMarking']
     return (
@@ -197,6 +202,7 @@ function MegaCol(props){
                              player2={props.player2}
                              megaRowIdx={props.megaRowKey}
                              megaColIdx={props.megaColKey}
+                             state={props.state}
                         />
                     </Grid>))
             }
@@ -298,7 +304,6 @@ export default function MTTBoard(props) {
     const {winningPlayer, haveAWinner, board, turn, player1Score, player2Score} = state;
     const calcWidth = () => config.num_columns * config.cell_width +
         (config.num_columns - 1) * config.h_gap;
-
 
 
     useEffect(() => {

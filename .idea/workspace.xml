@@ -2,18 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d50b5d56-9cd3-471e-bc54-ece8ad75fc4e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/megaTicTacToe/actionsMTT.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/megaTicTacToe/constantsMTT.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/megaTicTacToe/doWeHaveAWinnerMTT.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/components/megaTicTacToe/reducersMTTT.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/Chat.css" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/Chat.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/boardTicTacToe.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/boardTicTacToe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/LightsOut.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/LightsOut.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/megaTicTacToe/MegaTTTBoard.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/megaTicTacToe/MegaTTTBoard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/megaTicTacToe/MegaTTTLobby.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/megaTicTacToe/MegaTTTLobby.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/pentago/reducersPentago.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/pentago/reducersPentago.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/megaTicTacToe/reducersMTTT.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/megaTicTacToe/reducersMTTT.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +74,8 @@
       <workItem from="1669833034615" duration="4543000" />
       <workItem from="1669837677190" duration="23569000" />
       <workItem from="1669936695311" duration="969000" />
-      <workItem from="1669938997211" duration="18079000" />
+      <workItem from="1669938997211" duration="18180000" />
+      <workItem from="1670038573943" duration="12169000" />
     </task>
     <servers />
   </component>

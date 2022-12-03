@@ -18,10 +18,10 @@ function createInitialState(player1Points, player2Points, winningPlayer) {
     }
     let board = Array(NUM_ROWS).fill(Array(NUM_COLUMNS).fill(Array(NUM_ROWS).fill(Array(NUM_COLUMNS).fill({color: 'gray', isOccupied: false, playerMarking: null}))));
     board = board.map((megaColumn, megaColumnIdx) => board.map((megaRow, megaRowIdx) => megaRow.map((row, rowIdx) => row.map((col, colIdx) => {
-        return {...board[rowIdx][colIdx], row: rowIdx, column: colIdx, megaRow: megaRowIdx, megaColumn: megaColumnIdx}
+        return {...board[megaColumnIdx][megaRowIdx][rowIdx][colIdx], row: rowIdx, column: colIdx, megaRow: megaRowIdx, megaColumn: megaColumnIdx}
         }))));
 
-    let freshBoard = Array(NUM_ROWS).fill(Array(NUM_COLUMNS).fill({color: 'gray', isOccupied: false, playerMarking: null}));
+    let freshBoard = Array(NUM_ROWS).fill(Array(NUM_COLUMNS).fill({color: 'gray', isOccupied: false, playerMarking: null, playerMoves: 0}));
     freshBoard = freshBoard.map((row, rowIdx) => row.map( (col, colIdx) => {
         return {...freshBoard[rowIdx][colIdx], row: rowIdx, column: colIdx }}));
 
@@ -33,7 +33,8 @@ function createInitialState(player1Points, player2Points, winningPlayer) {
         player1Score: score1,
         player2Score: score2,
         grandBoard: freshBoard,
-        forcedPlay: -1,
+        forcedPlay: false,
+        playerMoves: 0,
 
 
     };
@@ -41,7 +42,6 @@ function createInitialState(player1Points, player2Points, winningPlayer) {
 
 async function sendState(newState, channel){
     let roughObjSize = JSON.stringify(newState).length;
-    console.log("obj size: ", roughObjSize);
     await channel.sendEvent({
         type: "game-move",
         data: {newState},
@@ -57,10 +57,9 @@ async function sendGameMove(gameMove, channel){
 
 
 function clientIntegrateClick(state, row, col, megaRow, megaCol, marking, playerSymbol){
-    console.log("Working with client grandboard", state.grandBoard);
     let nextTurn = advanceTurn(state.turn);
     let board = state.board;
-
+    const movesTaken = state.grandBoard[megaRow][megaCol].playerMoves + 1
     let affectedRow = board[megaRow][megaCol][row].slice();
     affectedRow[col] = {
         ...affectedRow[col],
@@ -72,18 +71,27 @@ function clientIntegrateClick(state, row, col, megaRow, megaCol, marking, player
     newBoard[megaRow][megaCol][row] = affectedRow;
 
     const newMoves = state.movesTaken + 1;
+    let forcedToPlayIn = [row, col];
+    if (state.grandBoard[row][col].isOccupied === true){
+        forcedToPlayIn = false;
+        console.log("The mini board has been won");
+    }
+
+    let newGrandBoard = state.grandBoard.slice()
+    newGrandBoard[megaRow][megaCol].playerMoves = movesTaken;
     let newState = {
         ...state,
         board: newBoard,
         turn: nextTurn,
         movesTaken: newMoves,
+        forcedPlay: forcedToPlayIn,
+        grandBoard: newGrandBoard,
     };
+
+
+
     const tinyBoard = board[megaRow][megaCol].slice()
     if( doWeHaveAWinnerThatIncludes(row, col, playerSymbol, tinyBoard) ) {
-        let doHaveResult = doWeHaveAWinnerThatIncludes(row, col, playerSymbol, tinyBoard);
-        console.log("after do wehave Mega Row, Mega Col: ", megaRow, megaCol);
-        console.log(state.grandBoard);
-        let newGrandBoard = state.grandBoard.slice()
         let tempGrandCell = newGrandBoard[megaRow][megaCol];
         tempGrandCell ={
           color: 'gray',
@@ -98,7 +106,7 @@ function clientIntegrateClick(state, row, col, megaRow, megaCol, marking, player
         let player2Points = ('O' === playerSymbol ? 1 : 0);
         player1Points += newState.player1Score;
         player2Points += newState.player2Score;
-
+        const newPlayerMoves = newState.playerMoves + 1;
         newState = {
             ...newState,
             // haveAWinner: true,
@@ -106,7 +114,46 @@ function clientIntegrateClick(state, row, col, megaRow, megaCol, marking, player
             player1Score: player1Points,
             player2Score: player2Points,
             grandBoard: newGrandBoard,
+            forcedPlay: false,
+            playerMoves: newPlayerMoves,
         };
+        if (doWeHaveAWinnerThatIncludes(megaRow,megaCol, playerSymbol, newState.grandBoard)) {
+            console.log("----------GAME OVER WOOO------");
+            const newMovesTaken = newState.movesTaken + 1;
+            newState = {
+                ...newState,
+                haveAWinner: true,
+                winningPlayer: playerSymbol,
+                movesTaken: newMovesTaken,
+            };
+        }
+    }
+    if (movesTaken === 9 && newGrandBoard[megaRow][megaCol].isOccupied === false){
+        console.log("It was a tie in this mini board");
+        const newPlayerMoves = newState.playerMoves + 1;
+
+        newGrandBoard[megaRow][megaCol] = {
+            ...newGrandBoard[megaRow][megaCol],
+            isOccupied: true,
+            playerMarking: 'C',
+        }
+        newState = {
+            ...newState,
+            grandBoard: newGrandBoard,
+            forcedPlay: false,
+            playerMoves: newPlayerMoves,
+
+        }
+        if(newState.playerMoves === 9){
+            console.log("This is game tie condition");
+            newState = {
+                ...newState,
+                haveAWinner: true,
+                winningPlayer: 'C',
+            }
+        }
+
+
     }
 
     return newState;
@@ -115,7 +162,6 @@ function clientIntegrateClick(state, row, col, megaRow, megaCol, marking, player
 function integrateClick(state, colIdx, rowGroup, channel, turn, megaCol, megaRow, marker, playerSym ) {
     const marking = (turn === 'player1' ? 'black' : 'white');
     const playerSymbol = (turn === 'player1' ? 'X' : 'O');
-
     const gameMove = {
         row: rowGroup,
         col: colIdx,
@@ -126,7 +172,9 @@ function integrateClick(state, colIdx, rowGroup, channel, turn, megaCol, megaRow
     }
 
     let nextTurn = advanceTurn(turn);
-
+    let tempGrandCell = state.grandBoard[megaRow][megaCol]
+    const newMovesTaken = tempGrandCell.playerMoves + 1;
+    console.log("new moves taken after click: ", newMovesTaken);
 
     let stateBoard = state.board;
     let affectedRow = stateBoard[megaRow][megaCol][rowGroup].slice();
@@ -136,46 +184,93 @@ function integrateClick(state, colIdx, rowGroup, channel, turn, megaCol, megaRow
         isOccupied: true,
         playerMarking: playerSymbol,
     };
-    console.log("affected row col id: ", affectedRow[colIdx]);
-    stateBoard[megaRow][megaCol][rowGroup] = affectedRow
-    const newMoves = state.movesTaken + 1;
 
+    stateBoard[megaRow][megaCol][rowGroup] = affectedRow
+
+    let forcedToPlayIn = [rowGroup, colIdx];
+    if (state.grandBoard[rowGroup][colIdx].isOccupied === true){
+        forcedToPlayIn = false;
+
+    }
+
+    let newGrandBoard = state.grandBoard.slice()
+    newGrandBoard[megaRow][megaCol].playerMoves = newMovesTaken;
     let newState = {
         ...state,
         board: stateBoard,
         turn: nextTurn,
-        movesTaken: newMoves,
+        forcedPlay: forcedToPlayIn,
+        grandBoard: newGrandBoard,
     };
+
+
     const tinyBoard = stateBoard[megaRow][megaCol].slice()
     if( doWeHaveAWinnerThatIncludes(rowGroup, colIdx, playerSymbol, tinyBoard) ) {
-        console.log("This is dowehaveawinner function: ", (doWeHaveAWinnerThatIncludes(rowGroup, colIdx, playerSymbol, tinyBoard)));
-        console.log("Before a winner this is grand board: ", state.grandBoard);
-        let tempGrandCell = state.grandBoard[megaRow][megaCol];
-        tempGrandCell ={
+
+        tempGrandCell = {
             ...tempGrandCell,
             isOccupied: true,
             playerMarking: playerSymbol,
+            playerMoves: newMovesTaken,
         };
-        let newGrandBoard = state.grandBoard.slice()
-
+        const newPlayerMoves = newState.playerMoves + 1;
         newGrandBoard[megaRow][megaCol] = tempGrandCell;
-        let player1Points = ('X' === playerSymbol ? 1 : 0);
-        let player2Points = ('O' === playerSymbol ? 1 : 0);
-        player1Points += newState.player1Score;
-        player2Points += newState.player2Score;
-        console.log("After having a winner this is grand board: ", newGrandBoard);
+
         newState = {
             ...newState,
             // haveAWinner: true,
             // winningPlayer: turn,
-            player1Score: player1Points,
-            player2Score: player2Points,
             grandBoard: newGrandBoard,
+            forcedPlay: false,
+            playerMoves : newPlayerMoves,
         };
-    }
+        if (doWeHaveAWinnerThatIncludes(megaRow,megaCol, playerSymbol, newState.grandBoard)){
+            console.log("----------GAME OVER WOOO------");
 
+            let player1Points = ('X' === playerSymbol ? 1 : 0);
+            let player2Points = ('O' === playerSymbol ? 1 : 0);
+            player1Points += newState.player1Score;
+            player2Points += newState.player2Score;
+            const newPlayerMoves = newState.playerMoves + 1;
+            newState = {
+              ...newState,
+                haveAWinner: true,
+                winningPlayer: playerSymbol,
+                player1Score: player1Points,
+                player2Score: player2Points,
+                playerMoves: newPlayerMoves
+            };
+        }
+    }
+    if (newMovesTaken === 9 && newState.grandBoard[megaRow][megaCol].isOccupied === false){
+        console.log("Its a tie-----");
+        const newPlayerMoves = newState.playerMoves + 1;
+        tempGrandCell = {
+            ...tempGrandCell,
+            isOccupied: true,
+            playerMarking: 'C',
+            playerMoves: newMovesTaken,
+        };
+        newGrandBoard[megaRow][megaCol] = tempGrandCell;
+
+        newState = {
+            ...newState,
+            grandBoard: newGrandBoard,
+            forcedPlay: false,
+            playerMoves: newPlayerMoves,
+        }
+        if(newState.playerMoves === 9){
+            console.log("This is game tie condition");
+            newState = {
+                ...newState,
+                haveAWinner: true,
+                winningPlayer: 'C',
+            }
+        }
+
+    }
+    console.log("end of integrate click this is moves taken: ", newState.grandBoard[megaRow][megaCol].playerMoves);
     sendGameMove(gameMove, channel);
-    console.log("state after integrate click:", state);
     return newState;
 }
 
@@ -204,7 +299,13 @@ function reducers(state, action) {
             //A player has won this mini board
             return state;
         }
-        return integrateClick(state, action.colIdx, action.rowGroup, action.channel, action.turn, action.megaCol, action.megaRow);
+        if (state.forcedPlay === false){
+            return integrateClick(state, action.colIdx, action.rowGroup, action.channel, action.turn, action.megaCol, action.megaRow);
+        }
+        if (state.forcedPlay[0] === action.megaRow && state.forcedPlay[1] === action.megaCol){
+            return integrateClick(state, action.colIdx, action.rowGroup, action.channel, action.turn, action.megaCol, action.megaRow);
+        }
+        return state;
     }
 
 
