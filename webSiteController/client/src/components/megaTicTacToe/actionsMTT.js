@@ -28,6 +28,12 @@ const reset_action = (channel) => {
     }
 }
 
+const reset_board = () => {
+    return {
+        type: 'RESET'
+    }
+}
+
 const update_Board = (newState) => {
     return {
         type: 'UPDATE',
@@ -56,4 +62,5 @@ export {
     update_Board,
     updateEnemyBoard,
     checkBoardState,
+    reset_board
 };

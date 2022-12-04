@@ -11,7 +11,8 @@ import { createMuiTheme} from "@mui/material";
 import { reducers, createInitialState } from './reducersMTTT';
 
 import {CssBaseline} from "@mui/material";
-import {click_on_cell_action, update_Board, updateEnemyBoard, checkBoardState} from "./actionsMTT";
+import {click_on_cell_action, update_Board, updateEnemyBoard, checkBoardState, reset_board} from "./actionsMTT";
+import {reset_action} from "../TicTacToe/actionsTicTacToe";
 
 const darkTheme = createTheme({
     palette: {
@@ -232,14 +233,6 @@ function MegaCol(props){
         </Stack>
 
     );
-
-
-
-
-
-
-
-
 }
 
 function MegaRow(props){
@@ -284,6 +277,49 @@ function MegaRow(props){
         </Stack>
     );
 }
+function TopMessage(props){
+    let playingName = (props.turn === 'player1' ? props.player1 : props.player2);
+
+    const turnMessage = `${playingName} plays next`;
+    const winMessage = (props.haveAWinner === false ? false : props.winningPlayer === 'C' ? "Cat's Game" : props.winningPlayer === 'X' ? `${props.player1} has won the game` : `${props.player2} has won the game` );
+    const infoMessage = (winMessage ? winMessage : turnMessage);
+    return    <Grid>
+
+        <Box>
+            <Typography sx={{fontFamily: 'Train One', fontWeight: 700, fontSize: '3.5rem',}}
+            >
+                Mega Tic Tac Toe
+            </Typography>
+            <Box aria-label='holding game message' sx={{alignItems: 'center', justifyContent:'center'}}>
+            <Grid sx={{justifyContent: 'center', alignItems: 'center',
+                        width: '50%', ml:16}}>
+                <Typography sx={{fontFamily: 'Train One', fontWeight: 700, fontSize: '1.5rem', borderBottom: '2px solid'}}>
+                    {infoMessage}
+                </Typography>
+            </Grid>
+        </Box>
+            <Grid sx={{ display: 'flex',
+                direction: 'flex-column',
+                justifyContent: 'center',
+                mt: 2,
+                mb: 1,
+            }}>
+                <Button width='100%'
+                        sx={{
+                            visibility: props.haveAWinner ? 'visible' : 'hidden',
+                            color:'pink',
+                            boxShadow: "1px 1px 5px gray",
+                            width: '15px',
+                            fontFamily: 'sans-serif',
+                        }}
+                        onClick={() => props.dispatch(reset_action(props.channel))}>Reset?
+                </Button>
+            </Grid>
+        </Box>
+    </Grid>
+}
+
+
 
 
 export default function MTTBoard(props) {
@@ -310,8 +346,9 @@ export default function MTTBoard(props) {
 
         if (firstConnected === null){
             setPlayer('player2');
-            setPlayer2Name(player1);
             setPlayer1Name(player2);
+            setPlayer2Name(player1);
+
         }
         else if (cookieIDName === firstConnected){
             setPlayer('player1');
@@ -334,9 +371,14 @@ export default function MTTBoard(props) {
                 console.log("Received enemy move as: ", event.data);
                 dispatch(updateEnemyBoard(event.data.gameMove));
             }
+            if (event.type === "reset" && event.user.id !== client.userID){
+                console.log("Reset action");
+                dispatch(reset_board())
+            }
         });
     }, [])
-
+    console.log("You are player: ", player);
+    console.log("Player 1:", player1Name, " this is player 2: ", player2Name);
 
     return (
         <ThemeProvider theme={darkTheme}>
@@ -350,6 +392,9 @@ export default function MTTBoard(props) {
                 alignItems: 'center',
 
             }}>
+                <TopMessage haveAWinner={haveAWinner} winningPlayer={winningPlayer} turn={turn}
+                            player1={player1Name} player2={player2Name} dispatch={dispatch}
+                />
                 {
                     board.map((megaRow, megaRowIdx) => (
                         <Grid item

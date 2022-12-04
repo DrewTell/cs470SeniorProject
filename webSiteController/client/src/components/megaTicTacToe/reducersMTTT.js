@@ -14,7 +14,7 @@ function createInitialState(player1Points, player2Points, winningPlayer) {
     if (player1Points !== undefined && player2Points !== undefined && winningPlayer !== undefined){
         score1 = player1Points;
         score2 = player2Points;
-        playerToStart = (winningPlayer === 'player1' ? 'player2' : 'player1');
+        playerToStart = (winningPlayer === 'player1' ? 'player2' : winningPlayer === 'player1' ? 'player1' : 'player1');
     }
     let board = Array(NUM_ROWS).fill(Array(NUM_COLUMNS).fill(Array(NUM_ROWS).fill(Array(NUM_COLUMNS).fill({color: 'gray', isOccupied: false, playerMarking: null}))));
     board = board.map((megaColumn, megaColumnIdx) => board.map((megaRow, megaRowIdx) => megaRow.map((row, rowIdx) => row.map((col, colIdx) => {
@@ -45,6 +45,12 @@ async function sendState(newState, channel){
     await channel.sendEvent({
         type: "game-move",
         data: {newState},
+    })
+};
+async function sendReset(channel){
+    await channel.sendEvent({
+        type: "reset",
+        data: {},
     })
 };
 
@@ -78,6 +84,7 @@ function clientIntegrateClick(state, row, col, megaRow, megaCol, marking, player
     }
 
     let newGrandBoard = state.grandBoard.slice()
+
     newGrandBoard[megaRow][megaCol].playerMoves = movesTaken;
     let newState = {
         ...state,
@@ -282,11 +289,10 @@ function reducers(state, action) {
 
     if( action.type === 'RESET' ) {
         console.log("In reset:");
-        let channel = action.channel;
         let newState = createInitialState(state.identity, state.player1Score, state.player2Score, state.winningPlayer);
         //If this sentResetState was put inside createInitialState, the game board would reset on exit and rejoin to the lobby
         //This might be a good idea because the games currently are desynced until a move is played on exit and rejoin
-        sendState(newState, channel);
+        sendReset(state.channel);
         return newState
     } else if( action.type === 'CELL_CLICKED') {
         if (state.haveAWinner)
