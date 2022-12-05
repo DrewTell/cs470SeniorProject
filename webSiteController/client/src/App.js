@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import { StreamChat } from "stream-chat";
 import { Chat } from "stream-chat-react";
 import Cookies from "universal-cookie";
-import { useState } from "react";
+import { useState} from "react";
 import JoinPentago from "./components/pentago/JoinPentago";
 import LightsOutPlaceHolder from "./components/lightsOut/LightsOutPlaceHolder";
 import BattleGamePlaceHolder from "./components/BattleGame/src/BattleGamePlaceholder";
@@ -143,10 +143,10 @@ function App() {
                 </Box>
 
 
-                <Box sx = {{width: '100%'}}>
-                    <GuessingGame gameSelected={gameSelected} setGameSelected={setGameSelected}
-                                     isSelected={isSelected} setIsSelected={setIsSelected}/>
-                </Box>
+                {/*<Box sx = {{width: '100%'}}>*/}
+                {/*    <GuessingGame gameSelected={gameSelected} setGameSelected={setGameSelected}*/}
+                {/*                     isSelected={isSelected} setIsSelected={setIsSelected}/>*/}
+                {/*</Box>*/}
 
 
 
