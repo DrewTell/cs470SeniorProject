@@ -5,6 +5,23 @@ import WinningMessage from "./components/WinningMessage";
 import CardComponent from "./components/Card";
 import { NextCard } from "./components/Card";
 import { Typography, Grid, Button, Table, Box, Stack } from "@mui/material";
+import WinningCondition from "./components/WinningCondition";
+
+const genereateArr = () => {
+  let tempSet = new Set();
+  while (tempSet.size !== 16) {
+    let randIndx = Math.floor(Math.random() * 54);
+    tempSet.add(randIndx);
+  }
+  let res = [...tempSet];
+  console.log(res);
+  return res;
+};
+
+const arr1 = genereateArr();
+const arr2 = genereateArr();
+const arr3 = genereateArr();
+const arr4 = genereateArr();
 
 function App() {
   const [winningPlayer, setWinningPlayer] = useState();
@@ -15,26 +32,11 @@ function App() {
     setGameOver(true);
   };
 
-  const genereateArr = () => {
-    let tempSet = new Set();
-    while (tempSet.size !== 16) {
-      let randIndx = Math.floor(Math.random() * 54);
-      tempSet.add(randIndx);
-    }
-    let res = [...tempSet];
-    console.log(res);
-    return res;
-  };
-
-  const arr1 = genereateArr();
-  const arr2 = genereateArr();
-  const arr3 = genereateArr();
-  const arr4 = genereateArr();
-
   return (
     <>
       <Header />
       <NextCard />
+      <WinningCondition />
       <Grid display="flex" pb={2}>
         <Stack mx={"auto"}>
           <h3>Player 1</h3>
@@ -109,7 +111,7 @@ function App() {
           </Button>
         </Stack>
       </Grid>
-      {gameOver && ( <WinningMessage player={winningPlayer} />)}
+      {gameOver && <WinningMessage player={winningPlayer} />}
     </>
   );
 }
