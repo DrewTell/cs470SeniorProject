@@ -12,6 +12,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 import Login from "./Login";
 import SignUp from "./SignUp";
+import Typography from "@mui/material/Typography";
 
 export default function ToggleButtonNotEmpty({ setIsAuth }) {
     const [alignment, setAlignment] = React.useState("login");
@@ -26,7 +27,7 @@ export default function ToggleButtonNotEmpty({ setIsAuth }) {
     return (
         <Fragment>
 
-        <Stack direction="row" divider={<Divider orientation="vertical" flexItem />} sx = {{ alignItems: 'center', justifyContent: 'center' }}>
+        <Stack direction="row" sx = {{ alignItems: 'center', justifyContent: 'center', width:"740px" }}>
             <ToggleButtonGroup
                 sx={{ width: '33%',}}
                 value={alignment}
@@ -35,18 +36,23 @@ export default function ToggleButtonNotEmpty({ setIsAuth }) {
                 aria-label="text alignment"
 
             >
-                <ToggleButton value="login" aria-label="login"  sx={{ width: '50%' }}>
-                    <LoginIcon />
+                <ToggleButton value="login" aria-label="login"  sx={{ width: '100%' }}>
+                    <Typography>
+                        Login
+                    </Typography>
                 </ToggleButton>
 
-                <ToggleButton value="signup" aria-label="sign up" sx={{ width: '50%' }}>
-                    <AddIcon />
+                <ToggleButton value="signup" aria-label="sign up" sx={{ width: '100%', fontFamily: 'monospace',
+                    fontWeight: 500, }}>
+                    <Typography>
+                        Signup
+                    </Typography>
                 </ToggleButton>
 
             </ToggleButtonGroup>
 
         </Stack>
-            <Box component="span" sx = {{display: 'block', }}>
+            <Box sx = {{ }}>
             {alignment === "login" && <Login setIsAuth={setIsAuth}/>}
             {alignment === "signup" && <SignUp setIsAuth={setIsAuth} />}
             </Box>

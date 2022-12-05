@@ -26,24 +26,24 @@ function SignUp({ setIsAuth }) {
     };
     return (
             <Fragment>
-                <Stack direction="column" divider={<Divider orientation="vertical" flexItem />} sx = {{xs: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="a"
-                        href="/"
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        Sign Up
-                    </Typography>
+                <Stack  sx = {{xs: 'flex', alignItems: 'center', justifyContent: 'center', width:'740px' }}>
+                    {/*<Typography*/}
+                    {/*    variant="h6"*/}
+                    {/*    noWrap*/}
+                    {/*    component="a"*/}
+                    {/*    href="/"*/}
+                    {/*    sx={{*/}
+                    {/*        mr: 2,*/}
+                    {/*        display: { xs: 'none', md: 'flex' },*/}
+                    {/*        fontFamily: 'monospace',*/}
+                    {/*        fontWeight: 700,*/}
+                    {/*        letterSpacing: '.3rem',*/}
+                    {/*        color: 'inherit',*/}
+                    {/*        textDecoration: 'none',*/}
+                    {/*    }}*/}
+                    {/*>*/}
+                    {/*    Sign Up*/}
+                    {/*</Typography>*/}
             <TextField
                 placeholder="First Name"
                 onChange={(event) => {

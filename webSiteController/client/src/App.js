@@ -31,8 +31,6 @@ const darkTheme = createTheme({
     },
 });
 
-
-
 function App() {
   const api_key = "ujt9j62cn6xx";
   const cookies = new Cookies();
@@ -42,6 +40,8 @@ function App() {
 
   const [gameSelected, setGameSelected] = useState(false);
   const [isSelected, setIsSelected] = useState(null);
+
+
 
   const logOut = () => {
     cookies.remove("token");
@@ -87,7 +87,7 @@ function App() {
         {isAuth ? (
             <Stack direction="column"  sx = {{xs: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 
-                <Box  sx={{  width: '100%' }}>
+                <Box  sx={{  width: '100%'}}>
                     <Chat client={client}>
                         <JoinPentago gameSelected={gameSelected} setGameSelected={setGameSelected}
                                  isSelected={isSelected} setIsSelected={setIsSelected}/>
@@ -104,6 +104,9 @@ function App() {
                     <BattleGamePlaceHolder gameSelected={gameSelected} setGameSelected={setGameSelected}
                                             isSelected={isSelected} setIsSelected={setIsSelected}/>
                 </Box>
+
+
+
 
 
 
@@ -130,6 +133,9 @@ function App() {
                     </Chat>
                 </Box>
 
+
+
+
                 <Box sx = {{width: '100%'}}>
 
                     <LoteriaGame gameSelected={gameSelected} setGameSelected={setGameSelected}
@@ -143,11 +149,15 @@ function App() {
                 </Box>
 
 
+
                 </Stack>
         ) : (
 
-                <Box component="span" sx={{ display: 'block', p: 35, border: '1'}}>
-                    <ToggleButtonNotEmpty setIsAuth={setIsAuth} />
+                <Box component="span" sx={{ display: 'block', border: '1', width:'100%', height:'100%'}}>
+                    <Grid sx={{justifyContent: 'center', alignItems:'center', mt: 5, ml: 60}}>
+                        <ToggleButtonNotEmpty setIsAuth={setIsAuth} />
+                    </Grid>
+
                 </Box>
 
         )
