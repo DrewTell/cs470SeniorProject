@@ -141,29 +141,30 @@ function attack(state, row, col, channel){
     //otherwise it's a hit, we can grab the ship number from its type with targetRow[col].y[4]
     else{
         let shipNum = parseInt(targetRow[col].y[4])
+        let text = ""
         switch(shipNum){
             case 1:
                 state.hits1 += 1
-                state.fightText = `destroyer hit by ${state.playerName}`
+                text = `destroyer hit by ${state.playerName}`
                 break
             case 2:
                 state.hits2 += 1
-                state.fightText = `cruiser hit by ${state.playerName}`
+                text = `cruiser hit by ${state.playerName}`
                 break
             case 3:
                 state.hits3 += 1
-                state.fightText = `submarine hit by ${state.playerName}`
+                text = `submarine hit by ${state.playerName}`
                 break
             case 4:
                 state.hits4 += 1
-                state.fightText = `battleship hit by ${state.playerName}`
+                text = `battleship hit by ${state.playerName}`
                 break
             case 5:
                 state.hits5 += 1
-                state.fightText = `carrier hit by ${state.playerName}`
+                text = `carrier hit by ${state.playerName}`
                 break
         }
-        let text = checkShips(state)
+        text = checkShips(state)
         targetRow[col] = {
             y:"checkmark",
             x:0

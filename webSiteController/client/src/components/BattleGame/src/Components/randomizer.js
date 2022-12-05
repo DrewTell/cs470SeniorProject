@@ -17,7 +17,7 @@ export const randomizer = (level, range, enemy) => {
 
         lvl = level + lRange
         if(name === "Human"){
-            strength = Math.ceil(Math.random() * (lvl*1.1)) + Math.floor(lvl/2)
+            strength = Math.ceil(Math.random() * (lvl*1.1)) + Math.ceil(lvl/2)
             defense = Math.ceil(Math.random() * (lvl))
             HP = Math.round(Math.random() * (lvl*3)) + Math.round(5*(lvl*0.80))
             accuracy = Math.round(Math.random()*10) + 75
