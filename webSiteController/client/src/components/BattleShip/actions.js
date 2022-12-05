@@ -1,7 +1,7 @@
 
 const reset = () => {
     return {
-        type: 'START'
+        type: 'RESTARTS'
     }
 }
 
@@ -19,8 +19,35 @@ const rotation = () => {
     }
 }
 
+const start = (board, channel) => {
+    return {
+        type: 'START',
+        board:board,
+        channel:channel
+    }
+}
+
+const set_name = (myName, enemyName, first) => {
+    return {
+        type: 'SET',
+        myName:myName,
+        enemyName:enemyName,
+        first:first
+    }
+}
+
+const set_enemy = (board) => {
+    return {
+        type: 'SET_eBOARD',
+        board:board
+    }
+}
+
 export {
     reset,
     place_ship,
-    rotation
+    rotation,
+    start,
+    set_name,
+    set_enemy
 }

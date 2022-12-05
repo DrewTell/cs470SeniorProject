@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import {Fragment} from "react";
-
-import {App} from "./BattleshipBoard";
-
-import Button from '@mui/material/Button';
+import {BattleshipBoard} from "./BattleshipBoard";
 import Typography from "@mui/material/Typography";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-
-
-import { Window, MessageList, MessageInput } from "stream-chat-react";
 import Grid from "@mui/material/Grid";
+
 function BattleShipGameLobby({ channel, setChannel, setGameSelected, player1, player2, clientID, setIsSelected}) {
     const [firstConnected, setFirstConnected] = useState(null);
     const [playersJoined, setPlayersJoined] = useState(
@@ -48,7 +43,7 @@ function BattleShipGameLobby({ channel, setChannel, setGameSelected, player1, pl
             {/*          firstConnected={firstConnected} setGameSelected={setGameSelected}*/}
             {/*          setIsSelected={setIsSelected} setChannel={setChannel}/>*/}
 
-            <App player1={player1} player2={player2}
+            <BattleshipBoard player1={player1} player2={player2}
                  firstConnected={firstConnected} setChannel={setChannel}
             />
             {result.state === "won" && <div> {result.winner} Won The Game</div>}

@@ -15,8 +15,6 @@ export const Cell = (props) => {
 
     let classes = `cell rotate${rotation}`
 
-    console.log(classes)
-
     return (
         <Stack>
             <Box id={ship} className={classes} onClick={() => { dispatch(place_ship(row, col)) }} sx={{mr:-1,

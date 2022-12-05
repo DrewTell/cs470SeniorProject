@@ -12,6 +12,10 @@
   left: 20vw;
 }
 
+.battleBoard{
+  margin: 0px;
+}
+
 #C1{
   cursor: url(ships/Ship1.png),auto;
 }
@@ -30,4 +34,14 @@
 
 #C5{
   cursor: url(ships/Ship5.png),auto;
+}
+
+#yourBoard{
+  position: absolute;
+  left:1%;
+}
+
+#enemyBoard{
+  position: absolute;
+  right:1%;
 }

@@ -4,7 +4,7 @@ import { Shop } from "./Components/shop.js"
 import { Battle } from './Components/battle/battle.js';
 import { Victory } from './Components/victory.js';
 import { createInitialState, reducers } from './reducer';
-import "./App.css"
+import "./battleApp.css"
 import { Stack } from '@mui/material';
 
 export const App = () => {

@@ -4,14 +4,17 @@ import { createInitialState, reducers } from './reducer';
 import "./Battleship.css"
 import { Stack } from '@mui/material';
 import {useChannelStateContext, useChatContext} from "stream-chat-react";
+import { set_name, set_enemy } from './actions.js';
+import { Battle } from './Battle.js';
 
-export const App = (props) => {
+export const BattleshipBoard = (props) => {
     const {player1, player2, firstConnected, setChannel} = props;
 
     const cookieIDName = document.cookie
         .split('; ')
         .find((row) => row.startsWith('username='))
         ?.split('=')[1];
+    const [state, dispatch] = useReducer(reducers, undefined, createInitialState)
     const [player, setPlayer] = useState(null);
     const [player1Name, setPlayer1Name] = useState(null);
     const [player2Name, setPlayer2Name] = useState(null);
@@ -27,40 +30,54 @@ export const App = (props) => {
         if (firstConnected === null){
             setPlayer('player2');
             setPlayer1Name(player2);
-            setPlayer2Name(player1);
-
+            setPlayer2Name(player1); 
         }
         else if (cookieIDName === firstConnected){
             setPlayer('player1');
             setPlayer1Name(player1);
             setPlayer2Name(player2);
-
         }
     }, [])
 
-    //Lets you know who is playing
-    console.log("You are player: ", player);
-    console.log("Player 1:", player1Name, " this is player 2: ", player2Name);
+    useEffect(() => {
 
+      if (firstConnected === null){
+        dispatch(set_name(player2Name,player1Name,player1Name))
+      }
+      else if (cookieIDName === firstConnected){
+        dispatch(set_name(player1Name,player2Name,player1Name))
+      }
+    }, [])
 
+    useEffect(() => {
+      channel.on((event) => {
+          if (event.type === "board" && event.user.id !== client.userID) {
+              dispatch(set_enemy(event.board))
+              return
 
-    const [state, dispatch] = useReducer(reducers, undefined, createInitialState)
+          }
+          if (event.type === "attack" && event.user.id !== client.userID) {
+            //dispatch(attack(event.data.board))
+            return
 
-    if(state.mode === 'plan'){
+        }
+      });
+    }, [])
+
+    if(state.mode === 'plan' || (state.mode === 'battle' && !state.enemyReady)){
         return(
-            <Stack style={{cursor: `url(Ship${state.shipsSet+1}.png), auto`}}className='App'>
-              <Plan state={state} dispatch={dispatch}></Plan>
+            <Stack style={{cursor: `url(Ship${state.shipsSet+1}.png), auto`}} className='battleBoard'>
+              <Plan state={state} dispatch={dispatch} channel={channel}></Plan>
             </Stack>
           )
       }
-
-    /*if(state.mode === 'battle'){
+    if(state.mode === 'battle' && state.enemyReady){
       return(
-          <Stack className='App'>
-            <Battle dispatch={dispatch}></Battle>
+          <Stack className='battleBoard'>
+            <Battle state={state} dispatch={dispatch}></Battle>
           </Stack>
         )
-      }*/
+    }
     /*if(state.mode === 'victory'){
       return(
           <Stack className='App'>
