@@ -15,10 +15,15 @@ function createInitialState() {
         enemyBoard:board,
         enemyReady:false,
         targetBoard:targets,
-        hits:0,
         playerName:"",
         enemyName:"",
-        currPlayer:""
+        currPlayer:"",
+        hitTotal:0,
+        hits1:0,
+        hits2:0,
+        hits3:0,
+        hits4:0,
+        hits5:0,
     };
 }
 
@@ -88,6 +93,25 @@ function placeShip(state, row, col){
     }
 }
 
+function attack(state, row, col){
+    let target = state.enemyBoard.slice()
+    let targetRow = target[row].slice()
+    console.log("inside attack", targetRow[col].y[4])
+    //hit or miss = invalid move
+    if(targetRow[col].y === "hit" || targetRow[col].y === "miss")
+        return state
+    //no type = miss
+    if(targetRow[col].y === ""){
+        return state
+    }
+    //otherwise it's a hit
+    else{
+        return state
+    }
+
+    
+}
+
 async function sendBoard(board, channel){
     await channel.sendEvent({
         type: "board",
@@ -150,6 +174,10 @@ function reducers(state, action) {
             enemyReady:true,
             enemyBoard:action.board
         }
+    }
+
+    if( action.type === 'ATTACK' ) {
+        return attack(state, action.row, action.col)
     }
 }
 

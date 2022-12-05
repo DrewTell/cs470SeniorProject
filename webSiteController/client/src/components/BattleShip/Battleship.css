@@ -38,10 +38,31 @@
 
 #yourBoard{
   position: absolute;
-  left:1%;
+  left:10vw;
 }
 
 #enemyBoard{
   position: absolute;
-  right:1%;
+  right:10vw;
+}
+
+
+#readyCheck{
+  position: absolute;
+  top:22vh;
+  left:25vw;
+  align-items: center;
+}
+
+#Check1{
+  background-image: url('X.png');
+}
+
+#Check2{
+  background-image: url('check.png');
+}
+
+#hiddenSprite{
+  height: 0px;
+  width: 0px;
 }

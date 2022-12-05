@@ -43,11 +43,20 @@ const set_enemy = (board) => {
     }
 }
 
+const attack = (row, col) => {
+    return {
+        type: 'ATTACK',
+        row:row,
+        col:col
+    }
+}
+
 export {
     reset,
     place_ship,
     rotation,
     start,
     set_name,
-    set_enemy
+    set_enemy,
+    attack
 }

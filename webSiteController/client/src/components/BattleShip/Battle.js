@@ -1,6 +1,10 @@
+import { Typography } from "@mui/material"
 import { Stack } from "@mui/system"
 import "./Battleship.css"
 import { Cell } from "./Cell"
+import { Spritesheet } from "./Spritesheet"
+import water from "./water.png"
+
 
 export const Battle = (props) => {
     const {state, dispatch, channel} = props
@@ -9,8 +13,22 @@ export const Battle = (props) => {
 
     return (
         <Stack id="board">
+            <Typography>{state.currPlayer}'s turn to fire!</Typography>
+            {
+            //for some reason the very first sprite rendered on the page flickers so we render an invisible one first 
+            }
+            <Spritesheet id="hiddenSprite"
+                         image={water} 
+                         width={60} 
+                         height={60} 
+                         steps={20} 
+                         fps={10} 
+                         loop={true}/>
             <table id="yourBoard">
                 <tbody>
+                <tr>
+                        <th colspan="11">Your Board</th>
+                </tr>
                 <tr>
                         <th className="invisible">0</th>
                         <th>1</th>
@@ -50,6 +68,9 @@ export const Battle = (props) => {
             <table id="enemyBoard">
                 <tbody>
                 <tr>
+                        <th colSpan="11">Enemy Board</th>
+                </tr>
+                <tr>
                         <th className="invisible">0</th>
                         <th>1</th>
                         <th>2</th>
@@ -76,7 +97,8 @@ export const Battle = (props) => {
                                           col={cIdx}
                                           ship={cell.y}
                                           rotation={cell.z}
-                                          dispatch={dispatch}/>
+                                          dispatch={dispatch}
+                                          hover="target"/>
                                 </td>
                                 )
                             }

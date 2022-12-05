@@ -1,30 +1,38 @@
 
 import { Box, Stack } from "@mui/material"
 import "./cells.css"
-import { blue } from "@mui/material/colors"
-import { place_ship } from "./actions"
+import { blue, red } from "@mui/material/colors"
+import { place_ship, attack } from "./actions"
 import water from "./water.png"
 import { Spritesheet } from "./Spritesheet"
 
 export const Cell = (props) => {
-    const {occupied, row, col, ship, rotation, dispatch} = props
+    const {row, col, ship, rotation, dispatch, hover} = props
     
-    const empty = blue[50]
-    const full = blue[500]
-    const color = occupied ? full : empty
+    let color = ""
 
     let classes = `cell rotate${rotation}`
 
     return (
         <Stack>
-            <Box id={ship} className={classes} onClick={() => { dispatch(place_ship(row, col)) }} sx={{mr:-1,
+            {hover === "target" ? <Box id={ship} className={classes} onClick={() => { dispatch(attack(row, col)) }} sx={{mr:-1,
                                                                                                     mb:-1,        
                                                                                                     width:60, 
                                                                                                     height:60, 
                                                                                                     background:"none",
                                                                                                     '&:hover': {
-                                                                                                        backgroundColor:full
-                                                                                                    }}}/>
+                                                                                                        backgroundColor:red[500]
+                                                                                                    }}}/> 
+                          :
+                            <Box id={ship} className={classes} onClick={() => { dispatch(place_ship(row, col)) }} sx={{mr:-1,
+                                                                                                                mb:-1,        
+                                                                                                                width:60, 
+                                                                                                                height:60, 
+                                                                                                                background:"none",
+                                                                                                                '&:hover': {
+                                                                                                                    backgroundColor:blue[500]
+                                                                                                                }}}/>
+            }
             <Spritesheet className="water"
                          image={water} 
                          width={60} 

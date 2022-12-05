@@ -2,6 +2,7 @@ import "./Battleship.css"
 import { Button, Stack, Typography } from '@mui/material';
 import { Cell }  from "./Cell.js"
 import { rotation, start } from "./actions";
+import { ReadyCheck } from "./ReadyCheck";
 
 
 export const Plan = (props) => {
@@ -29,12 +30,13 @@ export const Plan = (props) => {
     return (
         <Stack id="board">
             <Typography variant="h4"> Battleship</Typography>
-            <Typography variant="h5"> {state.shipsSet}/5 ships placed - - - - enemy ready? {state.enemyReady.toString()}</Typography>
+            <Typography variant="h5"> {state.shipsSet}/5 ships placed</Typography>
             {state.mode === 'plan' ? 
                             <Typography variant="h6"> Placed ships will currently extend {direction}</Typography> :
                             <Typography variant="h6"> Battle will start when enemy is ready!</Typography>
             
             }
+            <ReadyCheck check={state.enemyReady}/>
             <table>
                 <tbody>
                 <tr>
@@ -59,12 +61,12 @@ export const Plan = (props) => {
                             {
                                 row.map((cell, cIdx) =>
                                 <td key={(cIdx)}>
-                                    <Cell occupied={cell.x}
-                                          row={rIdx}
+                                    <Cell row={rIdx}
                                           col={cIdx}
                                           ship={cell.y}
                                           rotation={cell.z}
-                                          dispatch={dispatch}/>
+                                          dispatch={dispatch}
+                                          hover="plan"/>
                                 </td>
                                 )
                             }
