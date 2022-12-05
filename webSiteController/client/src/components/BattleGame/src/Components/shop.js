@@ -7,6 +7,8 @@ import { Party } from "./party"
 import { battle_mode } from "../actions"
 import { Unit } from "./unit"
 import { Items } from "./items"
+import elfIdle from "./sprites/elf/Idle.png"
+import { Spritesheet } from "./Spritesheet"
 
 export const Shop = (props) => {
     const {units, members, stage, gold, dispatch} = props
@@ -14,6 +16,15 @@ export const Shop = (props) => {
 
     return (
         <Fragment>
+            <Spritesheet className="invisible"
+            image={elfIdle}
+            width={100}
+            height={100}
+            steps={5}
+            fps={5}
+            loop={true}
+            enemy={true}
+            />
             <table className="shop">
                 <tbody>
                     <tr>

@@ -11,7 +11,8 @@ import { advance_enemy, advance_stage, attack, defend, fighter_death } from "../
 import { useState } from "react"
 import { Unit } from "../unit"
 import { grey } from '@mui/material/colors';
-
+import elfIdle from "../sprites/elf/Idle.png"
+import { Spritesheet } from "../Spritesheet"
 
 export const Battle = (props) => {
     const{state, dispatch} = props
@@ -60,6 +61,15 @@ export const Battle = (props) => {
 
     return(
         <Stack id={id} className="battle">
+            <Spritesheet className="invisible"
+            image={elfIdle}
+            width={100}
+            height={100}
+            steps={5}
+            fps={5}
+            loop={true}
+            enemy={true}
+            />
             <BattleBar stage={state.stage} enemies={state.enemies}/>
             <Enemy dispatch={dispatch} enemy={state.enemy} animation={eAnim}/>
             <Fighter unit={state.currFighter} dispatch={dispatch} animation={fAnim}/>
