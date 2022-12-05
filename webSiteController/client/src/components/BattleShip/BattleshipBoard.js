@@ -4,7 +4,7 @@ import { createInitialState, reducers } from './reducer';
 import "./Battleship.css"
 import { Stack } from '@mui/material';
 import {useChannelStateContext, useChatContext} from "stream-chat-react";
-import { set_name, set_enemy } from './actions.js';
+import { set_name, set_enemy, receive_attack } from './actions.js';
 import { Battle } from './Battle.js';
 
 export const BattleshipBoard = (props) => {
@@ -40,14 +40,15 @@ export const BattleshipBoard = (props) => {
     }, [])
 
     useEffect(() => {
-
-      if (firstConnected === null){
-        dispatch(set_name(player2Name,player1Name,player1Name))
-      }
-      else if (cookieIDName === firstConnected){
-        dispatch(set_name(player1Name,player2Name,player1Name))
-      }
-    }, [])
+      setTimeout(() => {
+        if (firstConnected === null){
+          dispatch(set_name(player2Name,player1Name,player1Name))
+        }
+        else if (cookieIDName === firstConnected){
+          dispatch(set_name(player1Name,player2Name,player1Name))
+        }
+      }, 50)
+    }, [player])
 
     useEffect(() => {
       channel.on((event) => {
@@ -57,7 +58,7 @@ export const BattleshipBoard = (props) => {
 
           }
           if (event.type === "attack" && event.user.id !== client.userID) {
-            //dispatch(attack(event.data.board))
+            dispatch(receive_attack(event.board))
             return
 
         }
@@ -74,7 +75,7 @@ export const BattleshipBoard = (props) => {
     if(state.mode === 'battle' && state.enemyReady){
       return(
           <Stack className='battleBoard'>
-            <Battle state={state} dispatch={dispatch}></Battle>
+            <Battle state={state} dispatch={dispatch} channel={channel}></Battle>
           </Stack>
         )
     }

@@ -7,15 +7,18 @@ import water from "./water.png"
 import { Spritesheet } from "./Spritesheet"
 
 export const Cell = (props) => {
-    const {row, col, ship, rotation, dispatch, hover} = props
+    const {row, col, ship, rotation, dispatch, hover, channel} = props
     
-    let color = ""
+    let id = ship
+
+    if(hover === "target" && ship !== "xmark" && ship !== "checkmark" && ship !== "")
+        id = ""
+
 
     let classes = `cell rotate${rotation}`
-
     return (
         <Stack>
-            {hover === "target" ? <Box id={ship} className={classes} onClick={() => { dispatch(attack(row, col)) }} sx={{mr:-1,
+            {hover === "target" ? <Box id={id} className={classes} onClick={() => { dispatch(attack(row, col, channel)) }} sx={{mr:-1,
                                                                                                     mb:-1,        
                                                                                                     width:60, 
                                                                                                     height:60, 
@@ -24,7 +27,7 @@ export const Cell = (props) => {
                                                                                                         backgroundColor:red[500]
                                                                                                     }}}/> 
                           :
-                            <Box id={ship} className={classes} onClick={() => { dispatch(place_ship(row, col)) }} sx={{mr:-1,
+                            <Box id={id} className={classes} onClick={() => { dispatch(place_ship(row, col)) }} sx={{mr:-1,
                                                                                                                 mb:-1,        
                                                                                                                 width:60, 
                                                                                                                 height:60, 

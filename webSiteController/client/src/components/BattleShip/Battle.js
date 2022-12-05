@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material"
+import { Box, Typography } from "@mui/material"
 import { Stack } from "@mui/system"
 import "./Battleship.css"
 import { Cell } from "./Cell"
@@ -10,10 +10,14 @@ export const Battle = (props) => {
     const {state, dispatch, channel} = props
 
     const labels = ['A','B','C','D','E','F','G','H','I','J']
+    let target = state.currPlayer
+    if(state.playerName === state.currPlayer)
+        target = state.enemyName
 
     return (
         <Stack id="board">
             <Typography>{state.currPlayer}'s turn to fire!</Typography>
+            <Typography>{state.fightText} </Typography>
             {
             //for some reason the very first sprite rendered on the page flickers so we render an invisible one first 
             }
@@ -27,7 +31,12 @@ export const Battle = (props) => {
             <table id="yourBoard">
                 <tbody>
                 <tr>
-                        <th colspan="11">Your Board</th>
+                        <th colSpan="11">Your Board</th>
+                </tr>
+                <tr>
+                    <th colSpan="11" className="invisible">
+                        <Box sx={{ height:25, width:25}}/>
+                    </th>
                 </tr>
                 <tr>
                         <th className="invisible">0</th>
@@ -71,6 +80,26 @@ export const Battle = (props) => {
                         <th colSpan="11">Enemy Board</th>
                 </tr>
                 <tr>
+                    <th colSpan="1" className="invisible">
+                        <Box sx={{ height:25, width:25, borderRadius: '50%'}}/>
+                    </th>
+                    <th colSpan="2">
+                        <Box id="one" sx={{ ml:5, height:25, width:25, borderRadius: '50%'}}/>
+                    </th>
+                    <th colSpan="2">
+                        <Box id="two" sx={{ ml:5, height:25, width:25, borderRadius: '50%'}}/>
+                    </th>
+                    <th colSpan="2">
+                        <Box id="three" sx={{ ml: 5, height:25, width:25, borderRadius: '50%'}}/>
+                    </th>
+                    <th colSpan="2">
+                        <Box id="four" sx={{ ml:5, height:25, width:25, borderRadius: '50%'}}/>
+                    </th>
+                    <th colSpan="2">
+                        <Box id="five"sx={{ ml:5, height:25, width:25, borderRadius: '50%'}}/>
+                    </th>
+                </tr>
+                <tr>
                         <th className="invisible">0</th>
                         <th>1</th>
                         <th>2</th>
@@ -98,7 +127,8 @@ export const Battle = (props) => {
                                           ship={cell.y}
                                           rotation={cell.z}
                                           dispatch={dispatch}
-                                          hover="target"/>
+                                          hover="target"
+                                          channel={channel}/>
                                 </td>
                                 )
                             }

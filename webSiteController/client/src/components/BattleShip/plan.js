@@ -3,6 +3,8 @@ import { Button, Stack, Typography } from '@mui/material';
 import { Cell }  from "./Cell.js"
 import { rotation, start } from "./actions";
 import { ReadyCheck } from "./ReadyCheck";
+import { Spritesheet } from "./Spritesheet";
+import water from "./water.png"
 
 
 export const Plan = (props) => {
@@ -29,6 +31,16 @@ export const Plan = (props) => {
 
     return (
         <Stack id="board">
+            {
+            //for some reason the very first sprite rendered on the page flickers so we render an invisible one first 
+            }
+            <Spritesheet id="hiddenSprite"
+                         image={water} 
+                         width={60} 
+                         height={60} 
+                         steps={20} 
+                         fps={10} 
+                         loop={true}/>
             <Typography variant="h4"> Battleship</Typography>
             <Typography variant="h5"> {state.shipsSet}/5 ships placed</Typography>
             {state.mode === 'plan' ? 

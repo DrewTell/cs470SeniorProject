@@ -18,6 +18,7 @@ function createInitialState() {
         playerName:"",
         enemyName:"",
         currPlayer:"",
+        fightText:"",
         hitTotal:0,
         hits1:0,
         hits2:0,
@@ -93,20 +94,90 @@ function placeShip(state, row, col){
     }
 }
 
-function attack(state, row, col){
+function checkShips(state){
+    if(state.hits1 === SHIP_SIZES[0]){
+        document.getElementById('one').style.backgroundColor = 'red';
+        return `destroyer sunk by ${state.playerName}`
+    }
+    if(state.hits2 === SHIP_SIZES[1]){
+        document.getElementById('two').style.backgroundColor = 'red';
+        return `cruiser sunk by ${state.playerName}`
+    }
+    if(state.hits3 === SHIP_SIZES[2]){
+        document.getElementById('three').style.backgroundColor = 'red';
+        return `submarine sunk by ${state.playerName}`
+    }
+    if(state.hits4 === SHIP_SIZES[3]){
+        document.getElementById('four').style.backgroundColor = 'red';
+        return `battleship sunk by ${state.playerName}`
+    }
+    if(state.hits5 === SHIP_SIZES[4]){
+        document.getElementById('five').style.backgroundColor = 'red';
+        return `carrier sunk by ${state.playerName}`
+    }
+}
+
+function attack(state, row, col, channel){
     let target = state.enemyBoard.slice()
     let targetRow = target[row].slice()
-    console.log("inside attack", targetRow[col].y[4])
     //hit or miss = invalid move
-    if(targetRow[col].y === "hit" || targetRow[col].y === "miss")
+    if(targetRow[col].y === "xmark" || targetRow[col].y === "checkmark")
         return state
     //no type = miss
     if(targetRow[col].y === ""){
-        return state
+        targetRow[col] = {
+            y:"xmark",
+            x:0
+        }
+        target[row] = targetRow
+        sendAttack(target, channel)
+        return {
+            ...state,
+            enemyBoard:target,
+            currPlayer:state.enemyName,
+            fightText:"ships missed by"
+        }
     }
-    //otherwise it's a hit
+    //otherwise it's a hit, we can grab the ship number from its type with targetRow[col].y[4]
     else{
-        return state
+        let shipNum = parseInt(targetRow[col].y[4])
+        switch(shipNum){
+            case 1:
+                state.hits1 += 1
+                state.fightText = `destroyer hit by ${state.playerName}`
+                break
+            case 2:
+                state.hits2 += 1
+                state.fightText = `cruiser hit by ${state.playerName}`
+                break
+            case 3:
+                state.hits3 += 1
+                state.fightText = `submarine hit by ${state.playerName}`
+                break
+            case 4:
+                state.hits4 += 1
+                state.fightText = `battleship hit by ${state.playerName}`
+                break
+            case 5:
+                state.hits5 += 1
+                state.fightText = `carrier hit by ${state.playerName}`
+                break
+        }
+        let text = checkShips(state)
+        targetRow[col] = {
+            y:"checkmark",
+            x:0
+        }
+        target[row] = targetRow
+        console.log(state.hitTotal+1)
+        sendAttack(target, channel)
+        return {
+            ...state,
+            enemyBoard:target,
+            hitTotal:state.hitTotal+1,
+            fightText:text,
+            currPlayer:state.enemyName
+        }
     }
 
     
@@ -119,10 +190,10 @@ async function sendBoard(board, channel){
     })
 };
 
-async function sendAttack(coords, channel){
+async function sendAttack(board, channel){
     await channel.sendEvent({
         type: "attack",
-        coords:coords
+        board:board
     })
 };
 
@@ -176,8 +247,18 @@ function reducers(state, action) {
         }
     }
 
+    if( action.type === 'HIT' ) {
+        return {
+            ...state,
+            board:action.board,
+            currPlayer:state.playerName
+        }
+    }
+
     if( action.type === 'ATTACK' ) {
-        return attack(state, action.row, action.col)
+        if(state.currPlayer !== state.playerName)
+            return state
+        return attack(state, action.row, action.col, action.channel)
     }
 }
 

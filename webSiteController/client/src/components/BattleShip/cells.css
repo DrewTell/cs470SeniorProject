@@ -74,7 +74,13 @@
 #Ship5_5{
     background-image: url("ships/Ship5/Ship5_5.png");
 }
-
+#checkmark{
+    background-image: url("check.png");
+}
+#xmark{
+    background-image: url("X.png");
+    background-size: cover;
+}
 .rotate1{
     transform: rotate(90deg);
 }
@@ -95,3 +101,4 @@
     height: 60px;
     z-index: -1;
 }
+

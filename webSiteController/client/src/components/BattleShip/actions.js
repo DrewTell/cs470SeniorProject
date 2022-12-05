@@ -43,11 +43,19 @@ const set_enemy = (board) => {
     }
 }
 
-const attack = (row, col) => {
+const attack = (row, col, channel) => {
     return {
         type: 'ATTACK',
         row:row,
-        col:col
+        col:col,
+        channel:channel
+    }
+}
+
+const receive_attack = (board) => {
+    return {
+        type: 'HIT',
+        board:board
     }
 }
 
@@ -58,5 +66,6 @@ export {
     start,
     set_name,
     set_enemy,
-    attack
+    attack,
+    receive_attack
 }

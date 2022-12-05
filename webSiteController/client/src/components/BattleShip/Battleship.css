@@ -15,7 +15,6 @@
 .battleBoard{
   margin: 0px;
 }
-
 #C1{
   cursor: url(ships/Ship1.png),auto;
 }
@@ -38,14 +37,19 @@
 
 #yourBoard{
   position: absolute;
+  top:12vh;
   left:10vw;
 }
 
 #enemyBoard{
   position: absolute;
+  top:12vh;
   right:10vw;
 }
 
+#one, #two, #three, #four, #five{
+  background-color: white;
+}
 
 #readyCheck{
   position: absolute;
@@ -63,6 +67,7 @@
 }
 
 #hiddenSprite{
+  position: absolute;
   height: 0px;
   width: 0px;
 }
