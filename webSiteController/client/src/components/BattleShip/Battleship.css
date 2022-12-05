@@ -1,0 +1,33 @@
+#board{
+  margin: auto;
+  width: 600px;
+  height: 800px;
+  text-align: center;
+  align-items: center;
+}
+
+#rotate{
+  position: absolute;
+  top: 50vh;
+  left: 20vw;
+}
+
+#C1{
+  cursor: url(ships/Ship1.png),auto;
+}
+
+#C2{
+  cursor: url(ships/Ship2.png),auto;
+}
+
+#C3{
+  cursor: url(ships/Ship3.png),auto;
+}
+
+#C4{
+  cursor: url(ships/Ship4.png),auto;
+}
+
+#C5{
+  cursor: url(ships/Ship5.png),auto;
+}

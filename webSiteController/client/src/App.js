@@ -13,7 +13,7 @@ import BattleGamePlaceHolder from "./components/BattleGame/src/BattleGamePlaceho
 import TicTacToeLobby from "./components/TicTacToe/TicTacToeLobby";
 import PlaceHolderGame from "./components/PlaceHolder";
 import MegaTTTPlaceHolder from "./components/megaTicTacToe/MegaTTTPlaceHolder";
-
+import BattleShipPlaceHolder from "./components/BattleShip/BattleShipPlaceHolder";
 import LoteriaGame from "./components/Loteria/LoteriaPlaceHolder";
 import GuessingGame from "./components/GuessingGame/GuessingGamePlaceHolder";
 
@@ -103,6 +103,15 @@ function App() {
                 <Box sx = {{width: '100%'}}>
                     <BattleGamePlaceHolder gameSelected={gameSelected} setGameSelected={setGameSelected}
                                             isSelected={isSelected} setIsSelected={setIsSelected}/>
+                </Box>
+
+
+
+                <Box sx = {{width: '100%'}}>
+                    <Chat client={client}>
+                        <BattleShipPlaceHolder gameSelected={gameSelected} setGameSelected={setGameSelected}
+                                        isSelected={isSelected} setIsSelected={setIsSelected}/>
+                    </Chat>
                 </Box>
 
                 <Box sx = {{width: '100%'}}>
