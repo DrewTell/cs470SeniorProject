@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d50b5d56-9cd3-471e-bc54-ece8ad75fc4e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/Chat.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/ticTacToeGameController.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/TicTacToe/ticTacToeGameController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webSiteController/server/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/server/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -85,7 +82,7 @@
       <workItem from="1670038573943" duration="12169000" />
       <workItem from="1670098754330" duration="15130000" />
       <workItem from="1670227882911" duration="5889000" />
-      <workItem from="1670264598748" duration="3184000" />
+      <workItem from="1670264598748" duration="4363000" />
     </task>
     <servers />
   </component>

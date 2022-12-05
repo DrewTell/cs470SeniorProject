@@ -12,6 +12,19 @@ const api_secret =
     "apsr66fpg7gu4rgfe9nrjr9d6prsch3wwf9ekzbzxjdjk8aebkucjwd74k9cb2jw";
 const serverClient = StreamChat.getInstance(api_key, api_secret);
 
+
+
+app.get('/cors', (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
+    res.send({ "msg": "This has CORS enabled 🎈" })
+})
+
+app.get('/', (req, res) => {
+    res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.send('Welcome to CORS server 😁')
+})
+
+
 app.post("/signup", async (req, res) => {
     try {
         const { firstName, lastName, username, password } = req.body;
@@ -51,6 +64,9 @@ app.post("/login", async (req, res) => {
         res.json(error);
     }
 });
+
+
+
 
 app.listen(3001, () => {
     console.log("Server is running on port 3001");
