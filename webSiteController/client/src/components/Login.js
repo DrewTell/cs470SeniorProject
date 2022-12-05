@@ -32,24 +32,24 @@ function Login({ setIsAuth }) {
     };
     return (
         <Fragment>
-            <Stack direction="column" divider={<Divider orientation="vertical" flexItem />} sx = {{ alignItems: 'center', justifyContent: 'center' }}>
+            <Stack direction="column"  sx = {{ alignItems: 'center', justifyContent: 'center',width:"740px" }}>
 
-                <Typography
-                    variant="h6"
-                    noWrap
-                    component="a"
-                    href="/"
-                    sx={{
-                        mr: 2,
-                        display: { xs: 'none', md: 'flex' },
-                        fontFamily: 'monospace',
-                        fontWeight: 700,
-                        color: 'inherit',
-                        textDecoration: 'none',
-                    }}
-                >
-                    Login
-                </Typography>
+                {/*<Typography*/}
+                {/*    variant="h6"*/}
+                {/*    noWrap*/}
+                {/*    component="a"*/}
+                {/*    href="/"*/}
+                {/*    sx={{*/}
+                {/*        mr: 2,*/}
+                {/*        display: { xs: 'none', md: 'flex' },*/}
+                {/*        fontFamily: 'monospace',*/}
+                {/*        fontWeight: 700,*/}
+                {/*        color: 'inherit',*/}
+                {/*        textDecoration: 'none',*/}
+                {/*    }}*/}
+                {/*>*/}
+                {/*    Login*/}
+                {/*</Typography>*/}
 
             <TextField
                 variant="outlined"
