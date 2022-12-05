@@ -3,7 +3,6 @@ import {Fragment} from "react";
 import Board from "../TicTacToe/boardTicTacToe";
 import Button from '@mui/material/Button';
 import Typography from "@mui/material/Typography";
-import "./Chat.css";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';

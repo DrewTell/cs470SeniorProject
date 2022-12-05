@@ -107,8 +107,8 @@ function addItem(state, item, cost){
 function advanceEnemy(state){
     let enemy = randomizer(state.stage, 0, true)
 
-    let percent = (Math.random() * .50) + .90
-    let loot = Math.floor(state.enemy.lvl * 75 * percent)
+    let percent = (Math.random() * .60) + .99
+    let loot = Math.floor(state.enemy.lvl * 90 * percent)
 
     if(state.enemies === 5)
         return advanceStage({...state, gold:state.gold+loot})
