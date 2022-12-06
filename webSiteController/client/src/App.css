@@ -100,3 +100,8 @@ h4 {
   height: 51px;
   cursor: pointer;
 }
+#mainbg{
+  background-image: url('img/img.png');
+  background-repeat:false;
+  backgroung-size:cover;
+}

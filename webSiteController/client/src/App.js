@@ -25,6 +25,9 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import {CssBaseline, Divider} from "@mui/material";
 import ResponsiveAppBar from "./components/AppBar";
 
+import Paper from '@mui/material/Paper';
+
+import Image from './img/img.png';
 
 
 
@@ -155,7 +158,7 @@ function App() {
 
                 </Stack>
         ) : (
-
+            <Box sx={{ backgroundImage: `url(${Image})`, width:"100vw", height:"100vh", backgroundSize:"cover"}}>
                 <Grid container sx={{position:'absolute', border: '1', width:'100%', height:'100%', justifyContent: 'center', alignItems:'center'}}>
                     <Grid item xs={8} sx={{
                         }}>
@@ -164,6 +167,7 @@ function App() {
                     </Grid>
 
                 </Grid>
+            </Box>
 
         )
         }
