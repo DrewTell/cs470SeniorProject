@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d50b5d56-9cd3-471e-bc54-ece8ad75fc4e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/webSiteController/client/src/img/lightsOut.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/SignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/SignUp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/userSignInToggle.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/userSignInToggle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/LightsOut.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/LightsOut.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/LightsOutPlaceHolder.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSiteController/client/src/components/lightsOut/LightsOutPlaceHolder.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +52,8 @@
       <recent name="C:\Users\Drewt\OneDrive\Documents\GitHub\cs470SeniorProject\webSiteController\client\src\components\lightsOut" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Drewt\OneDrive\Documents\GitHub\cs470SeniorProject\webSiteController\client\src\components\lightsOut\img" />
+      <recent name="C:\Users\Drewt\OneDrive\Documents\GitHub\cs470SeniorProject\webSiteController\client\src\components\lightsOut\lightsOut" />
       <recent name="C:\Users\Drewt\OneDrive\Documents\GitHub\cs470SeniorProject\webSiteController\client\src" />
       <recent name="C:\Users\Drewt\OneDrive\Documents\GitHub\cs470SeniorProject\webSiteController\client\src\components\BattleShip" />
       <recent name="C:\Users\Drewt\OneDrive\Documents\GitHub\cs470SeniorProject\webSiteController\client\src\components\BattleShip\public" />
@@ -86,7 +88,7 @@
       <workItem from="1670098754330" duration="15130000" />
       <workItem from="1670227882911" duration="5889000" />
       <workItem from="1670264598748" duration="4363000" />
-      <workItem from="1670271150473" duration="9397000" />
+      <workItem from="1670271150473" duration="11894000" />
     </task>
     <servers />
   </component>

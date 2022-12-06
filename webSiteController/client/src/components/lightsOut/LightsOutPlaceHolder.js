@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import LightsOut from "./LightsOut";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-
+import Image from "../../img/lightsOut.png";
+import Box from '@mui/material/Box';
 
 function LightsOutGame(props) {
     const handleClick = event => {
@@ -12,8 +13,10 @@ function LightsOutGame(props) {
     return (
         <>
             {(props.isSelected === 'lightsOut') ? (
+                <Box aria-label="Box For Background" sx={{ backgroundImage: `url(${Image})`, width:"99vw", height:"97vh", backgroundSize:"cover", display: 'block', overflow: "hidden", m: 0,}}>
                 <LightsOut setGameSelected={props.setGameSelected}
                            setIsSelected={props.setIsSelected}/>
+                </Box>
             ) : props.gameSelected === false ? (
                 <div className="joinGame">
                     <Typography

@@ -12,7 +12,6 @@ import { keyframes } from '@emotion/react'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import {CssBaseline, Divider} from "@mui/material";
 import {green} from "@mui/material/colors";
-
 const darkTheme = createTheme({
     palette: {
         mode: 'dark',
@@ -106,7 +105,7 @@ function TopMessage(props) {
     const Title = () =>  "Lights Out";
     const firstMessage = () => haveAWinner ? `You Won. Game Over` : ``;
     return (
-        <Stack width='100%'>
+        <Stack width='100%' sx={{mt:-8}}>
             <Typography variant='h4' textAlign='center' sx={{fontWeight: "bold",
                 // animation: `${flicker} 1s ease`,
                 textShadow: "0 0 7px #fff,\n" +
