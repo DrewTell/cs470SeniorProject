@@ -10,6 +10,7 @@ import Stack from '@mui/material/Stack';
 
 import { Window, MessageList, MessageInput } from "stream-chat-react";
 import Grid from "@mui/material/Grid";
+import Image from "../../img/blackGrad.png";
 function GameLobby({ channel, setChannel, setGameSelected, player1, player2, clientID, setIsSelected}) {
     const [firstConnected, setFirstConnected] = useState(null);
     const [playersJoined, setPlayersJoined] = useState(
@@ -41,14 +42,11 @@ function GameLobby({ channel, setChannel, setGameSelected, player1, player2, cli
 
     return (
         <Fragment>
-
+            <Box  aria-label="Box For Background" sx={{ backgroundImage: `url(${Image})`, width:"99vw", height:"90vh", backgroundSize:"cover", display: 'block', overflow: "hidden", m: 0,}}>
                 <MTTBoard result={result} setResult={setResult} player1={player1} player2={player2}
                        firstConnected={firstConnected} setGameSelected={setGameSelected}
                        setIsSelected={setIsSelected} setChannel={setChannel}/>
-
-
-            {result.state === "won" && <div> {result.winner} Won The Game</div>}
-            {result.state === "tie" && <div> Game Tied</div>}
+            </Box>
     </Fragment>
     );
 }

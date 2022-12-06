@@ -3,6 +3,8 @@ import LightsOut from "./LightsOut";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Image from "../../img/lightsOut.png";
+import Image1 from "../../img/lightsOutDoor1.jpg"
+
 import Box from '@mui/material/Box';
 
 function LightsOutGame(props) {

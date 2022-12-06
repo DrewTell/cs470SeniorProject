@@ -12,6 +12,7 @@ import { keyframes } from '@emotion/react'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import {CssBaseline, Divider} from "@mui/material";
 import {green} from "@mui/material/colors";
+
 const darkTheme = createTheme({
     palette: {
         mode: 'dark',

@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-
+import Image from "../../img/ticTac.png";
 
 import { Window, MessageList, MessageInput } from "stream-chat-react";
 import Grid from "@mui/material/Grid";
@@ -40,27 +40,11 @@ function Game({ channel, setChannel, setGameSelected, player1, player2, clientID
     }
 
     return (
-        <div className="gameContainer">
-            <Box sx={{height: "100vh", width: "90vh"}}>
+            <Box  aria-label="Box For Background" sx={{ backgroundImage: `url(${Image})`, width:"99vw", height:"90vh", backgroundSize:"cover", display: 'block', overflow: "hidden", m: 0,}}>
             <Board result={result} setResult={setResult} player1={player1} player2={player2}
                    firstConnected={firstConnected} setGameSelected={setGameSelected}
                    setIsSelected={setIsSelected} setChannel={setChannel} isNotMegaTTT={true}/>
             </Box>
-
-            {/*<Window>*/}
-            {/*    <MessageList*/}
-            {/*        disableDateSeparator*/}
-            {/*        closeReactionSelectorOnClick*/}
-            {/*        hideDeletedMessages*/}
-            {/*        messageActions={["react"]}*/}
-            {/*    />*/}
-            {/*    <MessageInput noFiles />*/}
-            {/*</Window>*/}
-
-
-            {result.state === "won" && <div> {result.winner} Won The Game</div>}
-            {result.state === "tie" && <div> Game Tied</div>}
-        </div>
     );
 }
 
