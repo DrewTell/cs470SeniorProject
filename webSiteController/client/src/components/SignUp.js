@@ -30,21 +30,24 @@ function SignUp({ setIsAuth }) {
 
             <TextField
                 placeholder="First Name"
-                sx={{width:"420px"}}
+                sx={{width:"420px", border: '1px solid', input: {color: 'black',
+                        backgroundColor: "rgb(245,255,255,0.45)",}}}
                 onChange={(event) => {
                     setUser({ ...user, firstName: event.target.value });
                 }}
             />
             <TextField
                 placeholder="Last Name"
-                sx={{width:"420px"}}
+                sx={{width:"420px", border: '1px solid', input: {color: 'black',
+                        backgroundColor: "rgb(245,255,255,0.45)",}}}
                 onChange={(event) => {
                     setUser({ ...user, lastName: event.target.value });
                 }}
             />
             <TextField
                 placeholder="Username"
-                sx={{width:"420px"}}
+                sx={{width:"420px", border: '1px solid', input: {color: 'black',
+                        backgroundColor: "rgb(245,255,255,0.45)",}}}
                 onChange={(event) => {
                     setUser({ ...user, username: event.target.value });
                 }}
@@ -52,12 +55,13 @@ function SignUp({ setIsAuth }) {
             <TextField
                 placeholder="Password"
                 type="password"
-                sx={{width:"420px"}}
+                sx={{width:"420px", border: '1px solid', input: {color: 'black',
+                        backgroundColor: "rgb(245,255,255,0.45)",}}}
                 onChange={(event) => {
                     setUser({ ...user, password: event.target.value });
                 }}
             />
-            <Button color={'primary'} onClick={signUp}> Sign Up</Button>
+            <Button color={'primary'} sx={{width:"420px", backgroundColor:"rgb(179,255,255,0.85)", color:"black"}} onClick={signUp}> Sign Up</Button>
                 </Stack>
             </Fragment>
     );

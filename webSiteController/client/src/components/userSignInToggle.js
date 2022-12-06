@@ -36,14 +36,14 @@ export default function ToggleButtonNotEmpty({ setIsAuth }) {
                 aria-label="text alignment"
 
             >
-                <ToggleButton value="login" aria-label="login"  sx={{width:"50%"}}>
+                <ToggleButton value="login" aria-label="login"  sx={{color:'black', width:"50%", backgroundColor: "rgb(245,255,255,0.55)",}}>
                     <Typography>
                         Login
                     </Typography>
                 </ToggleButton>
 
-                <ToggleButton value="signup" aria-label="sign up" sx={{ width:"50%", fontFamily: 'monospace',
-                    fontWeight: 500, }}>
+                <ToggleButton value="signup" aria-label="sign up" sx={{color:'black', width:"50%", fontFamily: 'monospace',
+                    fontWeight: 500, backgroundColor: "rgb(245,255,255,0.55)",}}>
                     <Typography>
                         Signup
                     </Typography>

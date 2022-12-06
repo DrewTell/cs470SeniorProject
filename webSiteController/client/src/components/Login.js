@@ -38,7 +38,7 @@ function Login({ setIsAuth }) {
                 variant="outlined"
                 placeholder="Username"
                 sx={{width:"420px", border: '1px solid', textColor: 'yellow',
-                    font:'15', backgroundColor: "rgb(245,255,255,0.45)",
+                    font:'15', backgroundColor: "rgb(245,255,255,0.49)",
                     input: {color: 'black', } }}
                 onChange={(event) => {
                     setUsername(event.target.value);
@@ -48,13 +48,13 @@ function Login({ setIsAuth }) {
                 placeholder="Password"
                 type="password"
                 sx={{width:"420px", border: '1px solid', input: {color: 'black',
-                        backgroundColor: "rgb(245,255,255,0.45)",}}}
+                        backgroundColor: "rgb(245,255,255,0.49)",}}}
                 onChange={(event) => {
                     setPassword(event.target.value);
                 }}
             />
 
-            <Button color={'primary'} onClick={login}> Submit</Button>
+            <Button color={'primary'} sx={{width:"420px", backgroundColor:"rgb(179,255,255,0.85)", color:"black"}} onClick={login}> Submit</Button>
             </Stack>
         </Fragment>
     );
