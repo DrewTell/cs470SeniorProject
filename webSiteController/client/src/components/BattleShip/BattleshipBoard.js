@@ -6,6 +6,7 @@ import { Stack } from '@mui/material';
 import {useChannelStateContext, useChatContext} from "stream-chat-react";
 import { set_name, set_enemy, receive_attack } from './actions.js';
 import { Battle } from './Battle.js';
+import { receive_reset } from './actions.js';
 
 export const BattleshipBoard = (props) => {
     const {player1, player2, firstConnected, setChannel} = props;
@@ -55,13 +56,15 @@ export const BattleshipBoard = (props) => {
           if (event.type === "board" && event.user.id !== client.userID) {
               dispatch(set_enemy(event.board))
               return
-
+          }
+          if (event.type === "reset" && event.user.id !== client.userID) {
+            dispatch(receive_reset())
+            return
           }
           if (event.type === "attack" && event.user.id !== client.userID) {
-            dispatch(receive_attack(event.board))
+            dispatch(receive_attack(event.board, event.text, event.win))
             return
-
-        }
+          }
       });
     }, [])
 
@@ -79,11 +82,4 @@ export const BattleshipBoard = (props) => {
           </Stack>
         )
     }
-    /*if(state.mode === 'victory'){
-      return(
-          <Stack className='App'>
-            <Victory dispatch={dispatch}></Victory>
-          </Stack>
-        )
-      }*/
     }

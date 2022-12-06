@@ -19,9 +19,7 @@ export const Cell = (props) => {
     return (
         <Stack>
             {hover === "target" ? <Box id={id} className={classes} onClick={() => { dispatch(attack(row, col, channel)) }} sx={{mr:-1,
-                                                                                                    mb:-1,        
-                                                                                                    width:60, 
-                                                                                                    height:60, 
+                                                                                                    mb:-1,
                                                                                                     background:"none",
                                                                                                     '&:hover': {
                                                                                                         backgroundColor:red[500]

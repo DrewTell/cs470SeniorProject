@@ -2,6 +2,8 @@
     background-repeat: no-repeat;
     background-size:cover;
     z-index: 0;
+    height: 60px;
+    width: 60px;
 }
 
 #Ship1_1{

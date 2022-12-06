@@ -1,7 +1,14 @@
 
-const reset = () => {
+const reset = (channel) => {
     return {
-        type: 'RESTARTS'
+        type: 'RESTART',
+        channel:channel
+    }
+}
+
+const receive_reset = () => {
+    return {
+        type: 'RESET'
     }
 }
 
@@ -52,10 +59,12 @@ const attack = (row, col, channel) => {
     }
 }
 
-const receive_attack = (board) => {
+const receive_attack = (board, text, win) => {
     return {
         type: 'HIT',
-        board:board
+        board:board,
+        text:text,
+        win:win
     }
 }
 
@@ -67,5 +76,6 @@ export {
     set_name,
     set_enemy,
     attack,
-    receive_attack
+    receive_attack,
+    receive_reset
 }

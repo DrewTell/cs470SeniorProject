@@ -11,6 +11,7 @@ function createInitialState() {
         board:board,
         shipsSet:0,
         haveWinner:false,
+        winnerName:"",
         rotation:0,
         enemyBoard:board,
         enemyReady:false,
@@ -25,6 +26,7 @@ function createInitialState() {
         hits3:0,
         hits4:0,
         hits5:0,
+        sunk:[false,false,false,false,false]
     };
 }
 
@@ -94,27 +96,33 @@ function placeShip(state, row, col){
     }
 }
 
-function checkShips(state){
-    if(state.hits1 === SHIP_SIZES[0]){
+function checkShips(state, text){
+    if(state.hits1 === SHIP_SIZES[0] && !state.sunk[0]){
         document.getElementById('one').style.backgroundColor = 'red';
+        state.sunk[0] = true
         return `destroyer sunk by ${state.playerName}`
     }
-    if(state.hits2 === SHIP_SIZES[1]){
+    if(state.hits2 === SHIP_SIZES[1] && !state.sunk[1]){
         document.getElementById('two').style.backgroundColor = 'red';
+        state.sunk[1] = true
         return `cruiser sunk by ${state.playerName}`
     }
-    if(state.hits3 === SHIP_SIZES[2]){
+    if(state.hits3 === SHIP_SIZES[2] && !state.sunk[2]){
         document.getElementById('three').style.backgroundColor = 'red';
+        state.sunk[2] = true
         return `submarine sunk by ${state.playerName}`
     }
-    if(state.hits4 === SHIP_SIZES[3]){
+    if(state.hits4 === SHIP_SIZES[3] && !state.sunk[3]){
         document.getElementById('four').style.backgroundColor = 'red';
+        state.sunk[3] = true
         return `battleship sunk by ${state.playerName}`
     }
-    if(state.hits5 === SHIP_SIZES[4]){
+    if(state.hits5 === SHIP_SIZES[4] && !state.sunk[4]){
         document.getElementById('five').style.backgroundColor = 'red';
+        state.sunk[4] = true
         return `carrier sunk by ${state.playerName}`
     }
+    return text
 }
 
 function attack(state, row, col, channel){
@@ -130,12 +138,13 @@ function attack(state, row, col, channel){
             x:0
         }
         target[row] = targetRow
-        sendAttack(target, channel)
+        let text = `${state.playerName} has missed`
+        sendAttack(target, text, state.haveWinner, channel)
         return {
             ...state,
             enemyBoard:target,
             currPlayer:state.enemyName,
-            fightText:"ships missed by"
+            fightText:text
         }
     }
     //otherwise it's a hit, we can grab the ship number from its type with targetRow[col].y[4]
@@ -164,14 +173,17 @@ function attack(state, row, col, channel){
                 text = `carrier hit by ${state.playerName}`
                 break
         }
-        text = checkShips(state)
+        text = checkShips(state, text)
         targetRow[col] = {
             y:"checkmark",
             x:0
         }
         target[row] = targetRow
-        console.log(state.hitTotal+1)
-        sendAttack(target, channel)
+        if(state.hitTotal+1 === 17){
+            state.haveWinner = true
+            state.winnerName = state.playerName
+        }
+        sendAttack(target, text, state.hitTotal === 16, channel)
         return {
             ...state,
             enemyBoard:target,
@@ -179,10 +191,17 @@ function attack(state, row, col, channel){
             fightText:text,
             currPlayer:state.enemyName
         }
+
     }
 
     
 }
+
+async function sendReset(channel){
+    await channel.sendEvent({
+        type: "reset"
+    })
+};
 
 async function sendBoard(board, channel){
     await channel.sendEvent({
@@ -191,20 +210,42 @@ async function sendBoard(board, channel){
     })
 };
 
-async function sendAttack(board, channel){
+async function sendAttack(board, text, win, channel){
     await channel.sendEvent({
         type: "attack",
-        board:board
+        board:board,
+        text:text,
+        win:win
     })
 };
+
 
 function reducers(state, action) {
     if( state === undefined )
         return state;
 
+    
+
     if( action.type === 'RESTART' ) {
-        return createInitialState(state.playerName)
+        sendReset(action.channel)
+        let newState = createInitialState()
+        return {
+            ...newState,
+            playerName:state.playerName,
+            currPlayer:state.playerName
+        }
     }
+
+    if( action.type === 'RESET' ) {
+        let newState =  createInitialState()
+        return {
+            ...newState,
+            playerName:state.playerName,
+            currPlayer:state.enemyName
+        }
+    }
+    if(state.haveWinner)
+        return state
 
     if( action.type === 'SET' ) {
         return {
@@ -249,10 +290,21 @@ function reducers(state, action) {
     }
 
     if( action.type === 'HIT' ) {
+        if(action.win){
+            return {
+                ...state,
+                board:action.board,
+                currPlayer:state.playerName,
+                fightText:action.text,
+                haveWinner:true,
+                winnerName:state.enemyName
+            }
+        }
         return {
             ...state,
             board:action.board,
-            currPlayer:state.playerName
+            currPlayer:state.playerName,
+            fightText:action.text
         }
     }
 

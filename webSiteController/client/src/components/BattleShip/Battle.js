@@ -1,9 +1,10 @@
-import { Box, Typography } from "@mui/material"
+import { Box, Button, Typography } from "@mui/material"
 import { Stack } from "@mui/system"
 import "./Battleship.css"
 import { Cell } from "./Cell"
 import { Spritesheet } from "./Spritesheet"
 import water from "./water.png"
+import { reset } from "./actions"
 
 
 export const Battle = (props) => {
@@ -16,8 +17,10 @@ export const Battle = (props) => {
 
     return (
         <Stack id="board">
-            <Typography>{state.currPlayer}'s turn to fire!</Typography>
-            <Typography>{state.fightText} </Typography>
+            {!state.haveWinner ? <Typography variant="h5" className="left">{state.currPlayer}'s turn to fire!</Typography> 
+                               : <Typography variant="h5" className="left">{state.winnerName} is victorious!</Typography>}
+            {!state.haveWinner ? <Typography className="left">{state.fightText} </Typography>
+                               : <Button className="left" onClick={() => {dispatch(reset(channel))}}>Reset Game</Button>}
             {
             //for some reason the very first sprite rendered on the page flickers so we render an invisible one first 
             }
@@ -32,6 +35,11 @@ export const Battle = (props) => {
                 <tbody>
                 <tr>
                         <th colSpan="11">Your Board</th>
+                </tr>
+                <tr>
+                    <th colSpan="11">
+                        <div style={{visibility:"hidden"}}>a</div>
+                    </th>
                 </tr>
                 <tr>
                     <th colSpan="11" className="invisible">
