@@ -37,7 +37,7 @@ function Login({ setIsAuth }) {
             <TextField
                 variant="outlined"
                 placeholder="Username"
-                sx={{width:"420px"}}
+                sx={{width:"420px", border: '2px solid', textColor: 'black', font:'15'}}
                 onChange={(event) => {
                     setUsername(event.target.value);
                 }}
@@ -45,7 +45,7 @@ function Login({ setIsAuth }) {
             <TextField
                 placeholder="Password"
                 type="password"
-                sx={{width:"420px"}}
+                sx={{width:"420px", border: '2px solid'}}
                 onChange={(event) => {
                     setPassword(event.target.value);
                 }}

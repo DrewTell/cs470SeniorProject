@@ -158,8 +158,8 @@ function App() {
 
                 </Stack>
         ) : (
-            <Box sx={{ backgroundImage: `url(${Image})`, width:"100vw", height:"100vh", backgroundSize:"cover"}}>
-                <Grid container sx={{position:'absolute', border: '1', width:'100%', height:'100%', justifyContent: 'center', alignItems:'center'}}>
+            <Box aria-label="Box For Background" sx={{ backgroundImage: `url(${Image})`, width:"100vw", height:"100vh", backgroundSize:"cover", display: 'block', overflow: "hidden"}}>
+                <Grid  aria-label="Grid Container" container sx={{position:'absolute', border: '1', width:'100%', height:'100%', justifyContent: 'center', alignItems:'center'}}>
                     <Grid item xs={8} sx={{
                         }}>
 
