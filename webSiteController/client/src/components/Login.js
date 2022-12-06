@@ -37,7 +37,9 @@ function Login({ setIsAuth }) {
             <TextField
                 variant="outlined"
                 placeholder="Username"
-                sx={{width:"420px", border: '2px solid', textColor: 'black', font:'15'}}
+                sx={{width:"420px", border: '1px solid', textColor: 'yellow',
+                    font:'15', backgroundColor: "rgb(245,255,255,0.45)",
+                    input: {color: 'black', } }}
                 onChange={(event) => {
                     setUsername(event.target.value);
                 }}
@@ -45,7 +47,8 @@ function Login({ setIsAuth }) {
             <TextField
                 placeholder="Password"
                 type="password"
-                sx={{width:"420px", border: '2px solid'}}
+                sx={{width:"420px", border: '1px solid', input: {color: 'black',
+                        backgroundColor: "rgb(245,255,255,0.45)",}}}
                 onChange={(event) => {
                     setPassword(event.target.value);
                 }}
