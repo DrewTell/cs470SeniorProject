@@ -32,28 +32,12 @@ function Login({ setIsAuth }) {
     };
     return (
         <Fragment>
-            <Stack direction="column"  sx = {{ alignItems: 'center', justifyContent: 'center',width:"740px" }}>
-
-                {/*<Typography*/}
-                {/*    variant="h6"*/}
-                {/*    noWrap*/}
-                {/*    component="a"*/}
-                {/*    href="/"*/}
-                {/*    sx={{*/}
-                {/*        mr: 2,*/}
-                {/*        display: { xs: 'none', md: 'flex' },*/}
-                {/*        fontFamily: 'monospace',*/}
-                {/*        fontWeight: 700,*/}
-                {/*        color: 'inherit',*/}
-                {/*        textDecoration: 'none',*/}
-                {/*    }}*/}
-                {/*>*/}
-                {/*    Login*/}
-                {/*</Typography>*/}
+            <Stack direction="column"  sx = {{ alignItems: 'center', justifyContent: 'center',width:"100%" }}>
 
             <TextField
                 variant="outlined"
                 placeholder="Username"
+                sx={{width:"420px"}}
                 onChange={(event) => {
                     setUsername(event.target.value);
                 }}
@@ -61,6 +45,7 @@ function Login({ setIsAuth }) {
             <TextField
                 placeholder="Password"
                 type="password"
+                sx={{width:"420px"}}
                 onChange={(event) => {
                     setPassword(event.target.value);
                 }}

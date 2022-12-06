@@ -27,22 +27,22 @@ export default function ToggleButtonNotEmpty({ setIsAuth }) {
     return (
         <Fragment>
 
-        <Stack direction="row" sx = {{ alignItems: 'center', justifyContent: 'center', width:"740px" }}>
+        <Stack direction="row" sx = {{ alignItems: 'center', justifyContent: 'center', width:"100%"}}>
             <ToggleButtonGroup
-                sx={{ width: '33%',}}
+                sx={{ width: '420px',}}
                 value={alignment}
                 exclusive
                 onChange={handleAlignment}
                 aria-label="text alignment"
 
             >
-                <ToggleButton value="login" aria-label="login"  sx={{ width: '100%' }}>
+                <ToggleButton value="login" aria-label="login"  sx={{width:"50%"}}>
                     <Typography>
                         Login
                     </Typography>
                 </ToggleButton>
 
-                <ToggleButton value="signup" aria-label="sign up" sx={{ width: '100%', fontFamily: 'monospace',
+                <ToggleButton value="signup" aria-label="sign up" sx={{ width:"50%", fontFamily: 'monospace',
                     fontWeight: 500, }}>
                     <Typography>
                         Signup

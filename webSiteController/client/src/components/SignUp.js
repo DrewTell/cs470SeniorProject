@@ -26,38 +26,25 @@ function SignUp({ setIsAuth }) {
     };
     return (
             <Fragment>
-                <Stack  sx = {{xs: 'flex', alignItems: 'center', justifyContent: 'center', width:'740px' }}>
-                    {/*<Typography*/}
-                    {/*    variant="h6"*/}
-                    {/*    noWrap*/}
-                    {/*    component="a"*/}
-                    {/*    href="/"*/}
-                    {/*    sx={{*/}
-                    {/*        mr: 2,*/}
-                    {/*        display: { xs: 'none', md: 'flex' },*/}
-                    {/*        fontFamily: 'monospace',*/}
-                    {/*        fontWeight: 700,*/}
-                    {/*        letterSpacing: '.3rem',*/}
-                    {/*        color: 'inherit',*/}
-                    {/*        textDecoration: 'none',*/}
-                    {/*    }}*/}
-                    {/*>*/}
-                    {/*    Sign Up*/}
-                    {/*</Typography>*/}
+                <Stack  sx = {{xs: 'flex', alignItems: 'center', justifyContent: 'center', width:'100%' }}>
+
             <TextField
                 placeholder="First Name"
+                sx={{width:"420px"}}
                 onChange={(event) => {
                     setUser({ ...user, firstName: event.target.value });
                 }}
             />
             <TextField
                 placeholder="Last Name"
+                sx={{width:"420px"}}
                 onChange={(event) => {
                     setUser({ ...user, lastName: event.target.value });
                 }}
             />
             <TextField
                 placeholder="Username"
+                sx={{width:"420px"}}
                 onChange={(event) => {
                     setUser({ ...user, username: event.target.value });
                 }}
@@ -65,6 +52,7 @@ function SignUp({ setIsAuth }) {
             <TextField
                 placeholder="Password"
                 type="password"
+                sx={{width:"420px"}}
                 onChange={(event) => {
                     setUser({ ...user, password: event.target.value });
                 }}

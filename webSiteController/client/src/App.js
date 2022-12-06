@@ -25,6 +25,9 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import {CssBaseline, Divider} from "@mui/material";
 import ResponsiveAppBar from "./components/AppBar";
 
+
+
+
 const darkTheme = createTheme({
     palette: {
         mode: 'dark',
@@ -85,7 +88,7 @@ function App() {
                             setGameSelected={setGameSelected}
                             setIsSelected={setIsSelected}/>
         {isAuth ? (
-            <Stack direction="column"  sx = {{xs: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Stack direction="column"  sx = {{xs: 'flex', alignItems: 'center', justifyContent: 'center'}}>
 
                 <Box  sx={{  width: '100%'}}>
                     <Chat client={client}>
@@ -153,12 +156,14 @@ function App() {
                 </Stack>
         ) : (
 
-                <Box component="span" sx={{ display: 'block', border: '1', width:'100%', height:'100%'}}>
-                    <Grid sx={{justifyContent: 'center', alignItems:'center', mt: 5, ml: 60}}>
+                <Grid container sx={{position:'absolute', border: '1', width:'100%', height:'100%', justifyContent: 'center', alignItems:'center'}}>
+                    <Grid item xs={8} sx={{
+                        }}>
+
                         <ToggleButtonNotEmpty setIsAuth={setIsAuth} />
                     </Grid>
 
-                </Box>
+                </Grid>
 
         )
         }
