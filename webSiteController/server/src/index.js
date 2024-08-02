@@ -9,8 +9,8 @@ app.use(cors());
 app.use(express.json());
 
 const serverClient = StreamChat.getInstance(api_key, api_secret);
-
-
+const api_key = "";
+const api_secret = "";
 
 app.get('/cors', (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
